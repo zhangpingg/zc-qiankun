@@ -11,7 +11,19 @@ const apps = [
     name: 'sub-vue',
     entry: '//127.0.0.1:3002/sub-vue',
     activeRule: '/sub-vue',
-    container: '#subVueId'
+    container: '#subVueId',
+    props: {
+      data: '基座的数据',
+    }
+  },
+  {
+    name: 'childVue',
+    entry: '//127.0.0.1:8080',
+    activeRule: '/childVue',
+    container: '#subVueId',
+    props: {
+      data: '基座的数据',
+    }
   }
 ]
 

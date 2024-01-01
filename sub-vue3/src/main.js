@@ -22,7 +22,7 @@ if (!qiankunWindow.__POWERED_BY_QIANKUN__) {
       console.log('update');
     },
     unmount(props) {
-      console.log('vue子应用卸载', props); 
+      console.log('vue子应用卸载', props);
       app = null;
     }
   })
