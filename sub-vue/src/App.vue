@@ -1,12 +1,9 @@
 <script setup>
-// import HelloWorld from './components/HelloWorld.vue'
+import { ref } from "vue";
 </script>
 
 <template>
-  <div>
-    子应用22
-  </div>
-  <!-- <HelloWorld msg="Vite + Vue" /> -->
+  <router-view />
 </template>
 
 <style scoped>

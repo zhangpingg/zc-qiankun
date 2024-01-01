@@ -1,11 +1,11 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
   <div>
-    基座
+    <div>基座-内容</div>
     <div id="subVueId"></div>
+    <router-view />
   </div>
 </template>
 

@@ -10,16 +10,20 @@ if (!qiankunWindow.__POWERED_BY_QIANKUN__) {
   createApp(App).use(router).mount('#app')
 } else {
   renderWithQiankun({
+    bootstrap() {
+      console.log('bootstrap');
+    },
     mount(props) {
       app = createApp(App);
       app.use(router).mount(props.container.querySelector('#app'));
       console.log('mount');
     },
-    bootstrap() {
-      console.log('bootstrap');
-    },
     update() {
       console.log('update');
+    },
+    unmount(props) {
+      console.log('vue子应用卸载', props); 
+      app = null;
     }
   })
 }

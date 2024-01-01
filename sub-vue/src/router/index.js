@@ -1,18 +1,28 @@
-import {createRouter, createWebHistory} from 'vue-router';
-import HelloWorld from '../components/HelloWorld.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import Home from '../pages/home/index.vue';
+import PageA from '../pages/pageA/list.vue';
+
+const appRoute = '/sub-vue';
 
 const routes = [
   {
-    path: '/sub-vue',
-    name: 'sub-vue',
+    path: `${appRoute}/home`,
+    name: 'home',
     meta: {
-        title: 'sub-vue',
+      title: '首页',
     },
-    component: HelloWorld,
-},
+    component: Home,
+  },
+  {
+    path: `${appRoute}/pageA`,
+    name: 'pageA',
+    meta: {
+      title: 'A页面',
+    },
+    component: PageA,
+  },
 ]
 
-// 导出路由 在 main.js 里使用
 const router = createRouter({
   history: createWebHistory(),
   routes: routes,
