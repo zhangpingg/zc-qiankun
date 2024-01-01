@@ -5,7 +5,7 @@ import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/sub-vue',
+  base: '/sub-vue3',
   server: {
     port: 3002,
     cors: true,
@@ -13,7 +13,7 @@ export default defineConfig({
   },
   plugins: [
     vue(),
-    qiankun('sub-vue', {
+    qiankun('sub-vue3', {
       useDevMode: true,
     })
   ],

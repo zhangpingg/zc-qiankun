@@ -5,8 +5,8 @@ import { ref } from "vue";
 
 <template>
   <div>
-    <h4>Home 页面</h4>
-    <router-link to="/sub-vue/pageA">跳转pageA</router-link>
+    <h4>子应用: vue3</h4>
+    <router-link to="/sub-vue3/pageA">跳转pageA</router-link>
   </div>
 </template>
 

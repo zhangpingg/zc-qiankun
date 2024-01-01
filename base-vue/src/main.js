@@ -8,23 +8,23 @@ createApp(App).use(router).mount('#app')
 
 const apps = [
   {
-    name: 'sub-vue',
-    entry: '//127.0.0.1:3002/sub-vue',
-    activeRule: '/sub-vue',
-    container: '#subVueId',
+    name: 'sub-vue2',
+    entry: '//127.0.0.1:8080',
+    activeRule: '/sub-vue2',
+    container: '#subVue2Id',
     props: {
       data: '基座的数据',
     }
   },
   {
-    name: 'childVue',
-    entry: '//127.0.0.1:8080',
-    activeRule: '/childVue',
-    container: '#subVueId',
+    name: 'sub-vue3',
+    entry: '//127.0.0.1:3002',
+    activeRule: '/sub-vue3',
+    container: '#subVue3Id',
     props: {
       data: '基座的数据',
     }
-  }
+  },
 ]
 
 registerMicroApps(apps, {})

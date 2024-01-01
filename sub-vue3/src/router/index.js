@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../pages/home/index.vue';
 import PageA from '../pages/pageA/list.vue';
 
-const appRoute = '/sub-vue';
+const appRoute = '/sub-vue3';
 
 const routes = [
   {

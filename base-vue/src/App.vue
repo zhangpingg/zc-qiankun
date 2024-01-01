@@ -4,7 +4,8 @@
 <template>
   <div>
     <div>基座-内容</div>
-    <div id="subVueId"></div>
+    <div id="subVue2Id"></div>
+    <div id="subVue3Id"></div>
     <router-view />
   </div>
 </template>

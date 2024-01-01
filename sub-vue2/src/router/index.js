@@ -1,16 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import ChildVue from '../views/child-vue'
+import Home from '../pages/home';
+
+const appRoute = '/sub-vue2';
 
 const routes = [
   {
-    path: '/',
-    name: 'childVue',
-    component: ChildVue
-  },
-  {
-    path: '/childVue',
-    name: 'childVue',
-    component: ChildVue
+    path: `${appRoute}/home`,
+    name: 'home',
+    component: Home
   }
 ]
 
