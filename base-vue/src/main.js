@@ -3,8 +3,10 @@ import "./style.css";
 import App from "./App.vue";
 import { start, registerMicroApps } from "qiankun";
 import router from "./router";
+import ViewUIPlus from "view-ui-plus";
+import "view-ui-plus/dist/styles/viewuiplus.css";
 
-createApp(App).use(router).mount("#app");
+createApp(App).use(router).use(ViewUIPlus).mount("#app");
 
 const apps = [
     {

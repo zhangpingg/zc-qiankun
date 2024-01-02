@@ -1,26 +1,28 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
+import Vue from "vue";
+import App from "./App.vue";
+import router from "./router";
 
-let instance = null;
+// let instance = null;
 function render(props = {}) {
-  const { container } = props;
-  instance = createApp(App).use(router).mount(container ? container.querySelector('#app') : '#app');
-  console.log('【vue-instance】', instance)
+    console.log(11, props);
+    new Vue({
+        router,
+        render: (h) => h(App),
+    }).$mount(props?.container?.querySelector("#app") || "#app");
 }
 
 // 独立运行时
 if (!window.__POWERED_BY_QIANKUN__) {
-  render();
+    render();
 }
 
 export async function bootstrap() {
-  console.log('【vue-bootstrap】');
+    console.log("【vue-bootstrap】");
 }
 export async function mount(props) {
-  console.log('【vue-mount】', props);
-  render(props);
+    console.log("【vue-mount】", props);
+    render(props);
 }
 export async function unmount() {
-  instance = null;
+    //instance = null;
 }
