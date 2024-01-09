@@ -1,7 +1,10 @@
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
+import ViewUI from "view-design";
+import "view-design/dist/styles/iview.css";
 
+Vue.use(ViewUI);
 // let instance = null;
 function render(props = {}) {
     console.log(11, props);

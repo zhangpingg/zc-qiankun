@@ -1,35 +1,32 @@
-import { createApp } from "vue";
-import "./style.css";
-import App from "./App.vue";
-import {
-    renderWithQiankun,
-    qiankunWindow,
-} from "vite-plugin-qiankun/dist/helper";
-import router from "./router";
-import ViewUIPlus from "view-ui-plus";
-import "view-ui-plus/dist/styles/viewuiplus.css";
+import { createApp } from 'vue';
+import './style.css';
+import App from './App.vue';
+import { renderWithQiankun, qiankunWindow } from 'vite-plugin-qiankun/dist/helper';
+import router from './router';
+import ViewUIPlus from 'view-ui-plus';
+import 'view-ui-plus/dist/styles/viewuiplus.css';
 
 let app;
 
 if (!qiankunWindow.__POWERED_BY_QIANKUN__) {
-    createApp(App).use(router).use(ViewUIPlus).mount("#app");
+    createApp(App).use(router).use(ViewUIPlus).mount('#app');
 } else {
     renderWithQiankun({
         bootstrap() {
-            console.log("bootstrap");
+            console.log('bootstrap');
         },
         mount(props) {
             app = createApp(App);
             app.use(router)
                 .use(ViewUIPlus)
-                .mount(props.container.querySelector("#app"));
-            console.log("mount");
+                .mount(props?.container?.querySelector('#app') || '#app');
+            console.log('mount');
         },
         update() {
-            console.log("update");
+            console.log('update');
         },
         unmount(props) {
-            console.log("vue子应用卸载", props);
+            console.log('vue子应用卸载', props);
             app = null;
         },
     });

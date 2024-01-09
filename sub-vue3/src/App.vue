@@ -1,10 +1,13 @@
-<script setup>
-import { ref } from "vue";
-</script>
+<script setup></script>
 
 <template>
-  <router-view />
+    <router-view v-slot="{ Component, route }">
+        <transition name="router-fade" mode="out-in">
+            <keep-alive>
+                <component :is="Component" :key="route.fullPath" />
+            </keep-alive>
+        </transition>
+    </router-view>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

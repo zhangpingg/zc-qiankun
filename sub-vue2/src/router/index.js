@@ -9,6 +9,9 @@ const routes = [
         path: `${appRoute}/home`,
         name: "home",
         component: Home,
+        meta: {
+            keepAlive: true,
+        },
     },
 ];
 Vue.use(VueRouter);
