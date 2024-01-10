@@ -18,6 +18,9 @@ const getData = async () => {
 const jump2 = () => {
     router.push('/sub-vue2/home');
 };
+const jump22 = () => {
+    router.push('/sub-vue2/pageB');
+};
 const jump3 = () => {
     router.push('/sub-vue3/home');
 };
@@ -25,7 +28,7 @@ const jump33 = () => {
     router.push('/sub-vue3/pageA');
 };
 const goLogin = () => {
-    router.push('/login');
+    window.location.assign('/login');
 };
 </script>
 
@@ -33,6 +36,7 @@ const goLogin = () => {
     <h4>基座-左侧菜单</h4>
     <Button @click="getData">调接口</Button> <br /><br />
     <Button type="primary" @click="jump2">跳转到子应用vue2</Button> <br />
+    <Button type="primary" @click="jump22">跳转到子应用vue2-pageB</Button> <br />
     <Button type="primary" @click="jump3">跳转到子应用vue3</Button><br />
     <Button type="primary" @click="jump33">跳转到子应用vue3-pageA</Button><br />
     <Button type="primary" @click="goLogin">基座-登录页</Button>

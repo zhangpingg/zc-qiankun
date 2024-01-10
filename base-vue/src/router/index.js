@@ -1,20 +1,20 @@
-import { createRouter, createWebHistory } from "vue-router";
-import Setting from "@/setting.js";
-import Login from "../pages/login/index.vue";
-import ViewUIPlus from "view-ui-plus";
+import { createRouter, createWebHistory } from 'vue-router';
+import Setting from '@/setting.js';
+import Login from '../pages/login/index.vue';
+import ViewUIPlus from 'view-ui-plus';
 
 const routes = [
     {
-        path: "/",
+        path: '/',
         redirect: {
-            name: "login",
+            name: 'login',
         },
     },
     {
-        path: "/login",
-        name: "login",
+        path: '/login',
+        name: 'login',
         meta: {
-            title: "登录",
+            title: '登录',
             keepAlive: true,
         },
         component: Login,

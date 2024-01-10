@@ -7,7 +7,6 @@ import "view-design/dist/styles/iview.css";
 Vue.use(ViewUI);
 // let instance = null;
 function render(props = {}) {
-    console.log(11, props);
     new Vue({
         router,
         render: (h) => h(App),

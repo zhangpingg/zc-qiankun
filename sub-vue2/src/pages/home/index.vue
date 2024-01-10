@@ -3,6 +3,7 @@
         子应用：vue2 <br />
         <Button type="primary" @click="getData">调接口</Button>
         <Input v-model="value" placeholder="请输入" style="width: 200px" />
+        <router-link to="/sub-vue2/pageB">跳转pageB</router-link>
     </div>
 </template>
 

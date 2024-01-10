@@ -11,9 +11,10 @@ createApp(App).use(router).use(ViewUIPlus).mount('#app');
 const apps = [
     {
         name: 'sub-vue2',
-        //entry: '//10.1.86.247:12022', // 测试环境
+        //entry: '//10.1.86.247:12023', // 测试环境
         entry: '//localhost:8080', // 本地
-        activeRule: '/sub-vue2',
+        //activeRule: '/sub-vue2',
+        activeRule: (location) => location.pathname.startsWith('/sub-vue2'),
         container: '#subConatiner',
         props: {
             data: '基座的数据',
@@ -23,7 +24,8 @@ const apps = [
         name: 'sub-vue3',
         //entry: '//10.1.86.247:12022', // 测试环境
         entry: '//localhost:3002', // 本地
-        activeRule: '/sub-vue3',
+        //activeRule: '/sub-vue3',
+        activeRule: (location) => location.pathname.startsWith('/sub-vue3'),
         container: '#subConatiner',
         props: {
             data: '基座的数据',

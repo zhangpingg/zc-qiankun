@@ -1,6 +1,8 @@
 # zc-qiankun
 
-微前端：
-主应用-vue3
-子应用一-vue2
-子应用二-vue3
+```bash
+微前端（node16）：
+主应用-vite+vue3
+子应用1-vue2
+子应用2-vite+vue3
+```
