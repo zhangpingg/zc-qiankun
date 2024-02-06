@@ -1,43 +1,41 @@
-import Cookies from "js-cookie";
-import Setting from "@/setting";
-
-const cookies = {};
+import Cookies from 'js-cookie';
+import Setting from '@/setting';
 
 /**
  * @description 存储 cookie 值
- * @param {String} name cookie name
- * @param {String} value cookie value
- * @param {Object} cookieSetting cookie setting
+ * @param {String} name cookie的key
+ * @param {String} value cookie的值
+ * @param {Object} cookieSetting cookie的其他需要存储的对象
  */
-cookies.set = function (name = "admin", value = "", cookieSetting = {}) {
+const setCookie = (name = '', value = '', cookieSetting = {}) => {
     let currentCookieSetting = {
         expires: Setting.cookiesExpires,
     };
     Object.assign(currentCookieSetting, cookieSetting);
-    Cookies.set(`admin-${name}`, value, currentCookieSetting);
+    Cookies.set(`Base-${name}`, value, currentCookieSetting);
 };
 
 /**
- * @description 拿到 cookie 值
- * @param {String} name cookie name
+ * @description 获取 cookie 值
+ * @param {String} name cookie的key
  */
-cookies.get = function (name = "admin") {
-    return Cookies.get(`admin-${name}`);
+const getCookie = (name) => {
+    return Cookies.get(`Base-${name}`);
 };
 
 /**
- * @description 拿到 cookie 全部的值
+ * @description 获取 cookie 存储的所有数据
  */
-cookies.getAll = function () {
+const getAllCookie = () => {
     return Cookies.get();
 };
 
 /**
  * @description 删除 cookie
- * @param {String} name cookie name
+ * @param {String} name cookie的key
  */
-cookies.remove = function (name = "admin") {
-    return Cookies.remove(`admin-${name}`);
+const removeCookie = (name) => {
+    return Cookies.remove(`Base-${name}`);
 };
 
-export default cookies;
+export { setCookie, getCookie, getAllCookie, removeCookie };

@@ -1,16 +1,13 @@
 <template>
-  <div id="nav">
-    <!-- <router-link to="/childVue">child-vue</router-link> -->
-    <router-view />
-  </div>
-  
+    <keep-alive>
+        <router-view />
+    </keep-alive>
 </template>
 
 <script>
 export default {
-  name: "HelloWorld",
-  data() {
-    return {};
-  },
+    data() {
+        return {};
+    },
 };
 </script>

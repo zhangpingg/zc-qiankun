@@ -3,8 +3,9 @@ module.exports = {
   env: {
     node: true
   },
-  'extends': [
-    'plugin:vue/vue3-essential',
+  extends: [
+    'plugin:vue/essential', // vue2使用
+    // 'plugin:vue/vue3-essential', // vue3使用
     'eslint:recommended'
   ],
   parserOptions: {

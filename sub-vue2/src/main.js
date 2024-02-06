@@ -23,6 +23,7 @@ export async function bootstrap() {
 }
 export async function mount(props) {
     console.log("【vue-mount】", props);
+    window.BasePageStore = props.pageStore;
     render(props);
 }
 export async function unmount() {

@@ -3,11 +3,11 @@ import VueRouter from "vue-router";
 import Home from "../pages/home";
 import PageB from "../pages/pageB/pageBList.vue";
 
-const appRoute = "/sub-vue2";
+const applyRoute = "/sub-vue2";
 
 const routes = [
     {
-        path: `${appRoute}/home`,
+        path: `${applyRoute}/home`,
         name: "home",
         component: Home,
         meta: {
@@ -15,16 +15,18 @@ const routes = [
         },
     },
     {
-        path: `${appRoute}/pageB`,
+        path: `${applyRoute}/pageB`,
         name: "pageB",
         meta: {
-            title: "B“≥√Ê",
+            title: "BÈ°µÈù¢",
             keepAlive: true,
         },
         component: PageB,
     },
 ];
+
 Vue.use(VueRouter);
+
 const router = new VueRouter({
     routes,
     mode: "history",

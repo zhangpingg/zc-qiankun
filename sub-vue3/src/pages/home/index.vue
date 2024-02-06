@@ -1,10 +1,10 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { GetExportList, tagSaveOrUpdate } from '@/api/account';
 
 const name = ref();
 
-const getData = async () => {
+const getApiData = async () => {
     const params2 = { current: 1, size: 10 };
     const res2 = await GetExportList(params2);
     console.log(res2);
@@ -12,14 +12,20 @@ const getData = async () => {
     const res3 = await tagSaveOrUpdate(params3);
     console.log(res3);
 };
+const jumpPage = () => {
+    history.pushState(null, '标题', '/sub-vue3/pageA');
+};
+onMounted(() => {
+    console.log('路由参数：', history.state);
+});
 </script>
 
 <template>
     <div>
-        <h4>子应用: vue3</h4>
-        <router-link to="/sub-vue3/pageA">跳转pageA</router-link>
-        <Button type="primary" @click="getData">调接口</Button>
+        <h4>子应用: vue3-home</h4>
         <Input v-model="name" placeholder="请输入" style="width: 200px" />
+        <Button @click="getApiData">调接口</Button> <br />
+        <Button type="primary" @click="jumpPage">跳转pageA</Button>
     </div>
 </template>
 

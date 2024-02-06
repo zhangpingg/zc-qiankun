@@ -7,9 +7,9 @@ import path from 'path';
 export default defineConfig({
     base: './',
     server: {
-        port: 3002,
+        port: 8082,
         cors: true,
-        origin: 'http://localhost:3002',
+        origin: 'http://localhost:8082',
     },
     plugins: [
         vue(),

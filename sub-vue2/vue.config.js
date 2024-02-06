@@ -1,8 +1,10 @@
-const { name } = require("./package");
+const { name } = require("./package.json");
 const path = require("path");
 
 module.exports = {
     devServer: {
+        port: 8081,
+        disableHostCheck: true,
         headers: {
             "Access-Control-Allow-Origin": "*",
         },

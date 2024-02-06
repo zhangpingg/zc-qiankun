@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Home from '../pages/home/homeList.vue';
-import PageA from '../pages/pageA/pageAList.vue';
+import Home from '@/pages/home/index.vue';
+import PageA from '@/pages/pageA/index.vue';
 
 const appRoute = '/sub-vue3';
 
