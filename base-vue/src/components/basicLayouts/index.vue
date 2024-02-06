@@ -3,12 +3,12 @@
         <Sider class="basicLayouts-sider" hide-trigger :width="menuSideWidth">
             <SideMenu />
         </Sider>
-        <Layout :style="{ marginLeft: menuSideWidth + 'px' }">
-            <Header class="basicLayouts-header">
+        <Layout class="basicLayouts-right" :style="{ marginLeft: menuSideWidth + 'px' }">
+            <Header class="basicLayouts-right-header">
                 <HeaderTool />
                 <HeaderTabs />
             </Header>
-            <Content class="basicLayouts-content">
+            <Content class="basicLayouts-right-content">
                 <router-view v-slot="{ Component, route }">
                     <keep-alive :exclude="[]">
                         <component :is="Component" :key="route.fullPath" />
@@ -46,16 +46,19 @@ const menuSideWidth = computed(() => {
         left: 0;
         z-index: 13;
     }
-    .basicLayouts-header {
-        background: #fff;
-        padding: 0;
-        height: 103px;
-    }
-    .basicLayouts-content {
-        height: calc(100% - 116px);
-        overflow-y: auto;
-        padding: 0px 24px 24px 24px;
-        margin-top: 10px;
+    .basicLayouts-right {
+        transition: all 0.3s;
+        .basicLayouts-right-header {
+            background: #fff;
+            padding: 0;
+            height: 103px;
+        }
+        .basicLayouts-right-content {
+            height: calc(100% - 116px);
+            overflow-y: auto;
+            padding: 0px 24px 24px 24px;
+            margin-top: 10px;
+        }
     }
 }
 </style>
