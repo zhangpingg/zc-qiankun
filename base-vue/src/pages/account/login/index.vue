@@ -25,7 +25,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { Message } from 'view-ui-plus';
+import { Login, UserName, Password, Checkbox, Submit, Message } from 'view-ui-plus';
 import { useRouter } from 'vue-router';
 import { useAccountStore } from '@/store';
 
@@ -86,7 +86,7 @@ const submitLogin = async (valid, values) => {
         flex-wrap: nowrap;
         overflow: auto;
         position: relative;
-        background: #1797d3 url('@/assets/images/page-bg.jpg') no-repeat 50% 50%;
+        background: #1797d3 url('@/assets/images/logo-bg.jpg') no-repeat 50% 50%;
         background-size: 100% 100%;
         border-radius: 20px;
         @media screen and (max-width: 992px) {
@@ -96,7 +96,7 @@ const submitLogin = async (valid, values) => {
             width: 1080px;
             height: 600px;
             margin: auto;
-            background: url('@/assets/images/login-bg.jpg') no-repeat 50% 50%;
+            background: url('@/assets/images/login-main-bg.jpg') no-repeat 50% 50%;
             background-size: 100% 100%;
             border-radius: 8px;
             padding-left: 480px;

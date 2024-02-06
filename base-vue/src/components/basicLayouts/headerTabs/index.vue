@@ -34,6 +34,7 @@
 </template>
 
 <script setup>
+import { Tabs, TabPane, Dropdown, DropdownMenu, DropdownItem, Icon } from 'view-ui-plus';
 import { usePageStore } from '@/store';
 import util from '@/libs/util';
 
@@ -60,7 +61,6 @@ const changeTab = (tabName) => {
 };
 // 关闭-标签（单个）
 const closeSingleTab = (tagName) => {
-    console.log(11, tagName);
     pageStore.closeTab({ tagName, type: 'tabClose' });
 };
 // 关闭-标签（多个）

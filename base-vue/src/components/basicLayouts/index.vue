@@ -22,6 +22,7 @@
 
 <script setup>
 import { computed } from 'vue';
+import { Layout, Sider, Header, Content } from 'view-ui-plus';
 import { useLayoutStore } from '@/store';
 import SideMenu from './sideMenu';
 import HeaderTabs from './headerTabs';

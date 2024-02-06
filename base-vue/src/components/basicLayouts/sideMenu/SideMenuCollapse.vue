@@ -1,9 +1,8 @@
 <template>
     <Dropdown placement="right-start" class="smc">
         <li
-            class="smc-title"
+            class="smc-title ivu-menu-item"
             :class="{
-                'ivu-menu-item': true,
                 'ivu-menu-item-sideMenuCollapse': layoutStore.layoutInfo.isMenuCollapse,
             }"
         >
@@ -35,6 +34,7 @@
 </template>
 
 <script setup>
+import { Dropdown, DropdownMenu, DropdownItem } from 'view-ui-plus';
 import { useLayoutStore, usePageStore } from '@/store';
 import SideMenuTitle from './SideMenuTitle.vue';
 import SideMenuCollapse from './SideMenuCollapse.vue';

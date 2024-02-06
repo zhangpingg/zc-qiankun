@@ -11,6 +11,7 @@
 </template>
 
 <script setup>
+import { Submenu } from 'view-ui-plus';
 import SideMenuItem from './SideMenuItem.vue';
 import SideMenuTitle from './SideMenuTitle.vue';
 import { isValidArr } from '@/libs/util.tool';

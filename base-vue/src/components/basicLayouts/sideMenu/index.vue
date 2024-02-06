@@ -2,7 +2,7 @@
     <div class="sideMenu">
         <div class="sideMenu-logo" @click="goHome">
             <img src="@/assets/images/logo-small.png" v-if="isMenuCollapse" />
-            <img src="@/assets/images/logo-dark.png" v-else />
+            <img src="@/assets/images/logo-big-dark.png" v-else />
         </div>
         <div class="c-hideScrollbar sideMenu-menuList">
             <Menu
@@ -46,6 +46,7 @@
 
 <script setup>
 import { toRefs } from 'vue';
+import { Menu, Tooltip } from 'view-ui-plus';
 import { useLayoutStore, useMenuStore, usePageStore } from '@/store';
 import SideMenuItem from './SideMenuItem.vue';
 import SideSubMenu from './SideSubMenu.vue';

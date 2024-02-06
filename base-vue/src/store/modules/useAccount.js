@@ -7,7 +7,7 @@ import { Modal } from 'view-ui-plus';
 import { AccountLogin, AccountInfo } from '@/api/account';
 import useUserStore from './useUser';
 import useLayoutStore from './useLayout';
-import { siderTreeList, resData } from './const';
+import { siderTreeList } from './const';
 import util from '@/libs/util';
 import { onUnmounted, ref } from 'vue';
 
@@ -23,38 +23,27 @@ const useAccount = defineStore('Base-account', () => {
     const login = async (data) => {
         const { username = '' } = data;
         return new Promise((resolve, reject) => {
-            // (1)登录接口 API
-            //AccountLogin(data)
-            //    .then(async (res) => {
-            //        setCookie('token', res.accessToken);
-            //        setCookie('username', username);
-            //        // 获取用户的信息接口，如相关页面路由
-            //        await AccountInfo({ username: username }).then(async (info) => {
-            //            //let menu = [...info.menuDTOS];
-            //            info.menu = siderTreeList; // 菜单tree列表
-            //            info.menuPaths = getMenuPathList(siderTreeList); // 获取菜单对应的path权限列表
-            //            delete info.menuDTOS;
-            //            setCookie('uuid', info.id);
-            //            localStorage.setItem('Base-isPdaChooseStore', info.isPdaChooseStore ? 'isPdaChooseStore' : '');
-            //            userStore.setUserInfo(info);
-            //        });
-            //        // 结束
-            //        resolve();
-            //    })
-            //    .catch((err) => {
-            //        reject(err);
-            //    });
-            // (2)静态的模拟数据
-            setCookie('token', '静态的token');
-            setCookie('username', username);
-            let info = resData;
-            info.menu = siderTreeList; // 菜单tree列表
-            info.menuPaths = getMenuPathList(siderTreeList); // 获取菜单对应的path权限列表
-            delete info.menuDTOS;
-            setCookie('uuid', info.id);
-            localStorage.setItem('Base-isPdaChooseStore', info.isPdaChooseStore ? 'isPdaChooseStore' : '');
-            userStore.setUserInfo(info);
-            resolve();
+            // 登录接口
+            AccountLogin(data)
+                .then(async (res) => {
+                    setCookie('token', res.accessToken);
+                    setCookie('username', username);
+                    // 获取用户的信息接口，如相关页面路由
+                    await AccountInfo({ username: username }).then(async (info) => {
+                        //let menu = [...info.menuDTOS];
+                        info.menu = siderTreeList; // 菜单tree列表
+                        info.menuPaths = getMenuPathList(siderTreeList); // 获取菜单对应的path权限列表
+                        delete info.menuDTOS;
+                        setCookie('uuid', info.id);
+                        localStorage.setItem('Base-isPdaChooseStore', info.isPdaChooseStore ? 'isPdaChooseStore' : '');
+                        userStore.setUserInfo(info);
+                    });
+                    // 结束
+                    resolve();
+                })
+                .catch((err) => {
+                    reject(err);
+                });
         });
     };
 

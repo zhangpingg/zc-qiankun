@@ -53,6 +53,7 @@
 
 <script setup>
 import { toRefs } from 'vue';
+import { Icon, Tag, Dropdown, DropdownMenu, DropdownItem, Button, Avatar } from 'view-ui-plus';
 import { useLayoutStore, useUserStore, useAccountStore } from '@/store';
 import util from '@/libs/util';
 import HeaderPassword from './headerPassword';

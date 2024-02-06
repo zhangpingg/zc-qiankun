@@ -2,17 +2,16 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import { start, registerMicroApps } from 'qiankun';
 import router from './router';
-import ViewUIPlus from 'view-ui-plus';
-import 'view-ui-plus/dist/styles/viewuiplus.css';
 import { createPinia } from 'pinia';
 import piniaPersist from 'pinia-plugin-persist';
 import { usePageStore } from '@/store';
+import 'view-ui-plus/dist/styles/viewuiplus.css';
 import './styles/index.less';
 
 const pinia = createPinia();
 pinia.use(piniaPersist);
 
-createApp(App).use(pinia).use(router).use(ViewUIPlus).mount('#app');
+createApp(App).use(pinia).use(router).mount('#app');
 
 const pageStore = usePageStore();
 

@@ -499,33 +499,4 @@ const projectPage = [
 
 const siderTreeList = [...testPage, ...projectPage];
 
-const resData = {
-    id: '342',
-    createDate: '2020-10-08 08:43:54',
-    modifyDate: '2024-02-06 14:49:14',
-    realName: '老李',
-    userName: '18857375652',
-    mobile: '18857375652',
-    email: null,
-    enabledDate: null,
-    isMaster: true,
-    password: '57091af1260966a65cf521d4fe1eb63b',
-    distributorId: '218',
-    loginFailureCount: 0,
-    certificationStatus: 1,
-    certificationName: '北京医科智谷资讯有限公司',
-    isLocked: false,
-    remark: null,
-    lockedDate: '2022-11-29 17:21:30',
-    isPda: true,
-    isLoginRemind: false,
-    isEnabled: true,
-    isDelete: false,
-    distributorName: 'test-不要动服务部',
-    isPdaChooseStore: true,
-    roleDTOS: null,
-    roleTye: false,
-    menu: [], // 菜单
-};
-
-export { siderTreeList, resData };
+export { siderTreeList };

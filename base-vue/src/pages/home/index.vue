@@ -1,7 +1,7 @@
 <template>
     <div class="home">
         <div class="home-main">
-            <img src="@/assets/images/logo.png" alt="logo" class="home-main-logo" />
+            <img src="@/assets/images/home-logo.png" alt="logo" class="home-main-logo" />
             <p style="width: 100%" />
             <img src="@/assets/images/home-tips.png" alt="logo" class="home-main-tips" />
         </div>

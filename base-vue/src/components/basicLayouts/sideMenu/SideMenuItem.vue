@@ -5,6 +5,7 @@
 </template>
 
 <script setup>
+import { MenuItem } from 'view-ui-plus';
 import SideMenuTitle from './SideMenuTitle.vue';
 import util from '@/libs/util';
 

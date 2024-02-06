@@ -10,6 +10,8 @@
 </template>
 
 <script setup>
+import { Icon } from 'view-ui-plus';
+
 defineProps({
     menu: {
         type: Object,

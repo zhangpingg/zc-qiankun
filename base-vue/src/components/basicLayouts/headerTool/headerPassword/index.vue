@@ -33,6 +33,7 @@
 
 <script setup>
 import { ref, reactive, computed } from 'vue';
+import { Modal, Spin, Form, FormItem, Input, Button } from 'view-ui-plus';
 import { useUserStore } from '@/store';
 import { ResetPassword } from '@/api/account';
 import { Notice } from 'view-ui-plus';
