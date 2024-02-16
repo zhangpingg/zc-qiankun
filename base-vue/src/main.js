@@ -7,6 +7,7 @@ import piniaPersist from 'pinia-plugin-persist';
 import { usePageStore } from '@/store';
 import 'view-ui-plus/dist/styles/viewuiplus.css';
 import './styles/index.less';
+import { subApplyUrl } from '../config/subEnv';
 
 const pinia = createPinia();
 pinia.use(piniaPersist);
@@ -18,8 +19,7 @@ const pageStore = usePageStore();
 const apps = [
     {
         name: 'sub-vue2',
-        //entry: '//10.1.86.247:12023', // 测试环境
-        entry: '//localhost:8081', // 本地
+        entry: subApplyUrl[subApplyUrl.environment].subVue2Url,
         activeRule: (location) => location.pathname.startsWith('/sub-vue2'),
         container: '#subContainer',
         // 共享数据到子应用
@@ -29,8 +29,7 @@ const apps = [
     },
     {
         name: 'sub-vue3',
-        //entry: '//10.1.86.247:12022', // 测试环境
-        entry: '//localhost:8082', // 本地
+        entry: subApplyUrl[subApplyUrl.environment].subVue3Url,
         activeRule: (location) => location.pathname.startsWith('/sub-vue3'),
         container: '#subContainer',
         props: {

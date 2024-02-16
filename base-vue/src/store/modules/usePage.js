@@ -69,9 +69,9 @@ const usePage = defineStore(
         };
         /**
          * @description 关闭一个 tag (关闭一个页面)
-         * @param {Object} param { tagName: 要关闭的标签名字 }
+         * @param {Object} param  tagName: 要关闭的标签名字
          */
-        const closeTab = async ({ tagName }) => {
+        const closeTab = async (tagName) => {
             // 下个新的页面
             let newPage = pageInfo.openedTabList[0];
             const isCurrent = pageInfo.currentRouteName === tagName;
