@@ -1,6 +1,6 @@
 // @ts-nocheck
 import axios from "axios";
-import cookies from "./util.cookies";
+import Cookies from "js-cookie";
 import router from "@/router";
 
 // 创建一个 axios 实例
@@ -12,9 +12,9 @@ const service = axios.create({
 // 请求拦截器
 service.interceptors.request.use(
     (config) => {
-        config.headers["Authorization"] = cookies.get("token");
-        config.headers["supplier-domain"] = "dt";
-        //console.log(22, config);
+        config.headers["Authorization"] = Cookies.get("Base-token");
+        //config.headers["supplier-domain"] = "dt";
+        console.log(22, config);
         return config;
     },
     (error) => {
@@ -26,7 +26,7 @@ service.interceptors.request.use(
 // 响应拦截器
 service.interceptors.response.use(
     (response) => {
-        //console.log(33, response);
+        console.log(33, response);
         //let config = response.config;
         //let { errorModalType = "Notice", handleError = true } = config;
         // dataAxios 是 axios 返回数据中的 data
@@ -53,7 +53,7 @@ service.interceptors.response.use(
                 case 520006:
                 case 520009:
                 case 100006:
-                    cookies.set("token", "");
+                    //cookies.set("token", "");
                     router.push({ path: "/login" });
                     //errorCreate(`身份认证失败`);
                     break;

@@ -3,7 +3,7 @@ const subApplyUrl = {
         subVue2Url: '//localhost:8081',
         subVue3Url: '//localhost:8082',
     },
-    dev: {
+    test: {
         subVue2Url: '//10.1.86.247:12023',
         subVue3Url: '//10.1.86.247:12022',
     },

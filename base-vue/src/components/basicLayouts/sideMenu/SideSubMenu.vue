@@ -5,7 +5,7 @@
         </template>
         <template v-for="item in menu.children">
             <SideSubMenu v-if="isValidArr(item.children)" :menu="item" :key="item.id" />
-            <SideMenuItem :menu="item" :key="item.id" v-if="!isValidArr(item.children) && !item.isHidden" />
+            <SideMenuItem :menu="item" :key="item.id" v-if="!isValidArr(item.children) && !item.activeName" />
         </template>
     </Submenu>
 </template>

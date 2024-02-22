@@ -15,6 +15,7 @@ const usePage = defineStore(
             menuTabsPool: [], // 可以在多页 tab 模式下显示的页面（所有菜单路由平铺后的列表，包括详情）
             openedTabList: [],
             currentRouteName: '', // 当前页面路由的 name
+            currentMenuActiveRouteName: '', // 当前菜单激活路由 name
         });
 
         /**
@@ -49,6 +50,13 @@ const usePage = defineStore(
             pageInfo.currentRouteName = routeName;
         };
         /**
+         * @description 设置当前左侧菜单激活的页面 name
+         * @param {String} routeName 当前页面路由的name
+         */
+        const setMenuActiveRouteName = (routeName) => {
+            pageInfo.currentMenuActiveRouteName = routeName;
+        };
+        /**
          * @description 设置路由池
          * @param {Array} routes 路由tree
          */
@@ -59,8 +67,8 @@ const usePage = defineStore(
                     if (route.children) {
                         pushRoute(route.children);
                     } else {
-                        const { title, name, path, applyName, parentName } = route;
-                        routePool.push({ title, name, path, applyName, parentName });
+                        const { title, name, path, applyName, parentName, activeName } = route;
+                        routePool.push({ title, name, path, applyName, parentName, activeName });
                     }
                 });
             };
@@ -160,6 +168,7 @@ const usePage = defineStore(
             openTab,
             setRoutePool,
             setRouteName,
+            setMenuActiveRouteName,
             closeTab,
             closeLeftTab,
             closeRightTab,

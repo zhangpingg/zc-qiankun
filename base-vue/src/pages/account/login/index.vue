@@ -1,5 +1,5 @@
 <template>
-    <div class="login pb-11 mt-12">
+    <div class="login">
         <div class="login-container">
             <div class="login-container-mian">
                 <div class="login-container-mian-content">

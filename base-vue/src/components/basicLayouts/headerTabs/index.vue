@@ -22,10 +22,10 @@
                 </div>
                 <template #list>
                     <DropdownMenu>
-                        <DropdownItem name="Left"> <Icon type="md-arrow-back" />关闭左侧 </DropdownItem>
-                        <DropdownItem name="Right"> <Icon type="md-arrow-forward" />关闭右侧 </DropdownItem>
-                        <DropdownItem name="Other"> <Icon type="md-close" />关闭其它 </DropdownItem>
-                        <DropdownItem name="All"> <Icon type="md-close-circle" />全部关闭 </DropdownItem>
+                        <DropdownItem name="Left"> <Icon type="md-arrow-back" /> 关闭左侧 </DropdownItem>
+                        <DropdownItem name="Right"> <Icon type="md-arrow-forward" /> 关闭右侧 </DropdownItem>
+                        <DropdownItem name="Other"> <Icon type="md-close" /> 关闭其它 </DropdownItem>
+                        <DropdownItem name="All"> <Icon type="md-close-circle" /> 全部关闭 </DropdownItem>
                     </DropdownMenu>
                 </template>
             </Dropdown>

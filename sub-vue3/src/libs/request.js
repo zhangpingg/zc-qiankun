@@ -1,6 +1,6 @@
 // @ts-nocheck
 import axios from 'axios';
-import cookies from './util.cookies';
+import Cookies from 'js-cookie';
 import router from '@/router';
 
 // 创建一个 axios 实例
@@ -12,8 +12,8 @@ const service = axios.create({
 // 请求拦截器
 service.interceptors.request.use(
     (config) => {
-        config.headers['Authorization'] = cookies.get('token');
-        config.headers['supplier-domain'] = 'dt';
+        config.headers['Authorization'] = Cookies.get('Base-token');
+        //config.headers['supplier-domain'] = 'dt';
         return config;
     },
     (error) => {

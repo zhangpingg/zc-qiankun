@@ -1,5 +1,5 @@
 const envApi = {
-    dev: {
+    test: {
         //api: 'http://dtra.zhilun-k8s.com', // 品牌商
         api: 'http://yd.zhilun-k8s.com', // 经销商-服务器地址（不带api）
         //api: 'http://192.168.1.231:8061', // 后台本地
@@ -12,7 +12,7 @@ const envApi = {
     prod: {
         api: 'https://dtapi.zcrubber.com/api/puxian', // 品牌商
     },
-    environment: 'dev',
+    environment: 'test',
 };
 
 export default {

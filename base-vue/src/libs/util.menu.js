@@ -48,4 +48,15 @@ const getMenuItemByName = (routeName) => {
     }
 };
 
-export { getMenuPathList, jumpPage, getMenuItemByName };
+/**
+ * 根据路由name获取当前左侧菜单的激活路由
+ * @param {string} routeName 当前菜单的路由name
+ * @return {} 返回当前左侧菜单的激活路由
+ */
+const getMenuActiveNameByName = (routeName) => {
+    const pageStore = usePageStore();
+    const menuItem = pageStore?.pageInfo?.menuTabsPool?.filter((item) => item.name == routeName);
+    return menuItem[0]?.activeName || menuItem[0]?.name;
+};
+
+export { getMenuPathList, jumpPage, getMenuItemByName, getMenuActiveNameByName };

@@ -1,7 +1,7 @@
-import cookies from "./util.cookies";
+import * as tool from "./util.tool";
 
 const util = {
-    cookies,
+    tool,
 };
 
 export default util;

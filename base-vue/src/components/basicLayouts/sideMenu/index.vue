@@ -6,11 +6,11 @@
         </div>
         <div class="c-hideScrollbar sideMenu-menuList">
             <Menu
-                ref="menu"
+                ref="menuRef"
                 theme="dark"
                 :accordion="isMenuAccordion"
                 :open-names="menuStore.menuInfo.sideMenuOpenNames"
-                :active-name="pageStore.pageInfo.currentRouteName"
+                :active-name="pageStore.pageInfo.currentMenuActiveRouteName"
                 width="auto"
                 class="sideMenu-menuList-menu"
             >
@@ -45,7 +45,7 @@
 </template>
 
 <script setup>
-import { toRefs } from 'vue';
+import { ref, toRefs, watch, nextTick } from 'vue';
 import { Menu, Tooltip } from 'view-ui-plus';
 import { useLayoutStore, useMenuStore, usePageStore } from '@/store';
 import SideMenuItem from './SideMenuItem.vue';
@@ -67,9 +67,21 @@ defineProps({
     },
 });
 
+const menuRef = ref();
+
 const goHome = () => {
     jumpPage({ path: '/home', applyName: 'base' });
 };
+// 更新-菜单栏展开
+const updateMenuOpen = async () => {
+    await nextTick();
+    menuRef?.value?.updateOpened();
+    menuRef?.value?.updateActiveName();
+};
+
+watch([() => menuStore.menuInfo.sideMenuOpenNames, () => pageStore.pageInfo.currentMenuActiveRouteName], () => {
+    updateMenuOpen();
+});
 </script>
 
 <style scoped lang="less">

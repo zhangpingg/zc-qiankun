@@ -13,7 +13,7 @@ const menuStore = useMenuStore();
 const userStore = useUserStore();
 const pageStore = usePageStore();
 const layoutStore = useLayoutStore();
-const { getMenuItemByName } = util.menu;
+const { getMenuItemByName, getMenuActiveNameByName } = util.menu;
 
 layoutStore.listenFullscreen(); // 初始化全屏监听
 
@@ -35,6 +35,7 @@ watch(route, (newRoute) => {
     menuStore.setSiderMenuTree(userStore.userInfo.menu);
     menuStore.setSideMenuOpenNames(getMenuItemByName(newRoute.name)?.parentName);
     pageStore.setRouteName(newRoute.name);
+    pageStore.setMenuActiveRouteName(getMenuActiveNameByName(newRoute.name));
     pageStore.setRoutePool(userStore.userInfo.menu || []);
 });
 onUnmounted(() => {
