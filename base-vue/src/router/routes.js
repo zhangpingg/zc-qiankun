@@ -1,11 +1,3 @@
-import BasicLayouts from '@/components/basicLayouts';
-import SubApply from '@/components/subApply';
-import Login from '@/pages/account/login';
-import Home from '@/pages/home';
-import Error403 from '@/pages/error/403';
-import Error404 from '@/pages/error/404';
-import Error500 from '@/pages/error/500';
-
 // 在主框架之外显示
 const frameOut = [
     {
@@ -15,7 +7,7 @@ const frameOut = [
             title: '登录',
             auth: false,
         },
-        component: Login,
+        component: () => import('@/pages/account/login/index.vue'),
     },
 ];
 
@@ -29,7 +21,7 @@ const frameIn = [
     },
     {
         path: '/',
-        component: BasicLayouts,
+        component: () => import('@/components/basicLayouts/index.vue'),
         children: [
             {
                 path: 'home',
@@ -37,7 +29,7 @@ const frameIn = [
                 meta: {
                     auth: true, // 路由拦截有用
                 },
-                component: Home,
+                component: () => import('@/pages/home/index.vue'),
             },
             {
                 path: 'sub-vue2/:oneLevel/:twoLevel?/:threeLevel?',
@@ -46,7 +38,7 @@ const frameIn = [
                     auth: true, // 路由拦截有用
                     isSubApply: true,
                 },
-                component: SubApply,
+                component: () => import('@/components/subApply/index.vue'),
             },
             {
                 path: 'sub-vue3/:oneLevel/:twoLevel?/:threeLevel?',
@@ -55,7 +47,7 @@ const frameIn = [
                     auth: true, // 路由拦截有用
                     isSubApply: true,
                 },
-                component: SubApply,
+                component: () => import('@/components/subApply/index.vue'),
             },
         ],
     },
@@ -69,7 +61,7 @@ const errorPage = [
         meta: {
             title: '403',
         },
-        component: Error403,
+        component: () => import('@/pages/error/403/index.vue'),
     },
     {
         path: '/:pathMatch(.*)',
@@ -77,7 +69,7 @@ const errorPage = [
         meta: {
             title: '404',
         },
-        component: Error404,
+        component: () => import('@/pages/error/404/index.vue'),
     },
     {
         path: '/500',
@@ -85,7 +77,7 @@ const errorPage = [
         meta: {
             title: '500',
         },
-        component: () => Error500,
+        component: () => () => import('@/pages/error/500/index.vue'),
     },
 ];
 
