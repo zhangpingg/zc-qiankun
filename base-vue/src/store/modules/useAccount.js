@@ -1,5 +1,5 @@
 /**
- * 登录、退出
+ * 登录、退出、获取账户信息
  */
 
 import { defineStore } from 'pinia';
@@ -11,7 +11,7 @@ import { siderTreeList, resData } from './const';
 import util from '@/libs/util';
 import { onUnmounted, ref } from 'vue';
 
-const { jumpPage, getMenuPathList } = util.menu;
+const { jumpPage, getMenuPathList, getHasAuthSiderTreeList } = util.menu;
 const { setCookie } = util.cookies;
 
 const useAccount = defineStore('Base-account', () => {
@@ -19,6 +19,16 @@ const useAccount = defineStore('Base-account', () => {
     const layoutStore = useLayoutStore();
     const timer = ref();
 
+    // 获取账户信息（用户的信息，页面路由等）
+    const getAccountInfo = async (username) => {
+        await AccountInfo({ username: username }).then((info) => {
+            info.menu = getHasAuthSiderTreeList([...info.authMarkList, '13', '13-1', '13-2', '13-3'], siderTreeList); // 菜单tree列表
+            info.menuPaths = getMenuPathList(siderTreeList); // 获取菜单对应的path权限列表
+            setCookie('uuid', info.id);
+            localStorage.setItem('Base-isPdaChooseStore', info.isPdaChooseStore ? 'isPdaChooseStore' : '');
+            userStore.setUserInfo(info);
+        });
+    };
     // 登录
     const login = async (data) => {
         const { username = '' } = data;
@@ -28,17 +38,7 @@ const useAccount = defineStore('Base-account', () => {
                 .then(async (res) => {
                     setCookie('token', res.accessToken);
                     setCookie('username', username);
-                    // 获取用户的信息接口，如相关页面路由
-                    await AccountInfo({ username: username }).then(async (info) => {
-                        //let menu = [...info.menuDTOS];
-                        info.menu = siderTreeList; // 菜单tree列表
-                        info.menuPaths = getMenuPathList(siderTreeList); // 获取菜单对应的path权限列表
-                        delete info.menuDTOS;
-                        setCookie('uuid', info.id);
-                        localStorage.setItem('Base-isPdaChooseStore', info.isPdaChooseStore ? 'isPdaChooseStore' : '');
-                        userStore.setUserInfo(info);
-                    });
-                    // 结束
+                    await getAccountInfo();
                     resolve();
                 })
                 .catch((err) => {
@@ -48,16 +48,14 @@ const useAccount = defineStore('Base-account', () => {
             //setCookie('token', '静态的token');
             //setCookie('username', username);
             //let info = resData;
-            //info.menu = siderTreeList; // 菜单tree列表
+            //info.menu = getHasAuthSiderTreeList([...info.authMarkList, '13', '13-1', '13-2', '13-3'], siderTreeList); // 菜单tree列表
             //info.menuPaths = getMenuPathList(siderTreeList); // 获取菜单对应的path权限列表
-            //delete info.menuDTOS;
             //setCookie('uuid', info.id);
             //localStorage.setItem('Base-isPdaChooseStore', info.isPdaChooseStore ? 'isPdaChooseStore' : '');
             //userStore.setUserInfo(info);
             //resolve();
         });
     };
-
     // 退出登录
     const logout = () => {
         if (layoutStore.layoutInfo.isLogoutConfirm) {
@@ -82,11 +80,12 @@ const useAccount = defineStore('Base-account', () => {
             }, 0);
         }
     };
+
     onUnmounted(() => {
-        clearInterval(timer);
+        clearInterval(timer.value);
     });
 
-    return { login, logout };
+    return { login, logout, getAccountInfo };
 });
 
 export default useAccount;

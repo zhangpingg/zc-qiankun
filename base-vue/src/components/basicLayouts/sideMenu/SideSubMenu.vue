@@ -4,8 +4,12 @@
             <SideMenuTitle :menu="menu" />
         </template>
         <template v-for="item in menu.children">
-            <SideSubMenu v-if="isValidArr(item.children)" :menu="item" :key="item.id" />
-            <SideMenuItem :menu="item" :key="item.id" v-if="!isValidArr(item.children) && !item.activeName" />
+            <SideSubMenu v-if="isValidArr(item.children) && item.isShow" :menu="item" :key="item.id" />
+            <SideMenuItem
+                :menu="item"
+                :key="item.id"
+                v-if="!isValidArr(item.children) && !item.activeName && item.isShow"
+            />
         </template>
     </Submenu>
 </template>

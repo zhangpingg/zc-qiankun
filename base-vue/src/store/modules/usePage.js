@@ -23,12 +23,12 @@ const usePage = defineStore(
          * @param {Object} menu 从路由钩子的 to 对象上获取 { name, params, query, fullPath } 路由信息
          */
         const openTab = async (menu) => {
-            const { name, fullPath } = menu;
+            const { name, path } = menu;
             let openedList = pageInfo.openedTabList; // 已经打开的页面
             // 判断此页面是否已经打开，并且记录位置
             let pageOpenedIndex = 0;
             const pageOpened = openedList.find((page, index) => {
-                const same = page.fullPath === fullPath;
+                const same = page.path === path;
                 pageOpenedIndex = same ? index : pageOpenedIndex;
                 return same;
             });
@@ -37,7 +37,7 @@ const usePage = defineStore(
                 let page = pageInfo.menuTabsPool.find((t) => t.name === name);
                 // 如果这里没有找到 page 代表这个路由虽然在框架内 但是不参与标签页显示
                 if (page) {
-                    pageInfo.openedTabList.push({ ...page, fullPath });
+                    pageInfo.openedTabList.push({ ...page, fullPath: path });
                 }
             }
         };

@@ -4,7 +4,7 @@ import { start, registerMicroApps } from 'qiankun';
 import router from './router';
 import { createPinia } from 'pinia';
 import piniaPersist from 'pinia-plugin-persist';
-import { usePageStore } from '@/store';
+import { usePageStore, useAccountStore } from '@/store';
 import 'view-ui-plus/dist/styles/viewuiplus.css';
 import './styles/index.less';
 import { subApplyUrl } from '../config/subEnv';
@@ -15,6 +15,7 @@ pinia.use(piniaPersist);
 createApp(App).use(pinia).use(router).mount('#app');
 
 const pageStore = usePageStore();
+const accountStore = useAccountStore();
 
 const apps = [
     {
@@ -25,6 +26,7 @@ const apps = [
         // 共享数据到子应用
         props: {
             pageStore,
+            accountStore,
         },
     },
     {

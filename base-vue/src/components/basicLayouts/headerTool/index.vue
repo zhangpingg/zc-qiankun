@@ -74,7 +74,9 @@ const expandOrCollapseSideMenu = () => {
     layoutStore.updateMenuCollapse(!isMenuCollapse.value);
 };
 // 刷新网页
-const refreshPage = () => {};
+const refreshPage = () => {
+    location.reload();
+};
 // 企业认证
 const goEnterpriseCertification = () => {};
 // 切换全屏

@@ -59,4 +59,22 @@ const getMenuActiveNameByName = (routeName) => {
     return menuItem[0]?.activeName || menuItem[0]?.name;
 };
 
-export { getMenuPathList, jumpPage, getMenuItemByName, getMenuActiveNameByName };
+/**
+ * 根据接口返回的菜单权限标识，前端控制左侧菜单tree的展示
+ * @param {[]} authMarkList 当前用户的权限列表
+ * @param {[]} siderTreeList 前端静态的所有页面tree
+ * @return {[]} 返回最终的左侧菜单tree
+ */
+const getHasAuthSiderTreeList = (authMarkList, siderTreeList) => {
+    siderTreeList.forEach((item) => {
+        if (!authMarkList.includes(item.authMark)) {
+            item.isShow = false;
+        }
+        if (item.children) {
+            getHasAuthSiderTreeList(authMarkList, item.children);
+        }
+    });
+    return siderTreeList;
+};
+
+export { getMenuPathList, jumpPage, getMenuItemByName, getMenuActiveNameByName, getHasAuthSiderTreeList };

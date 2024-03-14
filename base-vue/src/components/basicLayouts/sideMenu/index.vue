@@ -16,8 +16,8 @@
             >
                 <template v-if="!isMenuCollapse">
                     <template v-for="item in menuStore.menuInfo.siderMenuTree">
-                        <SideSubMenu :menu="item" :key="item.id" v-if="isValidArr(item.children)" />
-                        <SideMenuItem :menu="item" :key="item.id" v-else />
+                        <SideSubMenu :menu="item" :key="item.id" v-if="isValidArr(item.children) && item.isShow" />
+                        <SideMenuItem :menu="item" :key="item.id" v-if="!isValidArr(item.children) && item.isShow" />
                     </template>
                 </template>
                 <template v-else>
@@ -26,9 +26,15 @@
                             :menu="item"
                             :key="item.id"
                             style="width: 100%"
-                            v-if="isValidArr(item.children)"
+                            v-if="isValidArr(item.children) && item.isShow"
                         />
-                        <Tooltip :content="item.title" placement="right" :key="item.id" style="width: 100%" v-else>
+                        <Tooltip
+                            :content="item.title"
+                            placement="right"
+                            :key="item.id"
+                            style="width: 100%"
+                            v-if="!isValidArr(item.children) && item.isShow"
+                        >
                             <SideMenuItem
                                 :menu="item"
                                 hide-title
@@ -82,6 +88,12 @@ const updateMenuOpen = async () => {
 watch([() => menuStore.menuInfo.sideMenuOpenNames, () => pageStore.pageInfo.currentMenuActiveRouteName], () => {
     updateMenuOpen();
 });
+watch(
+    () => layoutStore.layoutInfo.isMenuCollapse,
+    () => {
+        updateMenuOpen();
+    }
+);
 </script>
 
 <style scoped lang="less">

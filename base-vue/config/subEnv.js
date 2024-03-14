@@ -4,8 +4,8 @@ const subApplyUrl = {
         subVue3Url: '//localhost:8082',
     },
     test: {
-        subVue2Url: '//10.1.86.247:12023',
-        subVue3Url: '//10.1.86.247:12022',
+        subVue2Url: '//10.1.86.200:31038',
+        subVue3Url: '//10.1.86.200:32421',
     },
     uat: {
         subVue2Url: '',

@@ -12,7 +12,7 @@
             <DropdownMenu style="width: auto" class="smc-dropdownMenu">
                 <template v-for="(item, index) in menu.children">
                     <div
-                        v-if="item.children === undefined || !item.children.length"
+                        v-if="!isValidArr(item.children) && item.isShow && !item.activeName"
                         :key="index"
                         @click="jumpMenu(item)"
                     >
@@ -26,7 +26,7 @@
                             <SideMenuTitle :menu="item" />
                         </DropdownItem>
                     </div>
-                    <SideMenuCollapse v-else :menu="item" :key="item.id" />
+                    <SideMenuCollapse v-if="isValidArr(item.children) && item.isShow" :menu="item" :key="item.id" />
                 </template>
             </DropdownMenu>
         </template>
@@ -43,6 +43,7 @@ import util from '@/libs/util';
 const layoutStore = useLayoutStore();
 const pageStore = usePageStore();
 const { jumpPage } = util.menu;
+const { isValidArr } = util.tool;
 
 defineProps({
     menu: {
