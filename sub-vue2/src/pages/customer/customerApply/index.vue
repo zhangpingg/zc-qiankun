@@ -8,7 +8,7 @@
 <script setup>
 import util from "@/libs/util";
 
-const { jumpPage } = util.tool;
+const { jumpPage } = util.menu;
 
 const jumpDetails = () => {
     jumpPage({ path: "/sub-vue2/customer/userApply/detail" });

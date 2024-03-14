@@ -7,7 +7,7 @@ import { Modal } from 'view-ui-plus';
 import { AccountLogin, AccountInfo } from '@/api/account';
 import useUserStore from './useUser';
 import useLayoutStore from './useLayout';
-import { siderTreeList, resData } from './const';
+import { siderTreeList, resData, authMarkList } from './const';
 import util from '@/libs/util';
 import { onUnmounted, ref } from 'vue';
 
@@ -22,7 +22,7 @@ const useAccount = defineStore('Base-account', () => {
     // 获取账户信息（用户的信息，页面路由等）
     const getAccountInfo = async (username) => {
         await AccountInfo({ username: username }).then((info) => {
-            info.menu = getHasAuthSiderTreeList([...info.authMarkList, '13', '13-1', '13-2', '13-3'], siderTreeList); // 菜单tree列表
+            info.menu = getHasAuthSiderTreeList(authMarkList, siderTreeList); // 菜单tree列表
             info.menuPaths = getMenuPathList(siderTreeList); // 获取菜单对应的path权限列表
             setCookie('uuid', info.id);
             localStorage.setItem('Base-isPdaChooseStore', info.isPdaChooseStore ? 'isPdaChooseStore' : '');

@@ -19,12 +19,12 @@ const customerRoutes = [
         meta: {
             title: "客户管理详情",
             auth: true,
-            cache: true,
+            cache: false,
         },
         component: customerManageDetail,
     },
     {
-        path: `${applyRoute}/customer/customerApply`,
+        path: `${applyRoute}/customer/userApply`,
         meta: {
             title: "用户申请",
             auth: true,
@@ -37,7 +37,7 @@ const customerRoutes = [
         meta: {
             title: "申请详情",
             auth: true,
-            cache: true,
+            cache: false,
         },
         component: CustomerApplyDetail,
     },
