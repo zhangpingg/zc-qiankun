@@ -3,6 +3,7 @@
 </template>
 
 <script setup>
+import { Exception } from 'view-ui-plus';
 import { ErrorInfo } from '../const';
 </script>
 
