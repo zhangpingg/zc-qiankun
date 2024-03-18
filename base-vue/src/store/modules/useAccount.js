@@ -9,7 +9,6 @@ import useUserStore from './useUser';
 import useLayoutStore from './useLayout';
 import { siderTreeList, resData, authMarkList } from './const';
 import util from '@/libs/util';
-import { onUnmounted, ref } from 'vue';
 
 const { jumpPage, getMenuPathList, getHasAuthSiderTreeList } = util.menu;
 const { setCookie } = util.cookies;
@@ -17,7 +16,6 @@ const { setCookie } = util.cookies;
 const useAccount = defineStore('Base-account', () => {
     const userStore = useUserStore();
     const layoutStore = useLayoutStore();
-    const timer = ref();
 
     // 获取账户信息（用户的信息，页面路由等）
     const getAccountInfo = async (username) => {
@@ -71,19 +69,15 @@ const useAccount = defineStore('Base-account', () => {
         }
         function clearStore() {
             jumpPage({ path: '/login', applyName: 'base' });
-            timer.value = setTimeout(() => {
+            Promise.resolve().then(() => {
                 localStorage.clear();
                 sessionStorage.clear();
                 document.cookie.split(';').forEach(function (c) {
                     document.cookie = c.trim().split('=')[0] + '=;expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
                 });
-            }, 0);
+            });
         }
     };
-
-    onUnmounted(() => {
-        clearInterval(timer.value);
-    });
 
     return { login, logout, getAccountInfo };
 });
