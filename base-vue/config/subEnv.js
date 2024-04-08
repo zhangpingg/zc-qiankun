@@ -1,21 +1,25 @@
-const subApplyUrl = {
-    local: {
-        subVue2Url: '//localhost:8081',
-        subVue3Url: '//localhost:8082',
-    },
-    test: {
-        subVue2Url: '//10.1.86.200:31038',
-        subVue3Url: '//10.1.86.200:32421',
-    },
-    uat: {
-        subVue2Url: '',
-        subVue3Url: '',
-    },
-    prod: {
-        subVue2Url: '',
-        subVue3Url: '',
-    },
-    environment: 'local',
+const getSubApplyUrl = () => {
+    let urlObj = {};
+    const hostname = window.location.host;
+    switch (hostname) {
+        case 'localhost:8080': // 本地
+            urlObj.subVue2Url = 'http://localhost:8081';
+            urlObj.subVue3Url = 'http://localhost:8082';
+            break;
+        case 'aaa.com': // 测试
+            urlObj.subVue2Url = 'http://12.123.123.80:8080';
+            urlObj.subVue3Url = 'http://12.123.123.80:8081';
+            break;
+        case 'bbb.com': // 准生产
+            urlObj.subVue2Url = 'http://12.123.123.80:8080';
+            urlObj.subVue3Url = 'http://12.123.123.80:8081';
+            break;
+        case 'dccc.com': // 生产
+            urlObj.subVue2Url = 'https://vue2.z2.xxx';
+            urlObj.subVue3Url = 'https://vue3.z2.yyy';
+            break;
+    }
+    return urlObj;
 };
 
-export { subApplyUrl };
+export { getSubApplyUrl };
