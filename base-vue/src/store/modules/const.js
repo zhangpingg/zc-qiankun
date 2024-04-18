@@ -165,7 +165,7 @@ const siderTreeList = [
             {
                 id: '6-1',
                 path: '/sub-vue3/functionDemo/imgDotting',
-                title: '用户管理',
+                title: '图片上打点',
                 applyName: 'sub-vue3',
                 auth: true,
                 name: 'sub-vue3-functionDemo-imgDotting',
