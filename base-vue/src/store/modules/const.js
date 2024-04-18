@@ -153,9 +153,31 @@ const siderTreeList = [
             },
         ],
     },
+    {
+        id: '6',
+        path: '/functionDemo',
+        name: 'functionDemo',
+        title: '功能示例',
+        icon: 'ios-archive',
+        authMark: '6',
+        isShow: true,
+        children: [
+            {
+                id: '6-1',
+                path: '/sub-vue3/functionDemo/imgDotting',
+                title: '用户管理',
+                applyName: 'sub-vue3',
+                auth: true,
+                name: 'sub-vue3-functionDemo-imgDotting',
+                parentName: 'functionDemo',
+                authMark: '6-1',
+                isShow: true,
+            }
+        ]
+    }
 ];
 // 左侧菜单权限（当接口挂了的时候，可以暂时用这个）
-const authMarkList = ['1', '2', '3', '3-1', '3-2', '3-3', '3-4', '4', '5', '5-1', '5-2', '5-3', '5-4'];
+const authMarkList = ['1', '2', '3', '3-1', '3-2', '3-3', '3-4', '4', '5', '5-1', '5-2', '5-3', '5-4', '6', '6-1'];
 // 模拟接口数据
 const resData = {
     id: '342',
