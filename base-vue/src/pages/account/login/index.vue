@@ -37,14 +37,9 @@ const autoLogin = ref(true);
 // 登录
 const submitLogin = async (valid, values) => {
     if (valid) {
-        Message.loading({
-            content: '登录中...',
-            duration: 0,
-        });
         try {
             await accountStore.login(values);
             submit.value = false;
-            Message?.destroy();
             Message.success({
                 content: '登录成功！',
             });
@@ -54,7 +49,6 @@ const submitLogin = async (valid, values) => {
             }
         } catch (err) {
             submit.value = false;
-            Message?.destroy();
         }
     }
 };

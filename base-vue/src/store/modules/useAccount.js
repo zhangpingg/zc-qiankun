@@ -32,26 +32,26 @@ const useAccount = defineStore('Base-account', () => {
         const { username = '' } = data;
         return new Promise((resolve, reject) => {
             // (1)登录接口 API
-            AccountLogin(data)
-                .then(async (res) => {
-                    setCookie('token', res.accessToken);
-                    setCookie('username', username);
-                    await getAccountInfo();
-                    resolve();
-                })
-                .catch((err) => {
-                    reject(err);
-                });
+            // AccountLogin(data)
+            //     .then(async (res) => {
+            //         setCookie('token', res.accessToken);
+            //         setCookie('username', username);
+            //         await getAccountInfo();
+            //         resolve();
+            //     })
+            //     .catch((err) => {
+            //         reject(err);
+            //     });
             // (2)静态的模拟数据
-            //setCookie('token', '静态的token');
-            //setCookie('username', username);
-            //let info = resData;
-            //info.menu = getHasAuthSiderTreeList([...info.authMarkList, '13', '13-1', '13-2', '13-3'], siderTreeList); // 菜单tree列表
-            //info.menuPaths = getMenuPathList(siderTreeList); // 获取菜单对应的path权限列表
-            //setCookie('uuid', info.id);
-            //localStorage.setItem('Base-isPdaChooseStore', info.isPdaChooseStore ? 'isPdaChooseStore' : '');
-            //userStore.setUserInfo(info);
-            //resolve();
+            setCookie('token', '静态的token');
+            setCookie('username', username);
+            let info = resData;
+            info.menu = getHasAuthSiderTreeList([...authMarkList], siderTreeList); // 菜单tree列表
+            info.menuPaths = getMenuPathList(siderTreeList); // 获取菜单对应的path权限列表
+            setCookie('uuid', info.id);
+            localStorage.setItem('Base-isPdaChooseStore', info.isPdaChooseStore ? 'isPdaChooseStore' : '');
+            userStore.setUserInfo(info);
+            resolve();
         });
     };
     // 退出登录
