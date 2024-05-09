@@ -25,7 +25,6 @@ service.interceptors.request.use(
 // 响应拦截器
 service.interceptors.response.use(
     (response) => {
-        //console.log(33, response);
         let config = response.config;
         let { errorModalType = 'Notice', handleError = true } = config;
         // dataAxios 是 axios 返回数据中的 data
@@ -52,7 +51,7 @@ service.interceptors.response.use(
                 case 520006:
                 case 520009:
                 case 100006:
-                    cookies.set('token', '');
+                    Cookies.set('token', '');
                     router.push({ path: '/login' });
                     //errorCreate(`身份认证失败`);
                     break;

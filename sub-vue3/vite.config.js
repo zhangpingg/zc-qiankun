@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import qiankun from 'vite-plugin-qiankun';
 import path from 'path';
+import proxy from './config/proxy';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -10,6 +11,7 @@ export default defineConfig({
         port: 8082,
         cors: true,
         origin: 'http://localhost:8082',
+        proxy,
     },
     plugins: [
         vue(),

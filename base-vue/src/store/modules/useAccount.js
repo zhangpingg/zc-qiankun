@@ -43,7 +43,7 @@ const useAccount = defineStore('Base-account', () => {
             //         reject(err);
             //     });
             // (2)静态的模拟数据
-            setCookie('token', '静态的token');
+            setCookie('token', 'token-112233445566');
             setCookie('username', username);
             let info = resData;
             info.menu = getHasAuthSiderTreeList([...authMarkList], siderTreeList); // 菜单tree列表

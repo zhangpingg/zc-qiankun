@@ -12,7 +12,7 @@ export function GetExportList(data) {
 // 新增或修改（标签/标签分类）
 export function SaveOrUpdateTag(data) {
     return request({
-        url: `/product/figure/tag/saveOrUpdate`,
+        url: '/product/figure/tag/saveOrUpdate',
         method: 'post',
         data,
     });
