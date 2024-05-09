@@ -8,8 +8,16 @@ const functionDemoRoutes = [
             auth: true,
             cache: true,
         },
-        // component: () => import('@/pages/exportList/index.vue'),
         component: () => import('@/pages/functionDemo/imgDotting/index.vue'),
+    },
+    {
+        path: `${applyRoute}/functionDemo/elementTreeDraggable`,
+        meta: {
+            title: 'tree树拖拽位置',
+            auth: true,
+            cache: true,
+        },
+        component: () => import('@/pages/functionDemo/elementTreeDraggable/index.vue'),
     },
 ];
 
