@@ -3,6 +3,7 @@ import { applyRoute } from './const';
 import { userRoutes } from './modules/user';
 import { exportListRoutes } from './modules/exportList';
 import { functionDemoRoutes } from './modules/functionDemo';
+import {elementPlusRoutes} from './modules/elementPlus'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -20,6 +21,7 @@ const router = createRouter({
         ...userRoutes,
         ...exportListRoutes,
         ...functionDemoRoutes,
+        ...elementPlusRoutes,
     ],
 });
 
