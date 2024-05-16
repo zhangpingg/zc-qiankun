@@ -77,7 +77,7 @@ const errorPage = [
         meta: {
             title: '500',
         },
-        component: () => () => import('@/pages/error/500/index.vue'),
+        component: () => import('@/pages/error/500/index.vue'),
     },
 ];
 

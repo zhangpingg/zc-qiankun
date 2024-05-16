@@ -13,7 +13,7 @@ const usePage = defineStore(
     () => {
         const pageInfo = reactive({
             menuTabsPool: [], // 可以在多页 tab 模式下显示的页面（所有菜单路由平铺后的列表，包括详情）
-            openedTabList: [],
+            openedTabList: [], // 已经打开的tab列表
             currentRouteName: '', // 当前页面路由的 name
             currentMenuActiveRouteName: '', // 当前菜单激活路由 name
         });
