@@ -17,7 +17,7 @@ const elementPlusRoutes = [
             auth: true,
             cache: true,
         },
-        component: () => import('@/pages/functionDemo/elementTreeDraggable/index.vue'),
+        component: () => import('@/pages/elementPlus/treeDraggable/index.vue'),
     },
 ];
 
