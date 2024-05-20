@@ -40,6 +40,13 @@ const apps = [
     },
 ];
 
-registerMicroApps(apps, {});
-
-start();
+// 解决本地刷新页面后，子应用vue3打不开页面的情况
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        const container = document.getElementById('subContainer');
+        if (container) {
+            registerMicroApps(apps, {});
+            start();
+        }
+    }, 200);
+});
