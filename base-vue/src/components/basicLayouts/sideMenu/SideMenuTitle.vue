@@ -1,11 +1,10 @@
 <template>
     <span class="smt">
-        <span class="smt-iconWrap" v-if="menu.icon || menu.custom || menu.img">
+        <span class="smt-iconWrap" v-if="menu.icon || menu.img">
             <Icon :type="menu.icon" v-if="menu.icon" />
-            <Icon :custom="menu.custom" v-else-if="menu.custom" />
-            <img :src="menu.img" v-else-if="menu.img" />
+            <img :src="menu.img" class="smt-iconWrap-img por" v-else-if="menu.img" />
         </span>
-        <span v-if="!hideTitle"> {{ menu.title }} </span>
+        <span v-if="isShowTitle"> {{ menu.title }} </span>
     </span>
 </template>
 
@@ -19,9 +18,9 @@ defineProps({
             return {};
         },
     },
-    hideTitle: {
+    isShowTitle: {
         type: Boolean,
-        default: false,
+        default: true,
     },
     // 用于侧边栏收起 Dropdown 当前高亮
     selected: {
@@ -36,6 +35,11 @@ defineProps({
     white-space: nowrap;
     .smt-iconWrap {
         margin-right: 10px;
+        .smt-iconWrap-img {
+            width: 14px;
+            height: 14px;
+            top: 2px;
+        }
     }
 }
 </style>

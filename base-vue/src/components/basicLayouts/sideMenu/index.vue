@@ -37,7 +37,7 @@
                         >
                             <SideMenuItem
                                 :menu="item"
-                                hide-title
+                                :isShowTitle="false"
                                 :class="{
                                     'sideMenu-menuList-menu-itemCollapse': isMenuCollapse,
                                 }"

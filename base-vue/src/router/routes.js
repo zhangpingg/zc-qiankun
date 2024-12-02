@@ -24,10 +24,10 @@ const frameIn = [
         component: () => import('@/components/basicLayouts/index.vue'),
         children: [
             {
-                path: 'home',
+                path: 'home', // path前缀需要加斜杠，这里前缀为啥没有斜杠，因为父级已经有了
                 name: 'home',
                 meta: {
-                    auth: true, // 路由拦截有用
+                    auth: true,
                 },
                 component: () => import('@/pages/home/index.vue'),
             },
@@ -35,8 +35,8 @@ const frameIn = [
                 path: 'sub-vue2/:oneLevel/:twoLevel?/:threeLevel?',
                 name: 'sub-vue2',
                 meta: {
-                    auth: true, // 路由拦截有用
-                    isSubApply: true,
+                    auth: true, // 是否需要登录才可以进入
+                    isSubApply: true, // 是否是子应用
                 },
                 component: () => import('@/components/subApply/index.vue'),
             },
@@ -44,7 +44,7 @@ const frameIn = [
                 path: 'sub-vue3/:oneLevel/:twoLevel?/:threeLevel?',
                 name: 'sub-vue3',
                 meta: {
-                    auth: true, // 路由拦截有用
+                    auth: true,
                     isSubApply: true,
                 },
                 component: () => import('@/components/subApply/index.vue'),

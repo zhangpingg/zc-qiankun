@@ -32,10 +32,11 @@ onMounted(() => {
     window.addEventListener('resize', getWindowMedia);
 });
 watch(route, (newRoute) => {
-    menuStore.setSiderMenuTree(userStore.userInfo.menu);
-    menuStore.setSideMenuOpenNames(getMenuItemByName(newRoute.name)?.parentName);
+    menuStore.setSiderMenuTree(userStore.userInfo.menu); // 侧边栏菜单tree
+    menuStore.setSideMenuOpenNames(getMenuItemByName(newRoute.name)?.parentName); // 设置侧边栏菜单展开的name
     pageStore.setRouteName(newRoute.name);
-    pageStore.setMenuActiveRouteName(getMenuActiveNameByName(newRoute.name));
+    pageStore.setMenuActiveRouteName(getMenuActiveNameByName(newRoute.name)); // 设置当前左侧菜单激活的页面 name
+    // 设置路由池：可以在多页 tab 模式下显示的页面（有权限的菜单路由平铺后的列表，包括详情）
     pageStore.setRoutePool(userStore.userInfo.menu || []);
 });
 onUnmounted(() => {

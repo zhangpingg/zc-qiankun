@@ -35,7 +35,7 @@ const customerRoutes = [
     {
         path: `${applyRoute}/customer/userApply/detail`,
         meta: {
-            title: "申请详情",
+            title: "用户申请详情",
             auth: true,
             cache: false,
         },

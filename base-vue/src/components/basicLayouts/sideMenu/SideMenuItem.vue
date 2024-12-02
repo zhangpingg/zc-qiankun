@@ -1,6 +1,6 @@
 <template>
     <MenuItem :name="menu?.name" @click="jumpMenu(menu)">
-        <SideMenuTitle :menu="menu" :hide-title="hideTitle" />
+        <SideMenuTitle :menu="menu" :isShowTitle="isShowTitle" />
     </MenuItem>
 </template>
 
@@ -18,9 +18,9 @@ defineProps({
             return {};
         },
     },
-    hideTitle: {
+    isShowTitle: {
         type: Boolean,
-        default: false,
+        default: true,
     },
 });
 

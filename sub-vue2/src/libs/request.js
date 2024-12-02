@@ -14,7 +14,6 @@ service.interceptors.request.use(
     (config) => {
         config.headers["Authorization"] = Cookies.get("Base-token");
         //config.headers["supplier-domain"] = "dt";
-        console.log(22, config);
         return config;
     },
     (error) => {
@@ -26,7 +25,6 @@ service.interceptors.request.use(
 // 响应拦截器
 service.interceptors.response.use(
     (response) => {
-        console.log(33, response);
         //let config = response.config;
         //let { errorModalType = "Notice", handleError = true } = config;
         // dataAxios 是 axios 返回数据中的 data

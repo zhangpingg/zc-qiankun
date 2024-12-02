@@ -1,6 +1,6 @@
 <template>
     <Submenu :name="menu.name">
-        <template v-slot:title>
+        <template #title>
             <SideMenuTitle :menu="menu" />
         </template>
         <template v-for="item in menu.children">

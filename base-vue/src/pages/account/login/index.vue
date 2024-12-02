@@ -15,7 +15,9 @@
                         <div class="lcmc-footer-phone">
                             <Checkbox v-model="autoLogin" size="large">记住用户名/手机号</Checkbox>
                         </div>
-                        <Submit :loading="submit" class="ivu-mb-8">{{ submit ? '登录中...' : '立即登录' }}</Submit>
+                        <Submit :loading="loadings.submit" class="ivu-mb-8">
+                            {{ loadings.submit ? '登录中...' : '立即登录' }}
+                        </Submit>
                     </Login>
                 </div>
             </div>
@@ -24,31 +26,30 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { reactive, ref } from 'vue';
 import { Login, UserName, Password, Checkbox, Submit, Message } from 'view-ui-plus';
 import { useRouter } from 'vue-router';
 import { useAccountStore } from '@/store';
 
 const router = useRouter();
 const accountStore = useAccountStore();
-const submit = ref(false);
+const loadings = reactive({ submit: false });
 const autoLogin = ref(true);
 
 // 登录
 const submitLogin = async (valid, values) => {
     if (valid) {
         try {
+            loadings.submit = true;
             await accountStore.login(values);
-            submit.value = false;
+            loadings.submit = false;
             Message.success({
                 content: '登录成功！',
             });
             history.replaceState(null, '', router.currentRoute.value.query.redirect || '/');
-            if (router.currentRoute.value.query.redirect) {
-                location.reload();
-            }
+            location.reload();
         } catch (err) {
-            submit.value = false;
+            loadings.submit = false;
         }
     }
 };

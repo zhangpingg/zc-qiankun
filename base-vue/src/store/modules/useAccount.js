@@ -7,7 +7,7 @@ import { Modal } from 'view-ui-plus';
 import { AccountLogin, AccountInfo } from '@/api/account';
 import useUserStore from './useUser';
 import useLayoutStore from './useLayout';
-import { siderTreeList, resData, authMarkList } from './const';
+import { siderTreeList, resData } from './const';
 import util from '@/libs/util';
 
 const { jumpPage, getMenuPathList, getHasAuthSiderTreeList } = util.menu;
@@ -20,7 +20,7 @@ const useAccount = defineStore('Base-account', () => {
     // 获取账户信息（用户的信息，页面路由等）
     const getAccountInfo = async (username) => {
         await AccountInfo({ username: username }).then((info) => {
-            info.menu = getHasAuthSiderTreeList(authMarkList, siderTreeList); // 菜单tree列表
+            info.menu = getHasAuthSiderTreeList(info.authMarkList, siderTreeList); // 菜单tree列表
             info.menuPaths = getMenuPathList(siderTreeList); // 获取菜单对应的path权限列表
             setCookie('uuid', info.id);
             localStorage.setItem('Base-isPdaChooseStore', info.isPdaChooseStore ? 'isPdaChooseStore' : '');
@@ -32,22 +32,22 @@ const useAccount = defineStore('Base-account', () => {
         const { username = '' } = data;
         return new Promise((resolve, reject) => {
             // (1)登录接口 API
-            // AccountLogin(data)
-            //     .then(async (res) => {
-            //         setCookie('token', res.accessToken);
-            //         setCookie('username', username);
-            //         await getAccountInfo();
-            //         resolve();
-            //     })
-            //     .catch((err) => {
-            //         reject(err);
-            //     });
+            //AccountLogin(data)
+            //    .then(async (res) => {
+            //        setCookie('token', res.accessToken);
+            //        setCookie('username', username);
+            //        await getAccountInfo();
+            //        resolve();
+            //    })
+            //    .catch((err) => {
+            //        reject(err);
+            //    });
             // (2)静态的模拟数据
             setCookie('token', 'token-112233445566');
             setCookie('username', username);
             let info = resData;
-            info.menu = getHasAuthSiderTreeList([...authMarkList], siderTreeList); // 菜单tree列表
-            info.menuPaths = getMenuPathList(siderTreeList); // 获取菜单对应的path权限列表
+            info.menu = getHasAuthSiderTreeList(info.authMarkList, siderTreeList); // 有权限的菜单tree列表
+            info.menuPaths = getMenuPathList(siderTreeList); // 获取全部菜单对应所有的path路径列表
             setCookie('uuid', info.id);
             localStorage.setItem('Base-isPdaChooseStore', info.isPdaChooseStore ? 'isPdaChooseStore' : '');
             userStore.setUserInfo(info);

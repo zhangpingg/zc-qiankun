@@ -6,7 +6,7 @@
                 'ivu-menu-item-sideMenuCollapse': layoutStore.layoutInfo.isMenuCollapse,
             }"
         >
-            <SideMenuTitle :menu="menu" hide-title />
+            <SideMenuTitle :menu="menu" :isShowTitle="false" />
         </li>
         <template #list>
             <DropdownMenu style="width: auto" class="smc-dropdownMenu">

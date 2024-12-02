@@ -14,8 +14,8 @@ const usePage = defineStore(
         const pageInfo = reactive({
             menuTabsPool: [], // 可以在多页 tab 模式下显示的页面（所有菜单路由平铺后的列表，包括详情）
             openedTabList: [], // 已经打开的tab列表
-            currentRouteName: '', // 当前页面路由的 name
-            currentMenuActiveRouteName: '', // 当前菜单激活路由 name
+            currentRouteName: '', // 当前页面路由的 name（真实的路由name）
+            currentMenuActiveRouteName: '', // 当前左侧菜单激活路由 name（如果是子级页面，但左侧并没有子级菜单，则需要点亮父级的背景色，即取父级的name）
         });
 
         /**

@@ -5,8 +5,8 @@ import { renderWithQiankun, qiankunWindow } from 'vite-plugin-qiankun/dist/helpe
 import router from './router';
 import ViewUIPlus from 'view-ui-plus';
 import 'view-ui-plus/dist/styles/viewuiplus.css';
-import ElementPlus from 'element-plus'
-import 'element-plus/dist/index.css'
+import ElementPlus from 'element-plus';
+import 'element-plus/dist/index.css';
 
 let app;
 
@@ -23,6 +23,7 @@ if (!qiankunWindow.__POWERED_BY_QIANKUN__) {
                 .use(ViewUIPlus)
                 .mount(props?.container?.querySelector('#app') || '#app');
             console.log('mount');
+            window.$basePageStore = props.pageStore;
         },
         update() {
             console.log('update');

@@ -1,15 +1,17 @@
-// 左侧菜单tree
+// 左侧菜单tree（全部：有权限的+无权限的）
 const siderTreeList = [
     {
         id: '1',
         path: '/home',
         title: '首页',
-        icon: 'md-home',
-        applyName: 'base',
-        auth: true,
-        name: 'home',
-        authMark: '1',
-        isShow: true,
+        icon: 'md-home', // 一级菜单的前面的 icon（引用的 view-ui-plus ）
+        // 一级菜单的前面的 icon（也可以是自定义的图片，优先用icon）
+        img: 'https://ms.bdimg.com/pacific/0/pic/-535040324_687599536.jpg?x=0&y=0&h=150&w=242&vh=150.00&vw=242.00&oh=150.00&ow=242.00',
+        applyName: 'base', // 应用表示
+        auth: true, // 是否需要登录才可以进入：表示该页面，需要用户登录后，才可以访问（如：用户中心，需要登录才可以访问的；而登录页面不需要登录就可以访问）
+        name: 'home', // 菜单的name
+        authMark: '1', // 页面权限标识（唯一）（登录用户有该页面权限标识，表示有该页面的权限）
+        isShow: true, // 是否显示该菜单
     },
     // sub-vue2
     {
@@ -39,7 +41,7 @@ const siderTreeList = [
                 applyName: 'sub-vue2',
                 auth: true,
                 name: 'sub-vue2-customer-customerManage',
-                parentName: 'customer',
+                parentName: 'customer', // 父级的name
                 authMark: '3-1',
                 isShow: true,
             },
@@ -59,7 +61,7 @@ const siderTreeList = [
             {
                 id: '3-3',
                 path: '/sub-vue2/customer/userApply',
-                title: '客户申请',
+                title: '用户申请',
                 applyName: 'sub-vue2',
                 auth: true,
                 name: 'sub-vue2-customer-userApply',
@@ -70,7 +72,7 @@ const siderTreeList = [
             {
                 id: '3-4',
                 path: '/sub-vue2/customer/userApply/detail',
-                title: '客户申请详情',
+                title: '用户申请详情',
                 icon: '',
                 applyName: 'sub-vue2',
                 auth: true,
@@ -172,18 +174,16 @@ const siderTreeList = [
                 parentName: 'functionDemo',
                 authMark: '6-1',
                 isShow: true,
-            }
-        ]
-    }
+            },
+        ],
+    },
 ];
-// 左侧菜单权限（当接口挂了的时候，可以暂时用这个）
-const authMarkList = ['1', '2', '3', '3-1', '3-2', '3-3', '3-4', '4', '5', '5-1', '5-2', '5-3', '5-4', '6', '6-1'];
 // 模拟接口数据
 const resData = {
     id: '342',
     createDate: '2020-10-08 08:43:54',
     modifyDate: '2024-02-06 14:49:14',
-    realName: '老李',
+    realName: '张三',
     userName: '18857375652',
     mobile: '18857375652',
     email: null,
@@ -206,6 +206,8 @@ const resData = {
     roleDTOS: null,
     roleTye: false,
     menu: [], // 菜单
+    // 左侧菜单权限
+    authMarkList: ['1', '2', '3', '3-1', '3-2', '3-3', '3-4', '4', '5', '5-1', '5-2', '5-3', '5-4', '6', '6-1'],
 };
 
-export { siderTreeList, authMarkList, resData };
+export { siderTreeList, resData };

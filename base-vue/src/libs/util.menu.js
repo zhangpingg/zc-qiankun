@@ -3,9 +3,9 @@ import { isValidArr } from './util.tool';
 import { setCookie, getCookie } from './util.cookies';
 
 /**
- * 获取当前权限菜单对应所有的path路径列表
+ * 获取全部菜单对应所有的path路径列表
  * @param menu 菜单列表
- * @return {*[]} 菜单路径列表
+ * @return {*[]} 菜单路径列表     如：['path1', 'path2', ...]
  */
 const getMenuPathList = (menu) => {
     let paths = [];
@@ -108,7 +108,7 @@ const getMenuItemByName = (routeName) => {
 const getMenuActiveNameByName = (routeName) => {
     const pageStore = usePageStore();
     const menuItem = pageStore?.pageInfo?.menuTabsPool?.filter((item) => item.name == routeName);
-    return menuItem[0]?.activeName || menuItem[0]?.name;
+    return menuItem[0]?.activeName || menuItem[0]?.name; // 子级页面 || 父级页面
 };
 
 /**

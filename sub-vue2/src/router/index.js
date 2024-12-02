@@ -1,12 +1,12 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import { customerRoutes } from "./modules/customer";
 import { exportRoutes } from "./modules/export";
+import { customerRoutes } from "./modules/customer";
 
 Vue.use(VueRouter);
 
 const router = new VueRouter({
-    routes: [...customerRoutes, ...exportRoutes],
+    routes: [...exportRoutes, ...customerRoutes],
     mode: "history",
 });
 

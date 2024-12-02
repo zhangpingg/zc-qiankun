@@ -6,9 +6,7 @@
 </template>
 
 <script setup>
-import util from '@/libs/util';
-
-const { jumpPage } = util.tool;
+import { jumpPage, transPathToName } from '@/libs/util.menu';
 
 const jumpDetails1 = () => {
     jumpPage({ path: '/sub-vue3/user/userManage/userDetail' });

@@ -5,7 +5,7 @@ import ViewUI from "view-design";
 import "view-design/dist/styles/iview.css";
 
 Vue.use(ViewUI);
-// let instance = null;
+
 function render(props = {}) {
     new Vue({
         router,
@@ -26,6 +26,4 @@ export async function mount(props) {
     window.$basePageStore = props.pageStore;
     render(props);
 }
-export async function unmount() {
-    //instance = null;
-}
+export async function unmount() {}
