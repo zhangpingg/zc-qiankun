@@ -36,6 +36,7 @@ const apps = [
         container: '#subContainer',
         props: {
             pageStore,
+            accountStore,
         },
     },
 ];

@@ -18,7 +18,7 @@
         <div class="fr headerTool">
             <span class="pr-10" @click="goEnterpriseCertification" v-if="isPC">
                 <span v-if="certificationStatus === 1 && certificationName">
-                    <Button type="primary" class="ivu-mr-16">企业认证</Button>
+                    <Button type="primary" class="mr-16">企业认证</Button>
                     <span>{{ certificationName }}</span>
                 </span>
                 <Button type="text" v-else>企业账号认证</Button>
@@ -65,9 +65,8 @@ const accoutStore = useAccountStore();
 const { isMenuCollapse, isShowSiderCollapseBtn, isShowReloadbtn, isShowFullscreenBtn, isFullscreen, isPC } = toRefs(
     layoutStore.layoutInfo
 );
-const { certificationStatus, certificationName } = toRefs(userStore.userInfo);
+const { certificationStatus, certificationName, avatar, mobile } = toRefs(userStore.userInfo);
 const { titlePrefix } = util.win;
-const { avatar, mobile } = toRefs(userStore.userInfo);
 
 // 展开/收起-侧边栏
 const expandOrCollapseSideMenu = () => {

@@ -1,5 +1,5 @@
-// margin, padding, font-size
-.setMarPadFontSize( @i:0, @n:30,) when(@i<@n) {
+// margin, padding, font-size, height, line-height
+.setMarPadFontSizeHeiLineHei( @i:0, @n:100,) when(@i<=@n) {
     .pt-@{i} {
         padding-top: unit(@i, px);
     }
@@ -27,11 +27,67 @@
     .fs-@{i} {
         font-size: unit(@i, px);
     }
-    .setMarPadFontSize((@i+1), @n);
+    .h-@{i} {
+        height: unit(@i, px);
+    }
+    .lh-@{i} {
+        line-height: unit(@i, px);
+    }
+    .setMarPadFontSizeHeiLineHei((@i+1), @n);
 }
-.setMarPadFontSize();
+.setMarPadFontSizeHeiLineHei();
+
+// 省略号
+.ellipsis-1 {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.setEllipsisMultiple( @i:2, @n:5,) when(@i<=@n) {
+    .ellipsis-@{i} {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: unit(@i);
+        -webkit-box-orient: vertical;
+    }
+    .setEllipsisMultiple((@i+1), @n);
+}
+.setEllipsisMultiple();
+
+// 隐藏滚动条样式
+.c-hideScrollbar {
+    &::-webkit-scrollbar {
+        width: 0;
+    }
+    &::-webkit-scrollbar-track {
+        background-color: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: #e8eaec;
+    }
+}
+
+// 极简滚动条样式
+.c-scrollbar {
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+    &::-webkit-scrollbar-track {
+        background-color: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: #808695;
+        border-radius: 4px;
+    }
+}
 
 // 定位布局样式
+.poa {
+    position: absolute;
+}
 .por {
     position: relative;
 }
@@ -61,31 +117,4 @@
 }
 .fr {
     float: right;
-}
-
-// 隐藏滚动条样式
-.c-hideScrollbar {
-    &::-webkit-scrollbar {
-        width: 0;
-    }
-    &::-webkit-scrollbar-track {
-        background-color: transparent;
-    }
-    &::-webkit-scrollbar-thumb {
-        background: #e8eaec;
-    }
-}
-
-// 极简滚动条样式
-.c-scrollbar {
-    &::-webkit-scrollbar {
-        width: 6px;
-    }
-    &::-webkit-scrollbar-track {
-        background-color: transparent;
-    }
-    &::-webkit-scrollbar-thumb {
-        background: #808695;
-        border-radius: 4px;
-    }
 }
