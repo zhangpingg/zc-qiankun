@@ -39,17 +39,4 @@ const clearInvalidKey = (data) => {
     return _obj;
 };
 
-/**
- * 跳转页面
- * @param route 跳转的路由对象 path-路由，title-标题，params-参数，applyName-应用名称
- */
-const jumpPage = (route) => {
-    const { path = '', title = '', params = null, applyName = 'sub-vue2' } = route;
-    window.history.pushState(params, title, path);
-    if (applyName === 'sub-vue2' && Cookies.get('apply-name') != 'sub-vue2') {
-        location.reload();
-    }
-    Cookies.set('apply-name', applyName);
-};
-
-export { isValidVal, isValidArr, clearInvalidKey, jumpPage };
+export { isValidVal, isValidArr, clearInvalidKey };

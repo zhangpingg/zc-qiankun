@@ -2,7 +2,7 @@ import { applyRoute } from '../const';
 
 const userRoutes = [
     {
-        path: `${applyRoute}/user/userManage`,
+        path: `${applyRoute}/user/userManage/index`,
         meta: {
             title: '用户管理',
             auth: true,
@@ -20,7 +20,7 @@ const userRoutes = [
         component: () => import('@/pages/user/userManage/userDetail.vue'),
     },
     {
-        path: `${applyRoute}/user/userApply`,
+        path: `${applyRoute}/user/userApply/index`,
         meta: {
             title: '用户申请',
             auth: true,

@@ -2,7 +2,7 @@ import { applyRoute } from '../const';
 
 const exportListRoutes = [
     {
-        path: `${applyRoute}/export/exportList`,
+        path: `${applyRoute}/exportList/index`,
         meta: {
             title: '导出列表',
             auth: true,

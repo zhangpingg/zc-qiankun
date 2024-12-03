@@ -1,18 +1,18 @@
-import CustomerManage from "@/pages/customer/customerManage/index.vue";
+import CustomerManageIndex from "@/pages/customer/customerManage/index.vue";
 import customerManageDetail from "@/pages/customer/customerManage/customerDetail";
-import CustomerApply from "@/pages/customer/customerApply/index";
+import CustomerApplyIndex from "@/pages/customer/customerApply/index";
 import CustomerApplyDetail from "@/pages/customer/customerApply/applyDetail";
 import { applyRoute } from "../const";
 
 const customerRoutes = [
     {
-        path: `${applyRoute}/customer/customerManage`,
+        path: `${applyRoute}/customer/customerManage/index`,
         meta: {
             title: "客户管理",
             auth: true,
             cache: true,
         },
-        component: CustomerManage,
+        component: CustomerManageIndex,
     },
     {
         path: `${applyRoute}/customer/customerManage/detail`,
@@ -24,13 +24,13 @@ const customerRoutes = [
         component: customerManageDetail,
     },
     {
-        path: `${applyRoute}/customer/userApply`,
+        path: `${applyRoute}/customer/userApply/index`,
         meta: {
             title: "用户申请",
             auth: true,
             cache: true,
         },
-        component: CustomerApply,
+        component: CustomerApplyIndex,
     },
     {
         path: `${applyRoute}/customer/userApply/detail`,

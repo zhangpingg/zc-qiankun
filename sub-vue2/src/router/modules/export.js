@@ -1,15 +1,15 @@
 import { applyRoute } from "../const";
-import ExportList from "@/pages/exportList/index";
+import ExportListIndex from "@/pages/exportList/index";
 
 const exportRoutes = [
     {
-        path: `${applyRoute}/export/exportList`,
+        path: `${applyRoute}/exportList/index`,
         meta: {
             title: "导出列表",
             auth: true,
             cache: true,
         },
-        component: ExportList,
+        component: ExportListIndex,
     },
 ];
 
