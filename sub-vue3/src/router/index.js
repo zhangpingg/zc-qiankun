@@ -2,8 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router';
 import { applyRoute } from './const';
 import { exportListRoutes } from './modules/exportList';
 import { userRoutes } from './modules/user';
-import { functionDemoRoutes } from './modules/functionDemo';
 import { elementPlusRoutes } from './modules/elementPlus';
+import { functionExampleRoutes } from './modules/functionExample';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -20,8 +20,8 @@ const router = createRouter({
         },
         ...exportListRoutes,
         ...userRoutes,
-        ...functionDemoRoutes,
         ...elementPlusRoutes,
+        ...functionExampleRoutes,
     ],
 });
 

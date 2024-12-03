@@ -25,10 +25,10 @@ const jumpPage = (route) => {
         _path = `${_path}?${_paramsStr}`;
     }
     window.history[routeType](null, title, _path);
-    if (applyName === 'sub-vue2' && Cookies.get('apply-name') != 'sub-vue2') {
+    if (applyName === 'sub-vue2' && Cookies.get('Base-apply-name') != 'sub-vue2') {
         location.reload();
     }
-    Cookies.set('apply-name', applyName);
+    Cookies.set('Base-apply-name', applyName);
 };
 
 /**
