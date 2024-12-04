@@ -5,6 +5,8 @@ const Setting = {
     showProgressBar: true,
     // Cookies 默认保存时间，单位：天
     cookiesExpires: 1,
+    // 每页条数
+    pageSize: 10,
 };
 
 export default Setting;

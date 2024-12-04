@@ -328,7 +328,7 @@ export default {
 .el-date-editor--monthrange.el-input__inner {
     width: 100%;
 }
-.el-input__inner{
+.el-input__inner {
     height: 33px;
     line-height: 33px;
 }

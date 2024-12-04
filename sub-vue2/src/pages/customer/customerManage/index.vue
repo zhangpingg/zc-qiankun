@@ -14,10 +14,11 @@
                 @onReset="onReset"
             />
             <TablePage
-                :list="tableConfig"
-                @onPageChange="onPageChange"
-                @onPageSizeChange="onPageSizeChange"
+                :tableConfig="tablePageData.tableConfig"
+                :pageConfig="tablePageData.pageConfig"
                 @onSelectionChange="onSelectionChange"
+                @onChangePageCurrent="changePageCurrent"
+                @onChangePageSize="changePageSize"
             />
         </Card>
         <Button type="primary">客户管理详情</Button>
@@ -41,6 +42,18 @@ import {
 import { dynamicSelectItem } from '@/components/tableFormNew/common/dynamicSelectItem';
 import { dynamicCascaderItem } from '@/components/tableFormNew/common/dynamicCascaderItem';
 import CustomComponent from '@/components/tableFormNew/components/CustomComponent';
+import {
+    personNameNormalColumn,
+    personPhoneNormalColumn,
+    dateNormalColumn,
+    numberNormalColumn,
+    idNormalColumn,
+    nameStrNormalColumn,
+    remarkNormalColumn,
+    orderNoNormalColumn,
+} from '@/components/tablePage/common/normalColumn';
+import Setting from '@/setting';
+import { resData } from './const';
 //import { renderButton } from '@/libs/util.render';
 
 export default {
@@ -104,55 +117,85 @@ export default {
                     //value: 'hangzhou'
                 },
             ],
-            tableConfig: {
-                current: 1,
-                size: window?.$pageSize,
-                total: 0,
-                columns: [
-                    //...columns,
-                    { title: 'ID', key: 'sn', minWidth: 160 },
-                    //{
-                    //    title: '操作',
-                    //    width: 140,
-                    //    fixed: 'right',
-                    //    render: (h, p) => {
-                    //        let btnList = [
-                    //            renderButton(h, { text: '查看', type: 'primary' }, () => {
-                    //                this.checkDetail(p.row);
-                    //            }),
-                    //        ];
-                    //        return btnList;
-                    //    },
-                    //},
-                ],
-                data: [],
-                loading: false,
+            tablePageData: {
+                tableConfig: {
+                    loading: false,
+                    columns: [
+                        { title: '正常列', key: 'id', minWidth: 100 }, // 正常列
+                        personNameNormalColumn(), // 姓名（默认）
+                        personNameNormalColumn('姓名2'),
+                        personNameNormalColumn(null, 'aa'),
+                        personNameNormalColumn('姓名4', 'aa'),
+                        personNameNormalColumn({ minWidth: 80 }),
+                        personNameNormalColumn({ title: '姓名6', key: 'aa', minWidth: 80 }),
+                        personPhoneNormalColumn(null, 'bb'), // 手机号
+                        dateNormalColumn(null, 'cc'), // 时间
+                        numberNormalColumn(null, 'dd'), // 数字、金额
+                        idNormalColumn('编号', 'ee'), // 编号
+                        nameStrNormalColumn('公司名称', 'ff'), // 某某什么名称  如：公司名称
+                        remarkNormalColumn(null, 'gg'), // 备注
+                        orderNoNormalColumn(null, 'hh'), // 业务-订单编号
+                        //{
+                        //    title: '操作',
+                        //    width: 140,
+                        //    fixed: 'right',
+                        //    render: (h, p) => {
+                        //        let btnList = [
+                        //            renderButton(h, { text: '查看', type: 'primary' }, () => {
+                        //                this.checkDetail(p.row);
+                        //            }),
+                        //        ];
+                        //        return btnList;
+                        //    },
+                        //},
+                    ],
+                    data: [],
+                },
+                pageConfig: {
+                    current: 1,
+                    pageSize: Setting.pageSize,
+                    total: 0,
+                },
             },
+
             selectList: [],
             loadings: {
                 export: false,
             },
         };
     },
+    mounted() {
+        this.getData();
+    },
     methods: {
         // 获取数据
         async getData() {
             try {
-                this.tableConfig.loading = true;
+                const { current, pageSize } = this.tablePageData.pageConfig;
+                this.tablePageData.tableConfig.loading = true;
                 let formData = this.$refs['tableFormNewRef'].getFormData();
-                console.log(11, formData);
-                this.tableConfig.loading = false;
+                const params = {
+                    ...formData,
+                    current,
+                    pageSize,
+                };
+                console.log('筛选条件', params);
+                this.tablePageData.tableConfig.data = resData;
+                this.tablePageData.pageConfig.total = 100;
+                this.tablePageData.tableConfig.loading = false;
             } catch (error) {
-                this.tableConfig.loading = false;
+                this.tablePageData.tableConfig.loading = false;
             }
         },
-        onPageChange(val) {
-            this.tableConfig.current = val;
+        // change-分页页码
+        changePageCurrent(val) {
+            this.tablePageData.pageConfig.current = val;
             this.getData();
         },
-        onPageSizeChange(val) {
-            this.tableConfig.current = 1;
-            this.tableConfig.size = val;
+        // change-分页条数
+        changePageSize(val) {
+            this.tablePageData.pageConfig.current = 1;
+            this.tablePageData.pageConfig.pageSize = val;
             this.getData();
         },
         onSelectionChange(data) {
@@ -176,14 +219,5 @@ export default {
     },
 };
 </script>
-<!--<script setup>
-import util from "@/libs/util";
-
-const { jumpPage } = util.menu;
-
-const jumpDetails1 = () => {
-    jumpPage({ path: "/sub-vue2/customer/customerManage/detail" });
-};
-</script>-->
 
 <style lang="less" scoped></style>

@@ -1,35 +1,21 @@
 <template>
-    <div class="table-page">
+    <div>
         <Table
-            row-key="id"
-            :disabled-hover="disHover"
-            :stripe="list.stripe"
-            :border="border"
-            :columns="list.columns"
-            :highlight-row="highlightRow"
-            :data="list.data"
-            :loading="list.loading"
-            :load-data="list.handleLoadData"
+            v-bind="{ rowKey: 'id', noDataText: '亲，没有找到相关记录哦！~', ...tableConfig }"
             @on-selection-change="onSelectionChange"
-            @on-current-change="onCurrentChange"
-            @on-select="handleSelect"
-            @on-select-cancel="handleSelectCancel"
-            @on-select-all="handleSelectAll"
-            @on-select-all-cancel="handleSelectAllCancel"
-            :no-data-text="list.noDataText || '亲，没有找到相关记录哦！~'"
+            @on-current-change="onRowClick"
         ></Table>
         <slot name="extra"></slot>
-        <div class="ivu-mt ivu-text-right" v-if="hasPage">
+        <div class="ivu-mt ivu-text-right" v-if="isHasPage">
             <Page
-                :current.sync="list.current"
-                :total="Number(list.total)"
+                :current.sync="pageConfig.current"
                 :page-size-opts="[10, 20, 30, 40]"
-                :page-size="list.size || 10"
                 show-sizer
                 show-elevator
                 show-total
-                @on-change="onPageChange"
-                @on-page-size-change="onPageSizeChange"
+                v-bind="pageConfig"
+                @on-change="onChangePageCurrent"
+                @on-page-size-change="onChangePageSize"
             />
         </div>
     </div>
@@ -42,54 +28,46 @@ export default {
     },
     components: {},
     props: {
-        list: {
+        // 表格配置
+        tableConfig: {
             type: Object,
-            default: () => {},
+            default() {
+                return { columns: [], data: [] };
+            },
         },
-        border: {
-            type: Boolean,
-            default: false,
+        // 分页配置
+        pageConfig: {
+            type: Object,
+            default() {
+                return {};
+            },
         },
-        hasPage: {
+        // 是否有页码
+        isHasPage: {
             type: Boolean,
             default: true,
         },
-        highlightRow: {
-            type: Boolean,
-            default: false,
-        },
-        disHover: {
-            type: Boolean,
-            default: false,
-        },
     },
     methods: {
+        // 选择-表格复选框
         onSelectionChange(selection) {
             this.$emit('onSelectionChange', selection);
         },
-        onPageChange(val) {
-            this.$emit('onPageChange', val);
-        },
-        onPageSizeChange(val) {
-            this.$emit('onPageSizeChange', val);
-        },
-        getData() {
-            this.$emit('getData');
-        },
-        onCurrentChange(currentRow) {
+        // 当某一行被点击时会触发
+        onRowClick(currentRow) {
             this.$emit('highlightRowChange', currentRow);
         },
-        handleSelect(selection, row) {
-            this.$emit('handleSelect', selection, row);
+        // 清空选中的项
+        clearSelection() {
+            //tableRef.value.clearSelection();
         },
-        handleSelectCancel(selection, row) {
-            this.$emit('handleSelectCancel', selection, row);
+        // change-分页页码
+        onChangePageCurrent(val) {
+            this.$emit('onChangePageCurrent', val);
         },
-        handleSelectAll(selection) {
-            this.$emit('handleSelectAll', selection);
-        },
-        handleSelectAllCancel(val) {
-            this.$emit('handleSelectAllCancel', val);
+        // change-分页条数
+        onChangePageSize(val) {
+            this.$emit('onChangePageSize', val);
         },
     },
 };
