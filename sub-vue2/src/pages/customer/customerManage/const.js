@@ -10,9 +10,11 @@ const resData = [
         ff: '杭州xxx股份有限公司',
         gg: '内容比较长的备注',
         hh: 'HZabc123456',
-        productLevel: 1,
-
-        auditStatus: 1,
+        ii: 1,
+        jj: [
+            { tagName: '标签1', id: 1 },
+            { tagName: '标签2', id: 2 },
+        ],
     },
     {
         id: 2,
@@ -25,9 +27,11 @@ const resData = [
         ff: '杭州xxx股份有限公司',
         gg: '内容比较长的备注',
         hh: 'HZabc123456',
-        productLevel: 2,
-
-        auditStatus: 2,
+        ii: 2,
+        jj: [
+            { tagName: '标签1', id: 1 },
+            { tagName: '标签2', id: 2 },
+        ],
     },
     {
         id: 3,
@@ -40,9 +44,11 @@ const resData = [
         ff: '杭州xxx股份有限公司',
         gg: '内容比较长的备注',
         hh: 'HZabc123456',
-        productLevel: 3,
-
-        auditStatus: 3,
+        ii: 3,
+        jj: [
+            { tagName: '标签1', id: 1 },
+            { tagName: '标签2', id: 2 },
+        ],
     },
     {
         id: 4,
@@ -55,9 +61,11 @@ const resData = [
         ff: '杭州xxx股份有限公司',
         gg: '内容比较长的备注',
         hh: 'HZabc123456',
-        productLevel: 4,
-
-        auditStatus: 4,
+        ii: 1,
+        jj: [
+            { tagName: '标签1', id: 1 },
+            { tagName: '标签2', id: 2 },
+        ],
     },
 ];
 

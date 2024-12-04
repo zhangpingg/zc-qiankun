@@ -2,34 +2,13 @@ import { getLabelByValue } from '@/dicts.js';
 import { isValidVal } from '@/libs/util.tool';
 
 /**
- * 状态Badge 只有两种 => 0/false:error 1/true:success
- * 默认['禁用', '启用']，可适用['下架', '上架']['否','是']等
- */
-const statusBadgeRenderColumn = (options, textArr = ['禁用', '启用']) => {
-    return {
-        title: '状态',
-        minWidth: 100,
-        render: (h, p) => {
-            const value = p.row[options?.key || 'status'];
-            const badge = h('Badge', {
-                props: {
-                    status: value ? 'success' : 'error',
-                    text: value ? textArr[1] : textArr[0],
-                },
-            });
-            return h('div', [isValidVal(value) ? badge : '-']);
-        },
-        ...options,
-    };
-};
-
-/**
  * 多个状态Badge
+ * 示例：badgeRenderColumn({ title: '审核状态', key: 'ii' }, aduitStatusDict)
  */
-const multipleStatusBadgeRenderColumn = (options, dict) => {
+const badgeRenderColumn = (options, dict) => {
     return {
         title: '状态',
-        minWidth: 100,
+        minWidth: 120,
         render: (h, p) => {
             const value = p.row[options?.key || 'status'];
             const badge = h('Badge', {
@@ -56,7 +35,7 @@ const tagsRenderColumn = (options, onClose) => {
             const value = p.row[options?.key || 'tagList'];
             if (value?.length > 0) {
                 return h('div', [
-                    value.map(tagItem => {
+                    value.map((tagItem) => {
                         return h(
                             'Tag',
                             {
@@ -86,4 +65,4 @@ const tagsRenderColumn = (options, onClose) => {
     };
 };
 
-export { statusBadgeRenderColumn, multipleStatusBadgeRenderColumn, tagsRenderColumn };
+export { badgeRenderColumn, tagsRenderColumn };

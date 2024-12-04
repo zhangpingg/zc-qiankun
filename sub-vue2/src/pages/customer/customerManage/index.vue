@@ -52,7 +52,9 @@ import {
     remarkNormalColumn,
     orderNoNormalColumn,
 } from '@/components/tablePage/common/normalColumn';
+import { badgeRenderColumn, tagsRenderColumn } from '@/components/tablePage/common/renderColumn';
 import Setting from '@/setting';
+import { aduitStatusDict } from '@/dicts.js';
 import { resData } from './const';
 //import { renderButton } from '@/libs/util.render';
 
@@ -135,6 +137,8 @@ export default {
                         nameStrNormalColumn('公司名称', 'ff'), // 某某什么名称  如：公司名称
                         remarkNormalColumn(null, 'gg'), // 备注
                         orderNoNormalColumn(null, 'hh'), // 业务-订单编号
+                        badgeRenderColumn({ title: '审核状态', key: 'ii' }, aduitStatusDict), // Badge 徽章
+                        tagsRenderColumn({ title: '某种标签', key: 'jj' }, this.deleteTag), // Tags标签列表（带删除功能）
                         //{
                         //    title: '操作',
                         //    width: 140,
@@ -209,12 +213,16 @@ export default {
         // 重置
         onReset() {
             this.tableConfig.current = 1;
-            this.tableConfig.size = window.$pageSize;
+            this.tableConfig.size = Setting.pageSize;
             this.getData();
         },
         // 查看详情
         checkDetail(row) {
             console.log(11, row);
+        },
+        // 删除标签
+        deleteTag(row, tagItem) {
+            console.log('删除标签', row, tagItem);
         },
     },
 };

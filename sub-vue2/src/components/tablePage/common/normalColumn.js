@@ -94,7 +94,7 @@ const orderNoNormalColumn = (titleOrOptions, key) => {
     const params = judgeParams(titleOrOptions);
     return {
         title: params.title || '订单编号',
-        minWidth: 300,
+        minWidth: 200,
         render: (h, p) => renderFunc(p, params.options?.key || key, 'orderNo'),
         ...params.options,
     };
