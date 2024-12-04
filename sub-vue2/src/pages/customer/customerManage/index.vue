@@ -27,7 +27,8 @@
 <script>
 import TableFormNew from '@/components/tableFormNew';
 import TablePage from '@/components/tablePage';
-import { inputTmplItem, storeInputItem } from '@/components/tableFormNew/common/inputItem';
+import { storeInputItem } from '@/components/tableFormNew/common/inputItem';
+import { enableStatusSelectItem } from '@/components/tableFormNew/common/selectItem';
 import {
     getCurrentYear,
     getPrevYearMoth,
@@ -37,68 +38,61 @@ import {
     dateRangeTmplItem,
     dateTimeRangeTmplItem,
 } from '@/components/tableFormNew/common/dateItem';
+import { dynamicSelectItem } from '@/components/tableFormNew/common/dynamicSelectItem';
+import { dynamicCascaderItem } from '@/components/tableFormNew/common/dynamicCascaderItem';
 //import { renderButton } from '@/libs/util.render';
 export default {
     components: { TableFormNew, TablePage },
     data() {
         return {
             formList: [
-                { ...inputTmplItem, label: '输入框', prop: 'aa' }, // 自定义输入框模板，扩展后，可拼接自定义数据
-                storeInputItem, // 业务-门店（也可以扩展后，拼接自定义数据，下面均同理）
+                { type: 'input', label: '输入框', prop: 'aa' }, // 输入框
+                { ...storeInputItem, prop: 'bb' }, // 业务-输入框（也可以扩展后，拼接自定义数据，下面均同理）
                 {
                     type: 'select',
-                    label: '静态下拉框',
-                    prop: 'bb',
+                    label: '静态-下拉框',
+                    prop: 'cc',
                     options: [
-                        { label: '启用', value: 1 },
-                        { label: '停用', value: 2 },
+                        { label: '选项一', value: 1 },
+                        { label: '选项二', value: 2 },
+                        { label: '选项三', value: 3 },
                     ],
                     value: 1,
                 },
-                { ...yearDateItem, value: getCurrentYear() }, // 年份，默认当前年
-                { ...monthDateItem, value: getPrevYearMoth() }, // 月份，默认上一个月
-                monthRangeDateItem, // 月份区间
-                { ...dateRangeTmplItem, isJoinTimeSuffix: true }, // 日期区间-模板
-                dateTimeRangeTmplItem, // 日期时间区间-模板
+                { ...enableStatusSelectItem, prop: 'cc2' }, // 业务-下拉框
+                { ...yearDateItem, value: getCurrentYear(), prop: 'dd' }, // 年份，默认当前年
+                { ...monthDateItem, value: getPrevYearMoth(), prop: 'ee' }, // 月份，默认上一个月
+                { ...monthRangeDateItem, prop: ['ff1', 'ff2'] }, // 月份区间
+                { ...dateRangeTmplItem, isJoinTimeSuffix: true, prop: ['gg1', 'gg2'] }, // 日期区间-模板
+                { ...dateTimeRangeTmplItem, prop: ['hh1', 'hh2'] }, // 日期时间区间-模板
                 {
                     type: 'cascader',
-                    label: '级联+异步',
-                    prop: 'cc',
+                    label: '级联',
+                    prop: 'ii',
                     placeholder: '请选择',
                     options: [
                         {
+                            label: '安徽省',
                             value: '1',
-                            label: '一级',
                             children: [
-                                {
-                                    value: '1-1',
-                                    label: '一级-子级1',
-                                },
-                                {
-                                    value: '1-2',
-                                    label: '一级-子级2',
-                                },
+                                { label: '黄山市', value: '1-1' },
+                                { label: '安庆市', value: '1-2' },
                             ],
                         },
                         {
+                            label: '浙江省',
                             value: '2',
-                            label: '二级',
                             children: [
-                                {
-                                    value: '2-1',
-                                    label: '二级-子级1',
-                                },
+                                { label: '杭州市', value: '2-1' },
+                                { label: '金华市', value: '2-2' },
                             ],
                         },
                     ],
                     filterable: true,
                     //value: ['1', '1-2'],
                 },
-                //departmentCascaderItem,
-                //distributorEnableSelectItem,
-                //businessStatusItem,
-                //reimburseStatusItem,
-                //materialInfoStatusItem,
+                dynamicSelectItem,
+                dynamicCascaderItem,
             ],
             tableConfig: {
                 current: 1,
