@@ -2,10 +2,12 @@
     <div>
         导出列表(vue3) <br />
         <Button type="primary" @click="getData">掉接口</Button>
+        <el-icon><Plus /></el-icon>
     </div>
 </template>
 
 <script setup>
+import { Plus } from '@element-plus/icons-vue';
 import { GetExportList, SaveOrUpdateTag } from '@/api/export';
 
 const getData = async () => {

@@ -1,12 +1,11 @@
 <template>
     <Select
-        :loading="loading"
-        v-model="distributorId"
+        v-model="cityId"
         v-bind="{ filterable: true, clearable: true, placeholder: '请选择', ...restItem }"
         @on-query-change="onQueryChange"
         @on-change="onchange"
     >
-        <Option v-for="item in distributorList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+        <Option v-for="item in cityList" :value="item?.value" :key="item.value">{{ item.label }}</Option>
     </Select>
 </template>
 
@@ -24,30 +23,30 @@ export default {
     },
     data() {
         return {
-            distributorId: null,
-            distributorList: [],
+            cityId: null,
+            cityList: [],
         };
     },
     mounted() {
-        this.getDistributorUserList();
+        this.getCityList();
     },
     watch: {
         value: {
             handler(val) {
-                this.distributorId = val;
+                this.cityId = val;
             },
             immediate: true,
         },
     },
     methods: {
-        // 获取-经销商用户列表
-        async getDistributorUserList() {
+        // 获取-城市列表
+        async getCityList() {
             try {
                 const res = [
-                    { value: 'ali', label: '阿里巴巴' },
-                    { value: '163', label: '网易' },
+                    { value: 'shanghai', label: '上海' },
+                    { value: 'hangzhou', label: '杭州' },
                 ];
-                this.distributorList = res;
+                this.cityList = res;
             } catch (err) {
                 console.log(err);
             }

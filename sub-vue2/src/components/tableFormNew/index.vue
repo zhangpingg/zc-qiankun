@@ -136,7 +136,7 @@
                 <!--自定义表单项-->
                 <FormItem :label="label && label + ':'" :prop="prop" v-if="type === 'custom'">
                     <component
-                        :is="getCustomComponentMap(customComponent)"
+                        :is="customComponent"
                         :value="formData[prop]"
                         :restItem="restItem"
                         @onChange="(val) => changeCustomComponent(prop, val, restItem.onChange)"
@@ -327,5 +327,9 @@ export default {
 <style lang="less" scoped>
 .el-date-editor--monthrange.el-input__inner {
     width: 100%;
+}
+.el-input__inner{
+    height: 33px;
+    line-height: 33px;
 }
 </style>

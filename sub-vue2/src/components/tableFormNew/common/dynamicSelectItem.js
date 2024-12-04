@@ -1,6 +1,6 @@
 // 接口
 const apiFn = () => {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         setTimeout(() => {
             const data = [
                 { label: '选项一', value: 1 },

@@ -40,7 +40,9 @@ import {
 } from '@/components/tableFormNew/common/dateItem';
 import { dynamicSelectItem } from '@/components/tableFormNew/common/dynamicSelectItem';
 import { dynamicCascaderItem } from '@/components/tableFormNew/common/dynamicCascaderItem';
+import CustomComponent from '@/components/tableFormNew/components/CustomComponent';
 //import { renderButton } from '@/libs/util.render';
+
 export default {
     components: { TableFormNew, TablePage },
     data() {
@@ -93,6 +95,14 @@ export default {
                 },
                 dynamicSelectItem,
                 dynamicCascaderItem,
+                {
+                    type: 'custom',
+                    label: '自定义-城市',
+                    prop: 'zz',
+                    customComponent: CustomComponent,
+                    placeholder: '占位符',
+                    //value: 'hangzhou'
+                },
             ],
             tableConfig: {
                 current: 1,
