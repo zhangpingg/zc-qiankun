@@ -1,25 +1,27 @@
 import { resolveComponent } from 'vue';
 import { isValidVal } from '@/libs/util.tool';
+import { getLabelByValue } from '@/dicts.js';
 
 /**
- * 状态Badge 只有两种 => 0/false:error 1/true:success
- * 默认['禁用', '启用']，可适用['下架', '上架']['否','是']等
+ * 状态Badge
+ * 示例：badgeRenderColumn({ title: '审核状态', key: 'ii' }, aduitStatusDict)
  */
-const statusBadgeRenderColumn = (options, textArr = ['禁用', '启用']) => {
+const badgeRenderColumn = (options, dict) => {
     return {
         title: '状态',
-        minWidth: 100,
+        minWidth: 120,
         render: (h, p) => {
             const value = p.row[options?.key || 'status'];
             const badge = h(resolveComponent('Badge'), {
-                status: value ? 'success' : 'error',
-                text: value ? textArr[1] : textArr[0],
+                color: getLabelByValue(dict, value, 'color'),
+                text: getLabelByValue(dict, value),
             });
             return h('div', [isValidVal(value) ? badge : '-']);
         },
         ...options,
     };
 };
+
 /**
  * Tags标签列表 支持删除单个标签
  * onClose(row:表格行, tagItem:所删除的标签) 删除单个标签的方法
@@ -39,9 +41,12 @@ const tagsRenderColumn = (options, onClose) => {
                                 type: 'border',
                                 color: 'primary',
                                 closable: true,
-                                onClose: () => onClose?.(p.row, tagItem),
+                                onClose: () => {
+                                    console.log(33);
+                                    onClose?.(p.row, tagItem);
+                                },
                             },
-                            tagItem.tagName
+                            () => h('span', {}, tagItem.tagName)
                         );
                     }),
                 ]);
@@ -56,5 +61,4 @@ const tagsRenderColumn = (options, onClose) => {
     };
 };
 
-export { statusBadgeRenderColumn, tagsRenderColumn };
-
+export { badgeRenderColumn, tagsRenderColumn };

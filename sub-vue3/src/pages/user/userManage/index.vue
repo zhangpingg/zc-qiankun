@@ -57,7 +57,7 @@ import {
     remarkNormalColumn,
     orderNoNormalColumn,
 } from '@/components/tablePage/common/normalColumn';
-//import { statusBadgeRenderColumn, tagsRenderColumn } from '@/components/tablePage/common/renderColumn';
+import { badgeRenderColumn, tagsRenderColumn } from '@/components/tablePage/common/renderColumn';
 import { getLabelByValue, aduitStatusDict } from '@/dicts.js';
 // 其他
 import { resData } from './const';
@@ -147,10 +147,11 @@ const tablePageData = reactive({
             nameStrNormalColumn('公司名称', 'ff'), // 某某什么名称  如：公司名称
             remarkNormalColumn(null, 'gg'), // 备注
             orderNoNormalColumn(null, 'hh'), // 业务-订单编号
-            //badgeRenderColumn({ title: '审核状态', key: 'ii' }, aduitStatusDict), // Badge 徽章
-            //tagsRenderColumn({ title: '某种标签', key: 'jj' }, () => {
-            //    deleteTag();
-            //}), // Tags标签列表（带删除功能）
+            badgeRenderColumn({ title: '审核状态', key: 'ii' }, aduitStatusDict), // Badge 徽章
+            tagsRenderColumn({ title: '某种标签', key: 'jj' }, () => {
+                console.log(21);
+                deleteTag();
+            }), // Tags标签列表（带删除功能）
             { title: '字典', key: '_ii', minWidth: 100 }, // 字典
         ],
         data: [],
