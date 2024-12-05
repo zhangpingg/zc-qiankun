@@ -1,17 +1,11 @@
-import Cookies from "js-cookie";
+import Cookies from 'js-cookie';
 
 /**
  * 跳转页面
  * @param route 跳转的路由对象 path-路由，title-标题，params-参数，applyName-应用名称, routeType-路由类型(replaceState/pushState)
  */
 const jumpPage = (route) => {
-    const {
-        path = "",
-        title = "",
-        params = null,
-        applyName = "sub-vue2",
-        routeType = "pushState",
-    } = route;
+    const { path = '', title = '', params = null, applyName = 'sub-vue2', routeType = 'pushState' } = route;
     const _paramsStr =
         params &&
         Object.keys(params)
@@ -20,42 +14,39 @@ const jumpPage = (route) => {
                     let list = params[key].map((item) => {
                         return `${key}=${encodeURI(item)}`;
                     });
-                    return list.join("&");
+                    return list.join('&');
                 } else {
                     return `${key}=${encodeURI(params[key])}`;
                 }
             })
-            .join("&");
+            .join('&');
     let _path = `${path}`;
     if (_paramsStr) {
         _path = `${_path}?${_paramsStr}`;
     }
     window.history[routeType](null, title, _path);
-    if (
-        applyName === "sub-vue2" &&
-        Cookies.get("Base-apply-name") != "sub-vue2"
-    ) {
+    if (applyName === 'sub-vue2' && Cookies.get('Base-apply-name') != 'sub-vue2') {
         location.reload();
     }
-    Cookies.set("Base-apply-name", applyName);
+    Cookies.set('Base-apply-name', applyName);
 };
 
 /**
  * 获取url参数
  * @param url-页面地址
  */
-const getUrlParams = (url = "") => {
-    if (url?.indexOf("?") < 0) {
+const getUrlParams = (url = '') => {
+    if (url?.indexOf('?') < 0) {
         return {};
     }
     return transParams(joinParams(url));
     function joinParams(url) {
         const _obj = {};
-        url?.split("?")[1]
-            .split("&")
+        url?.split('?')[1]
+            .split('&')
             .forEach((item) => {
-                let _key = item?.split("=")[0];
-                let _val = decodeURI(item?.split("=")[1]);
+                let _key = item?.split('=')[0];
+                let _val = decodeURI(item?.split('=')[1]);
                 if (_obj[_key]) {
                     _obj[_key].push(_val);
                 } else {
@@ -79,7 +70,7 @@ const getUrlParams = (url = "") => {
  * @param url的path
  */
 const transPathToName = (path) => {
-    return path.substring(1).replace(new RegExp("/", "g"), "-");
+    return path.substring(1).replace(new RegExp('/', 'g'), '-');
 };
 
 export { jumpPage, getUrlParams, transPathToName };

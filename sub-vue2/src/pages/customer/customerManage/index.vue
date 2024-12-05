@@ -28,7 +28,6 @@
                 @onChangePageSize="changePageSize"
             />
         </Card>
-        <Button type="primary">客户管理详情</Button>
     </div>
 </template>
 
@@ -66,7 +65,8 @@ import Setting from '@/setting';
 import { getLabelByValue, aduitStatusDict } from '@/dicts.js';
 // 其他
 import { resData } from './const';
-//import { renderButton } from '@/libs/util.render';
+import { renderButton } from '@/libs/util.render';
+import { jumpPage } from '@/libs/util.menu';
 
 export default {
     components: { TableFormNew, TablePage },
@@ -215,19 +215,19 @@ export default {
                                 );
                             },
                         },
-                        //{
-                        //    title: '操作',
-                        //    width: 140,
-                        //    fixed: 'right',
-                        //    render: (h, p) => {
-                        //        let btnList = [
-                        //            renderButton(h, { text: '查看', type: 'primary' }, () => {
-                        //                this.checkDetail(p.row);
-                        //            }),
-                        //        ];
-                        //        return btnList;
-                        //    },
-                        //},
+                        {
+                            title: '操作',
+                            width: 140,
+                            fixed: 'right',
+                            render: (h, p) => {
+                                let btnList = [
+                                    renderButton(h, { text: '查看', type: 'primary' }, () => {
+                                        this.checkDetail(p.row);
+                                    }),
+                                ];
+                                return btnList;
+                            },
+                        },
                     ],
                     data: [],
                 },
@@ -300,13 +300,13 @@ export default {
             this.tablePageData.pageConfig.pageSize = Setting.pageSize;
             this.getData();
         },
-        // 查看详情
-        checkDetail(row) {
-            console.log(11, row);
-        },
         // 删除标签
         deleteTag(row, tagItem) {
             console.log('删除标签', row, tagItem);
+        },
+        // 查看详情
+        checkDetail(row) {
+            jumpPage({ path: '/sub-vue2/customer/customerManage/detail', params: { id: row.id } });
         },
     },
 };

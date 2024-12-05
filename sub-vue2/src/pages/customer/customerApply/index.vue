@@ -6,12 +6,10 @@
 </template>
 
 <script setup>
-import util from "@/libs/util";
-
-const { jumpPage } = util.menu;
+import { jumpPage } from '@/libs/util.menu';
 
 const jumpDetails = () => {
-    jumpPage({ path: "/sub-vue2/customer/userApply/detail" });
+    jumpPage({ path: '/sub-vue2/customer/userApply/detail' });
 };
 </script>
 
