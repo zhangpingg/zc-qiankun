@@ -1,6 +1,7 @@
 <template>
     <div>
         <Table
+            ref="tableRef"
             v-bind="{ rowKey: 'id', noDataText: '亲，没有找到相关记录哦！~', ...tableConfig }"
             @on-selection-change="onSelectionChange"
             @on-current-change="onRowClick"
@@ -68,6 +69,9 @@ export default {
         // change-分页条数
         onChangePageSize(val) {
             this.$emit('onChangePageSize', val);
+        },
+        onClearSelected(flag) {
+            this.$refs.tableRef.selectAll(flag);
         },
     },
 };

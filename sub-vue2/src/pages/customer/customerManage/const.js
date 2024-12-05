@@ -15,6 +15,10 @@ const resData = [
             { tagName: '标签1', id: 1 },
             { tagName: '标签2', id: 2 },
         ],
+        kk: [
+            'https://img0.baidu.com/it/u=3383325011,2141463052&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=1424',
+            'https://fc1tn.baidu.com/it/u=532156564,4053536323&fm=202&mola=new&crop=v1',
+        ],
     },
     {
         id: 2,

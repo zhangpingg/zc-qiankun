@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="cm">
         <PageHeader title="客户管理(vue2) " hidden-breadcrumb>
             <div slot="action">
                 <Button class="ivu-ml-8" type="error" :loading="loadings.export"> 导出 </Button>
@@ -13,10 +13,17 @@
                 @onSubmit="onSubmit"
                 @onReset="onReset"
             />
+            <Alert show-icon class="ivu-mt cm-alert">
+                <div v-font="14">
+                    已选择 <strong v-color="'#2d8cf0'">{{ selectList.length }} </strong>项
+                    <a class="ivu-ml" @click="clearSelected">清空</a>
+                </div>
+            </Alert>
             <TablePage
+                ref="tablePageRef"
                 :tableConfig="tablePageData.tableConfig"
                 :pageConfig="tablePageData.pageConfig"
-                @onSelectionChange="onSelectionChange"
+                @onSelectionChange="changeSelection"
                 @onChangePageCurrent="changePageCurrent"
                 @onChangePageSize="changePageSize"
             />
@@ -26,8 +33,8 @@
 </template>
 
 <script>
+// 筛选条件
 import TableFormNew from '@/components/tableFormNew';
-import TablePage from '@/components/tablePage';
 import { storeInputItem } from '@/components/tableFormNew/common/inputItem';
 import { enableStatusSelectItem } from '@/components/tableFormNew/common/selectItem';
 import {
@@ -42,6 +49,8 @@ import {
 import { dynamicSelectItem } from '@/components/tableFormNew/common/dynamicSelectItem';
 import { dynamicCascaderItem } from '@/components/tableFormNew/common/dynamicCascaderItem';
 import CustomComponent from '@/components/tableFormNew/components/CustomComponent';
+// 表格
+import TablePage from '@/components/tablePage';
 import {
     personNameNormalColumn,
     personPhoneNormalColumn,
@@ -54,7 +63,8 @@ import {
 } from '@/components/tablePage/common/normalColumn';
 import { badgeRenderColumn, tagsRenderColumn } from '@/components/tablePage/common/renderColumn';
 import Setting from '@/setting';
-import { aduitStatusDict } from '@/dicts.js';
+import { getLabelByValue, aduitStatusDict } from '@/dicts.js';
+// 其他
 import { resData } from './const';
 //import { renderButton } from '@/libs/util.render';
 
@@ -123,6 +133,7 @@ export default {
                 tableConfig: {
                     loading: false,
                     columns: [
+                        { type: 'selection', width: 60, align: 'center', fixed: 'left' },
                         { title: '正常列', key: 'id', minWidth: 100 }, // 正常列
                         personNameNormalColumn(), // 姓名（默认）
                         personNameNormalColumn('姓名2'),
@@ -139,6 +150,71 @@ export default {
                         orderNoNormalColumn(null, 'hh'), // 业务-订单编号
                         badgeRenderColumn({ title: '审核状态', key: 'ii' }, aduitStatusDict), // Badge 徽章
                         tagsRenderColumn({ title: '某种标签', key: 'jj' }, this.deleteTag), // Tags标签列表（带删除功能）
+                        { title: '字典', key: '_ii', minWidth: 100 }, // 字典
+                        // 图片（可预览）
+                        {
+                            title: '图片',
+                            minWidth: 220,
+                            key: 'kk',
+                            render: (h, p) => {
+                                if (!p.row.kk || p.row.kk.length === 0) {
+                                    return h('div', '-');
+                                }
+                                let imgList = (p.row.kk || []).map((item) => {
+                                    return h(
+                                        'div',
+                                        {
+                                            class: 'mr-5 mt-2 mb-2',
+                                            style: {
+                                                position: 'relative',
+                                                width: '60px',
+                                                height: '40px',
+                                                display: 'inline-block',
+                                            },
+                                        },
+                                        [
+                                            h('img', {
+                                                attrs: {
+                                                    src: item,
+                                                    key: item,
+                                                },
+                                                style: {
+                                                    width: '60px',
+                                                    height: '40px',
+                                                },
+                                            }),
+                                            h('Icon', {
+                                                attrs: { type: 'ios-add-circle-outline' },
+                                                style: {
+                                                    'z-index': 1,
+                                                    position: 'absolute',
+                                                    bottom: '2px',
+                                                    right: '2px',
+                                                    color: '#fff',
+                                                },
+                                            }),
+                                        ],
+                                    );
+                                });
+                                return h(
+                                    'div',
+                                    {
+                                        class: 'pt-2',
+                                        directives: [
+                                            {
+                                                name: 'viewer',
+                                                value: { movable: false },
+                                                expression: '{ movable: false }',
+                                            },
+                                        ],
+                                        style: {
+                                            width: '220px',
+                                        },
+                                    },
+                                    imgList,
+                                );
+                            },
+                        },
                         //{
                         //    title: '操作',
                         //    width: 140,
@@ -161,7 +237,6 @@ export default {
                     total: 0,
                 },
             },
-
             selectList: [],
             loadings: {
                 export: false,
@@ -184,7 +259,11 @@ export default {
                     pageSize,
                 };
                 console.log('筛选条件', params);
-                this.tablePageData.tableConfig.data = resData;
+                console.log('复选框', this.selectList);
+                this.tablePageData.tableConfig.data = resData.map((item) => {
+                    item._ii = getLabelByValue(aduitStatusDict, item.ii);
+                    return item;
+                });
                 this.tablePageData.pageConfig.total = 100;
                 this.tablePageData.tableConfig.loading = false;
             } catch (error) {
@@ -202,18 +281,23 @@ export default {
             this.tablePageData.pageConfig.pageSize = val;
             this.getData();
         },
-        onSelectionChange(data) {
-            this.selectList = data;
+        // change-复选框
+        changeSelection(list) {
+            this.selectList = list.map((item) => item.id);
+        },
+        // 清空已选中的item
+        clearSelected() {
+            this.$refs.tablePageRef.onClearSelected(false);
         },
         // 查询
         onSubmit() {
-            this.tableConfig.current = 1;
+            this.tablePageData.pageConfig.current = 1;
             this.getData();
         },
         // 重置
         onReset() {
-            this.tableConfig.current = 1;
-            this.tableConfig.size = Setting.pageSize;
+            this.tablePageData.pageConfig.current = 1;
+            this.tablePageData.pageConfig.pageSize = Setting.pageSize;
             this.getData();
         },
         // 查看详情
@@ -228,4 +312,13 @@ export default {
 };
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.cm {
+    .cm-alert {
+        /deep/ .ivu-icon-ios-information-circle {
+            position: relative;
+            top: 10px;
+        }
+    }
+}
+</style>

@@ -12,10 +12,14 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 // 本地样式
 import './styles/index.less';
+// 图片预览【https://www.npmjs.com/package/v-viewer】
+import VueViewer from 'v-viewer';
+import 'viewerjs/dist/viewer.css';
 
 Vue.use(ViewUI);
 Vue.use(iViewPro);
 Vue.use(ElementUI);
+Vue.use(VueViewer);
 
 function render(props = {}) {
     new Vue({
