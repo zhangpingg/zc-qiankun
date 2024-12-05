@@ -1,37 +1,34 @@
 <template>
     <div>
-        <!--<PageHeader title="用户管理(vue3)" back hidden-breadcrumb></PageHeader>-->
-        <!--<Button type="primary" @click="jumpDetails1">用户详情</Button>-->
-        <TableForm
-            ref="tableFormNewRef"
-            :formConfig="{ labelWidth: 140 }"
-            :formList="formList"
-            @onSubmit="search"
-            @onReset="reset"
-        >
-            <template #extraBtn>
-                <Button type="error" class="ml-8">导出</Button>
-            </template>
-        </TableForm>
-        <!--<button @click="getFormData">获取表单数据</button>
-        <TablePage
-            :tableConfig="tableData.tableConfig"
-            :pageConfig="tableData.pageConfig"
-            @onPageChange="onPageChange"
-            @onPageSizeChange="onPageSizeChange"
-            @handleSelect="handleSelect"
-            @handleSelectCancel="handleSelectCancel"
-            @handleSelectAll="handleSelectAll"
-            @handleSelectAllCancel="handleSelectAllCancel"
-        >
-            <template #extra>这是底部插槽</template>
-        </TablePage>-->
+        <PageHeader title="用户管理(vue3)" back hidden-breadcrumb></PageHeader>
+        <div class="main-card">
+            <TableForm
+                ref="tableFormRef"
+                :formConfig="{ labelWidth: 140 }"
+                :formList="formList"
+                @onSubmit="onSubmit"
+                @onReset="onReset"
+            >
+                <template #extraBtn>
+                    <Button type="error" class="ml-8">导出</Button>
+                </template>
+            </TableForm>
+            <TablePage
+                :tableConfig="tablePageData.tableConfig"
+                :pageConfig="tablePageData.pageConfig"
+                @onPageChange="changePageCurrent"
+                @onPageSizeChange="changePageSize"
+                @onSelectionChange="changeSelection"
+            >
+                <template #extra>这是底部插槽</template>
+            </TablePage>
+        </div>
     </div>
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, markRaw, watch } from 'vue';
-import { Button } from 'view-ui-plus';
+import { ref, reactive, onMounted, markRaw, watch, getCurrentInstance } from 'vue';
+import { PageHeader, Button } from 'view-ui-plus';
 // 筛选条件
 import TableForm from '@/components/tableForm';
 import { storeInputItem } from '@/components/tableForm/common/inputItem';
@@ -49,12 +46,31 @@ import { dynamicSelectItem, dynamicSelectItemOptions } from '@/components/tableF
 import { dynamicCascaderItem, dynamicCascaderItemOptions } from '@/components/tableForm/common/dynamicCascaderItem';
 import CustomComponent from '@/components/tableForm/components/CustomComponent';
 // 表格
+import TablePage from '@/components/tablePage';
+import {
+    personNameNormalColumn,
+    personPhoneNormalColumn,
+    dateNormalColumn,
+    numberNormalColumn,
+    idNormalColumn,
+    nameStrNormalColumn,
+    remarkNormalColumn,
+    orderNoNormalColumn,
+} from '@/components/tablePage/common/normalColumn';
+//import { statusBadgeRenderColumn, tagsRenderColumn } from '@/components/tablePage/common/renderColumn';
+import { getLabelByValue, aduitStatusDict } from '@/dicts.js';
+// 其他
+import { resData } from './const';
 
 const jumpDetails1 = () => {
     jumpPage({ path: '/sub-vue3/user/userManage/detail' });
 };
 
-const formRef = ref(null);
+const {
+    proxy: { globalConst },
+} = getCurrentInstance();
+
+const tableFormRef = ref(null);
 const formList = reactive([
     { type: 'input', label: '输入框', prop: 'aa' }, // 输入框
     { ...storeInputItem, prop: 'bb' }, // 业务-输入框（也可以扩展后，拼接自定义数据，下面均同理）
@@ -112,17 +128,96 @@ const formList = reactive([
         value: 'hangzhou',
     },
 ]);
+const tablePageData = reactive({
+    tableConfig: {
+        loading: false,
+        columns: [
+            { type: 'selection', width: 60, align: 'center', fixed: 'left' },
+            { title: '正常列', key: 'id', minWidth: 100 }, // 正常列
+            personNameNormalColumn(), // 姓名（默认）
+            personNameNormalColumn('姓名2'),
+            personNameNormalColumn(null, 'aa'),
+            personNameNormalColumn('姓名4', 'aa'),
+            personNameNormalColumn({ minWidth: 80 }),
+            personNameNormalColumn({ title: '姓名6', key: 'aa', minWidth: 80 }),
+            personPhoneNormalColumn(null, 'bb'), // 手机号
+            dateNormalColumn(null, 'cc'), // 时间
+            numberNormalColumn(null, 'dd'), // 数字、金额
+            idNormalColumn('编号', 'ee'), // 编号
+            nameStrNormalColumn('公司名称', 'ff'), // 某某什么名称  如：公司名称
+            remarkNormalColumn(null, 'gg'), // 备注
+            orderNoNormalColumn(null, 'hh'), // 业务-订单编号
+            //badgeRenderColumn({ title: '审核状态', key: 'ii' }, aduitStatusDict), // Badge 徽章
+            //tagsRenderColumn({ title: '某种标签', key: 'jj' }, () => {
+            //    deleteTag();
+            //}), // Tags标签列表（带删除功能）
+            { title: '字典', key: '_ii', minWidth: 100 }, // 字典
+        ],
+        data: [],
+    },
+    pageConfig: {
+        current: 1,
+        pageSize: globalConst.paginationMap.pageSize,
+        total: 0,
+    },
+});
 
+// 获取数据
+const getData = async () => {
+    try {
+        const { current, pageSize } = tablePageData.pageConfig;
+        const params = {
+            ...tableFormRef.value.getFormData(),
+            current: current,
+            sise: pageSize,
+        };
+        console.log('筛选条件', params);
+        tablePageData.tableConfig.loading = true;
+        tablePageData.tableConfig.data = resData.map((item) => {
+            item._ii = getLabelByValue(aduitStatusDict, item.ii);
+            return item;
+        });
+        tablePageData.pageConfig.total = 100;
+        tablePageData.tableConfig.loading = false;
+    } catch (error) {
+        tablePageData.tableConfig.loading = false;
+    }
+};
+// change-复选框
+const changeSelection = (list) => {
+    let _list = list.map((item) => item.id);
+    console.log(11, _list);
+};
+// change-分页页码
+const changePageCurrent = (val) => {
+    tablePageData.pageConfig.current = val;
+    getData();
+};
+// change-分页条数
+const changePageSize = (val) => {
+    tablePageData.pageConfig.pageSize = val;
+    tablePageData.pageConfig.current = 1;
+    getData();
+};
 // 查询
-const search = (formData) => {
-    console.log('查询条件：', formData);
+const onSubmit = () => {
+    tablePageData.pageConfig.current = 1;
+    getData();
 };
 // 重置
-const reset = (formData) => {
-    console.log('点击重置了', formData);
+const onReset = () => {
+    tablePageData.pageConfig.pageSize = globalConst.paginationMap.pageSize;
+    tablePageData.pageConfig.current = 1;
+    getData();
+};
+// 删除标签
+const deleteTag = (row, tagItem) => {
+    console.log('删除标签', row, tagItem);
 };
 
-onMounted(() => {});
+onMounted(() => {
+    getData();
+});
 // 需要赋值，页面才会重新渲染；直接修改内部值是，页面是不好重新渲染的
 watch(
     [dynamicSelectItemOptions, dynamicCascaderItemOptions],
