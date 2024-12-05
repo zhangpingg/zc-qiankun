@@ -9,7 +9,7 @@
 import { jumpPage } from '@/libs/util.menu';
 
 const jumpDetails1 = () => {
-    jumpPage({ path: '/sub-vue3/user/userApply/applyDetail' });
+    jumpPage({ path: '/sub-vue3/user/userApply/detail' });
 };
 </script>
 

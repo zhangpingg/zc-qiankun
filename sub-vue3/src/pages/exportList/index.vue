@@ -1,7 +1,7 @@
 <template>
     <div>
         导出列表(vue3) <br />
-        <Button type="primary" @click="getData">掉接口</Button>
+        <el-button type="primary" @click="getData">掉接口</el-button>
         <el-icon><Plus /></el-icon>
     </div>
 </template>

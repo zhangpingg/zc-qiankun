@@ -3,24 +3,34 @@ import './style.css';
 import App from './App.vue';
 import { renderWithQiankun, qiankunWindow } from 'vite-plugin-qiankun/dist/helper';
 import router from './router';
-//import ViewUIPlus from 'view-ui-plus';    // 全局引用会有问题，所以此处不全局引用
+// view-ui-plus
+//import ViewUIPlus from 'view-ui-plus'; // 全局引用会有问题，所以此处不全局引用
 import 'view-ui-plus/dist/styles/viewuiplus.css';
+// element-plus
 import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';
+import * as ElementPlusIconsVue from '@element-plus/icons-vue';
+import zhCn from 'element-plus/es/locale/lang/zh-cn';
+import globalConst from './globalConst';
 
-let app;
+let app = createApp(App);
+
+app.config.globalProperties.globalConst = globalConst;
+
+for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+    app.component(key, component);
+}
 
 if (!qiankunWindow.__POWERED_BY_QIANKUN__) {
-    createApp(App).use(router).use(ElementPlus).mount('#app');
+    app.use(router).use(ElementPlus, { locale: zhCn }).mount('#app');
 } else {
     renderWithQiankun({
         bootstrap() {
             console.log('bootstrap');
         },
         mount(props) {
-            app = createApp(App);
             app.use(router)
-                .use(ElementPlus)
+                .use(ElementPlus, { locale: zhCn })
                 .mount(props?.container?.querySelector('#app') || '#app');
             console.log('mount');
             window.$basePageStore = props.pageStore;

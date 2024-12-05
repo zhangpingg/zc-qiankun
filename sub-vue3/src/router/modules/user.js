@@ -11,13 +11,13 @@ const userRoutes = [
         component: () => import('@/pages/user/userManage/index.vue'),
     },
     {
-        path: `${applyRoute}/user/userManage/userDetail`,
+        path: `${applyRoute}/user/userManage/detail`,
         meta: {
             title: '用户详情',
             auth: true,
             cache: true,
         },
-        component: () => import('@/pages/user/userManage/userDetail.vue'),
+        component: () => import('@/pages/user/userManage/detail.vue'),
     },
     {
         path: `${applyRoute}/user/userApply/index`,
@@ -29,13 +29,13 @@ const userRoutes = [
         component: () => import('@/pages/user/userApply/index.vue'),
     },
     {
-        path: `${applyRoute}/user/userApply/applyDetail`,
+        path: `${applyRoute}/user/userApply/detail`,
         meta: {
             title: '申请详情',
             auth: true,
             cache: true,
         },
-        component: () => import('@/pages/user/userApply/applyDetail.vue'),
+        component: () => import('@/pages/user/userApply/detail.vue'),
     },
 ];
 

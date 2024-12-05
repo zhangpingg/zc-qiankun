@@ -19,11 +19,11 @@
 -->
 
 <template>
-    <Form :model="formData" ref="formRef" v-bind="{ 'label-width': 110, ...formConfig }" :key="updateKey">
+    <Form :model="formData" ref="formRef" v-bind="{ labelWidth: 110, ...formConfig }" :key="updateKey">
         <Row>
             <Col
                 v-for="{ type, label, prop, options, customComponent, ...restItem } in formList"
-                :key="judgeIsValidArr(prop) ? prop.join(',') : prop"
+                :key="getStrProp(prop)"
                 span="8"
             >
                 <!--输入框-->
@@ -78,13 +78,9 @@
                     />
                 </FormItem>
                 <!--月份区间-->
-                <FormItem
-                    :label="label && label + ':'"
-                    :prop="judgeIsValidArr(prop) ? prop.join(',') : prop"
-                    v-if="type == 'monthrange'"
-                >
+                <FormItem :label="label && label + ':'" :prop="getStrProp(prop)" v-if="type == 'monthrange'">
                     <el-date-picker
-                        v-model="formData[judgeIsValidArr(prop) ? prop.join(',') : prop]"
+                        v-model="formData[getStrProp(prop)]"
                         type="monthrange"
                         v-bind="{
                             format: 'yyyy-MM',
@@ -98,14 +94,10 @@
                     ></el-date-picker>
                 </FormItem>
                 <!--日期选择区间-->
-                <FormItem
-                    :label="label && label + ':'"
-                    :prop="judgeIsValidArr(prop) ? prop.join(',') : prop"
-                    v-if="type == 'daterange'"
-                >
+                <FormItem :label="label && label + ':'" :prop="getStrProp(prop)" v-if="type == 'daterange'">
                     <DatePicker
                         type="daterange"
-                        v-model="formData[judgeIsValidArr(prop) ? prop.join(',') : prop]"
+                        v-model="formData[getStrProp(prop)]"
                         v-bind="{
                             format: 'yyyy-MM-dd',
                             clearable: true,
@@ -116,14 +108,10 @@
                     />
                 </FormItem>
                 <!--日期时间选择区间-->
-                <FormItem
-                    :label="label && label + ':'"
-                    :prop="judgeIsValidArr(prop) ? prop.join(',') : prop"
-                    v-if="type == 'datetimerange'"
-                >
+                <FormItem :label="label && label + ':'" :prop="getStrProp(prop)" v-if="type == 'datetimerange'">
                     <DatePicker
                         type="datetimerange"
-                        v-model="formData[judgeIsValidArr(prop) ? prop.join(',') : prop]"
+                        v-model="formData[getStrProp(prop)]"
                         v-bind="{
                             format: 'yyyy-MM-dd HH:mm',
                             clearable: true,
@@ -159,7 +147,6 @@
 import Vue from 'vue';
 import { isValidArr, clearInvalidKey } from '@/libs/util.tool';
 import dayjs from 'dayjs';
-import { CustomComponentMap } from './const';
 export default {
     props: {
         // form配置
@@ -175,7 +162,7 @@ export default {
         // 是否显示查询/设置按钮
         isShowSearchReset: {
             type: Boolean,
-            default: () => true,
+            default: true,
         },
     },
     data() {
@@ -200,13 +187,9 @@ export default {
         this.initSearchParams();
     },
     methods: {
-        // 获取自定义组件
-        getCustomComponentMap(componentsName) {
-            return CustomComponentMap[componentsName];
-        },
-        // 判断-是否是有效的非空数组
-        judgeIsValidArr(list) {
-            return isValidArr(list);
+        // 获取字符串prop
+        getStrProp(prop) {
+            return isValidArr(prop) ? prop.join(',') : prop;
         },
         // change-自定义组件
         changeCustomComponent(prop, val, callback) {

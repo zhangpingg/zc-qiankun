@@ -1,5 +1,3 @@
-const env = process.env.NODE_ENV;
-
 const Setting = {
     // 页面切换时，是否显示模拟的进度条
     showProgressBar: true,

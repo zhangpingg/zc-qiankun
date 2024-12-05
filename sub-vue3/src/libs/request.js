@@ -1,7 +1,8 @@
 // @ts-nocheck
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import router from '@/router';
+import { throwLogError, throwNoticeError } from './util.error';
+import { jumpPage } from './util.menu';
 
 // 创建一个 axios 实例
 const service = axios.create({
@@ -25,25 +26,23 @@ service.interceptors.request.use(
 // 响应拦截器
 service.interceptors.response.use(
     (response) => {
-        let config = response.config;
-        let { errorModalType = 'Notice', handleError = true } = config;
-        // dataAxios 是 axios 返回数据中的 data
-        const dataAxios = response.data;
+        // axiosData 是 axios 返回数据中的 data
+        const axiosData = response.data;
         // 这个状态码是和后端约定的
-        const { code } = dataAxios;
+        const { code } = axiosData;
         // 根据 code 进行判断
         if (code === undefined) {
             // 如果没有 code 代表这不是项目后端开发的接口
-            return dataAxios;
+            return axiosData;
         } else {
             // 有 code 代表这是一个后端接口 可以进行进一步的判断
             switch (code) {
                 case 200:
-                    if (dataAxios.success) {
-                        return dataAxios.data;
+                    if (axiosData.success) {
+                        return axiosData.data;
                     } else {
                         // [ 示例 ] code === 0 代表没有错误
-                        return dataAxios;
+                        return axiosData;
                     }
                 case 100009:
                 case 520001:
@@ -51,30 +50,18 @@ service.interceptors.response.use(
                 case 520006:
                 case 520009:
                 case 100006:
-                    Cookies.set('token', '');
-                    router.push({ path: '/login' });
-                    //errorCreate(`身份认证失败`);
+                    Cookies.remove(`Base-token`);
+                    jumpPage({ path: '/login' });
+                    throwLogError('身份认证失败');
                     break;
                 case 520000:
-                    //errorCreate(`无访问权限`);
+                    throwLogError('无访问权限');
                     break;
                 case 100003:
-                    if (window.location.pathname && window.location.pathname.indexOf('/login') === -1) {
-                        //router.push({ name: "login" });
-                    }
-                    //errorCreate(`${dataAxios.message || "账号被禁用"}`);
-                    // errorCreate(`账号不存在`);
+                    throwLogError('账号被禁用');
                     break;
-                // case 100013:
-                //     errorCreate(`账号被禁用`);
-                //     break;
                 default:
-                    // 不是正确的 code
-                    //errorCreate(
-                    //    `${dataAxios.message || "服务器内部错误"}`,
-                    //    errorModalType,
-                    //    handleError,
-                    //);
+                    throwLogError(axiosData.message);
                     break;
             }
         }
@@ -119,7 +106,7 @@ service.interceptors.response.use(
                     break;
             }
         }
-        //errorCreate(error);
+        throwNoticeError(error);
         Promise.reject(error);
     }
 );

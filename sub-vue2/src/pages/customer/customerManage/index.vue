@@ -8,11 +8,15 @@
         <Card :bordered="false" dis-hover class="ivu-mt">
             <TableFormNew
                 ref="tableFormNewRef"
-                :formConfig="{ 'label-width': 140 }"
+                :formConfig="{ labelWidth: 140 }"
                 :formList="formList"
                 @onSubmit="onSubmit"
                 @onReset="onReset"
-            />
+            >
+                <template #extraBtn>
+                    <Button type="error" class="ml-8">导出</Button>
+                </template>
+            </TableFormNew>
             <Alert show-icon class="ivu-mt cm-alert">
                 <div v-font="14">
                     已选择 <strong v-color="'#2d8cf0'">{{ selectList.length }} </strong>项
