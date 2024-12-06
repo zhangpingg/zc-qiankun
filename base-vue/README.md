@@ -1,1 +1,1 @@
-基座-Vue3
+基座：vite + vue3 + view-ui-plus + element-plus
