@@ -23,12 +23,8 @@
 </template>
 
 <script setup>
-import { getCurrentInstance } from 'vue';
+import { ref } from 'vue';
 import { Table, Page } from 'view-ui-plus';
-
-const {
-    proxy: { globalConst },
-} = getCurrentInstance();
 
 defineProps({
     // 表格配置
@@ -53,6 +49,8 @@ defineProps({
 });
 const emit = defineEmits(['onSelectionChange', 'onRowClick', 'onChangePageCurrent', 'onChangePageSize']);
 
+const tableRef = ref();
+
 // 选项改变
 const onSelectionChange = (selection) => {
     emit('onSelectionChange', selection);
@@ -69,6 +67,12 @@ const onChangePageCurrent = (val) => {
 const onChangePageSize = (val) => {
     emit('onChangePageSize', val);
 };
+// 清空已选中的item
+const clearSelection = (flag) => {
+    tableRef.value.selectAll(flag);
+};
+
+defineExpose({ clearSelection, tableRef });
 </script>
 
 <style lang="less" scoped></style>

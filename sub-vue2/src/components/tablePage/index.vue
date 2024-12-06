@@ -59,8 +59,8 @@ export default {
             this.$emit('highlightRowChange', currentRow);
         },
         // 清空选中的项
-        clearSelection() {
-            //tableRef.value.clearSelection();
+        clearSelection(flag) {
+            this.$refs.tableRef.selectAll(flag);
         },
         // change-分页页码
         onChangePageCurrent(val) {
@@ -69,9 +69,6 @@ export default {
         // change-分页条数
         onChangePageSize(val) {
             this.$emit('onChangePageSize', val);
-        },
-        onClearSelected(flag) {
-            this.$refs.tableRef.selectAll(flag);
         },
     },
 };

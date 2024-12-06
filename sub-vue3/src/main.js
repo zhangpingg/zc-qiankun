@@ -3,9 +3,9 @@ import './style.css';
 import App from './App.vue';
 import { renderWithQiankun, qiankunWindow } from 'vite-plugin-qiankun/dist/helper';
 import router from './router';
-// view-ui-plus
-//import ViewUIPlus from 'view-ui-plus'; // 全局引用会有命名冲突
-import { Badge, Tag } from 'view-ui-plus';
+// view-ui-plus：因为组件名和自己封装的组件名很类似，所以尽量避免全局引入，按需引入比较好
+//import ViewUIPlus from 'view-ui-plus'; // 全局引用时，会与element-plus有命名冲突
+import { PageHeader, FooterToolbar, Badge, Tag } from 'view-ui-plus';
 import 'view-ui-plus/dist/styles/viewuiplus.css';
 // element-plus
 import ElementPlus from 'element-plus';
@@ -18,7 +18,11 @@ import globalConst from './globalConst';
 
 let app = createApp(App);
 
-app.component('Badge', Badge).component('Tag', Tag);
+app.component('PageHeader', PageHeader)
+    .component('FooterToolbar', FooterToolbar)
+    .component('Badge', Badge)
+    .component('Tag', Tag);
+
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component);
 }
@@ -32,10 +36,8 @@ if (!qiankunWindow.__POWERED_BY_QIANKUN__) {
         bootstrap() {},
         mount(props) {
             app.use(router)
-                //.use(ViewUIPlus)
                 .use(ElementPlus, { locale: zhCn })
                 .mount(props?.container?.querySelector('#app') || '#app');
-            console.log('mount');
             window.$basePageStore = props.pageStore;
         },
         update() {},

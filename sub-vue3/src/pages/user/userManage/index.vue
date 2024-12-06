@@ -1,6 +1,10 @@
 <template>
     <div>
-        <PageHeader title="用户管理(vue3)" back hidden-breadcrumb></PageHeader>
+        <PageHeader title="用户管理(vue3)" hidden-breadcrumb>
+            <template #action>
+                <Button type="primary" :loading="loadings.export">导出</Button>
+            </template>
+        </PageHeader>
         <div class="main-card">
             <TableForm
                 ref="tableFormRef"
@@ -13,12 +17,19 @@
                     <Button type="error" class="ml-8">导出</Button>
                 </template>
             </TableForm>
+            <Alert show-icon class="ivu-mt cm-alert">
+                <div>
+                    已选择 <strong :style="{ color: ' #2d8cf0' }">{{ selectList.length }}</strong> 项
+                    <a class="ivu-ml" @click="clearSelected">清空</a>
+                </div>
+            </Alert>
             <TablePage
+                ref="tablePageRef"
                 :tableConfig="tablePageData.tableConfig"
                 :pageConfig="tablePageData.pageConfig"
-                @onPageChange="changePageCurrent"
-                @onPageSizeChange="changePageSize"
                 @onSelectionChange="changeSelection"
+                @onChangePageCurrent="changePageCurrent"
+                @onChangePageSize="changePageSize"
             >
                 <template #extra>这是底部插槽</template>
             </TablePage>
@@ -28,7 +39,7 @@
 
 <script setup>
 import { ref, reactive, onMounted, markRaw, watch, getCurrentInstance } from 'vue';
-import { PageHeader, Button } from 'view-ui-plus';
+import { Button, Alert } from 'view-ui-plus';
 // 筛选条件
 import TableForm from '@/components/tableForm';
 import { storeInputItem } from '@/components/tableForm/common/inputItem';
@@ -70,7 +81,8 @@ const {
     proxy: { globalConst },
 } = getCurrentInstance();
 
-const tableFormRef = ref(null);
+const tableFormRef = ref();
+const tablePageRef = ref(null);
 const formList = reactive([
     { type: 'input', label: '输入框', prop: 'aa' }, // 输入框
     { ...storeInputItem, prop: 'bb' }, // 业务-输入框（也可以扩展后，拼接自定义数据，下面均同理）
@@ -148,10 +160,7 @@ const tablePageData = reactive({
             remarkNormalColumn(null, 'gg'), // 备注
             orderNoNormalColumn(null, 'hh'), // 业务-订单编号
             badgeRenderColumn({ title: '审核状态', key: 'ii' }, aduitStatusDict), // Badge 徽章
-            tagsRenderColumn({ title: '某种标签', key: 'jj' }, () => {
-                console.log(21);
-                deleteTag();
-            }), // Tags标签列表（带删除功能）
+            tagsRenderColumn({ title: '某种标签', key: 'jj' }, (row, item) => deleteTag(row, item)), // Tag标签列表（带删除功能）
             { title: '字典', key: '_ii', minWidth: 100 }, // 字典
         ],
         data: [],
@@ -162,6 +171,8 @@ const tablePageData = reactive({
         total: 0,
     },
 });
+const selectList = ref([]);
+const loadings = reactive({ export: false });
 
 // 获取数据
 const getData = async () => {
@@ -186,8 +197,11 @@ const getData = async () => {
 };
 // change-复选框
 const changeSelection = (list) => {
-    let _list = list.map((item) => item.id);
-    console.log(11, _list);
+    selectList.value = list.map((item) => item.id);
+};
+// 清空已选中的item
+const clearSelected = () => {
+    tablePageRef.value.clearSelection(false);
 };
 // change-分页页码
 const changePageCurrent = (val) => {
@@ -212,8 +226,8 @@ const onReset = () => {
     getData();
 };
 // 删除标签
-const deleteTag = (row, tagItem) => {
-    console.log('删除标签', row, tagItem);
+const deleteTag = (row, item) => {
+    console.log('删除标签', row, item);
 };
 
 onMounted(() => {

@@ -291,7 +291,7 @@ export default {
         },
         // 清空已选中的item
         clearSelected() {
-            this.$refs.tablePageRef.onClearSelected(false);
+            this.$refs.tablePageRef.clearSelection(false);
         },
         // 查询
         onSubmit() {
