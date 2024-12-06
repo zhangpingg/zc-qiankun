@@ -256,7 +256,7 @@ export default {
             try {
                 const { current, pageSize } = this.tablePageData.pageConfig;
                 this.tablePageData.tableConfig.loading = true;
-                let formData = this.$refs['tableFormNewRef'].getFormData();
+                let formData = this.$refs?.['tableFormNewRef']?.getFormData();
                 const params = {
                     ...formData,
                     current,
@@ -291,7 +291,7 @@ export default {
         },
         // 清空已选中的item
         clearSelected() {
-            this.$refs.tablePageRef.clearSelection(false);
+            this.$refs?.tablePageRef?.clearSelection?.(false);
         },
         // 查询
         onSubmit() {

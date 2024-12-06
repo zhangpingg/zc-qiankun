@@ -6,7 +6,7 @@ module.exports = {
     extends: [
         'plugin:vue/essential', // vue2使用
         // 'plugin:vue/vue3-essential', // vue3使用
-        'eslint:recommended',
+        //'eslint:recommended',
     ],
     parserOptions: {
         parser: 'babel-eslint',
