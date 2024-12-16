@@ -45,7 +45,6 @@ const tagsRenderColumn = (options, onClose) => {
                                 color: 'primary',
                                 closable: true,
                                 onOnClose: () => {
-                                    console.log(11);
                                     onClose?.(p.row, item);
                                 },
                             },
@@ -64,4 +63,72 @@ const tagsRenderColumn = (options, onClose) => {
     };
 };
 
-export { badgeRenderColumn, tagsRenderColumn };
+const previewImgRenderColumn = (options) => {
+    return {
+        title: '图片',
+        minWidth: 220,
+        key: 'kk',
+        render: (h, p) => {
+            if (!p.row.kk || p.row.kk.length === 0) {
+                return h('div', '-');
+            }
+            let imgList = (p.row.kk || []).map((item) => {
+                console.log(11, item);
+                return h(
+                    'div',
+                    {
+                        class: 'mr-5 mt-2 mb-2',
+                        style: {
+                            position: 'relative',
+                            width: '60px',
+                            height: '40px',
+                            display: 'inline-block',
+                        },
+                    },
+                    [
+                        h('img', {
+                            attrs: {
+                                src: item,
+                                key: item,
+                                alert: item,
+                            },
+                            style: {
+                                width: '60px',
+                                height: '40px',
+                            },
+                        }),
+                        h(resolveComponent('Icon'), {
+                            attrs: { type: 'ios-add-circle-outline' },
+                            style: {
+                                'z-index': 1,
+                                position: 'absolute',
+                                bottom: '2px',
+                                right: '2px',
+                                color: '#fff',
+                            },
+                        }),
+                    ]
+                );
+            });
+            return h(
+                'div',
+                {
+                    class: 'pt-2',
+                    directives: [
+                        {
+                            name: 'viewer',
+                            value: { movable: false },
+                            expression: '{ movable: false }',
+                        },
+                    ],
+                    style: {
+                        width: '220px',
+                    },
+                },
+                imgList
+            );
+        },
+    };
+};
+
+export { badgeRenderColumn, tagsRenderColumn, previewImgRenderColumn };

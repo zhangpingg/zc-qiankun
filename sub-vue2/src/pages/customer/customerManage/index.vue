@@ -219,6 +219,46 @@ export default {
                                 );
                             },
                         },
+                        // 编辑输入框
+                        {
+                            title: '编辑输入框',
+                            minWidth: 140,
+                            key: 'll',
+                            renderHeader: (h, p) => {
+                                const btn = h(
+                                    'span',
+                                    {
+                                        style: {
+                                            color: '#2d8cf0',
+                                            cursor: 'pointer',
+                                        },
+                                        on: {
+                                            click: () => {
+                                                this.tablePageData.tableConfig.data.map((item) => {
+                                                    this.$set(item, 'll', '');
+                                                });
+                                            },
+                                        },
+                                    },
+                                    '清空',
+                                );
+                                return h('div', [h('span', { class: 'mr-10' }, '年龄'), btn]);
+                            },
+                            render: (h, p) => {
+                                return h('Input', {
+                                    props: {
+                                        max: 999999,
+                                        min: 0,
+                                        value: p.row.ll || '',
+                                    },
+                                    on: {
+                                        input: (v) => {
+                                            this.$set(this.tablePageData.tableConfig.data[p.index], 'll', v);
+                                        },
+                                    },
+                                });
+                            },
+                        },
                         {
                             title: '操作',
                             width: 140,

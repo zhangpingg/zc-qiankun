@@ -12,13 +12,14 @@ const resData = [
         hh: 'HZabc123456',
         ii: 1,
         jj: [
-            { tagName: '标签1', id: 1 },
-            { tagName: '标签2', id: 2 },
+            { label: '标签1', value: 1 },
+            { label: '标签2', value: 2 },
         ],
         kk: [
             'https://img0.baidu.com/it/u=3383325011,2141463052&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=1424',
             'https://fc1tn.baidu.com/it/u=532156564,4053536323&fm=202&mola=new&crop=v1',
         ],
+        ll: null,
     },
     {
         id: 2,
@@ -33,9 +34,11 @@ const resData = [
         hh: 'HZabc123456',
         ii: 2,
         jj: [
-            { tagName: '标签1', id: 1 },
-            { tagName: '标签2', id: 2 },
+            { label: '标签1', value: 1 },
+            { label: '标签2', value: 2 },
         ],
+        kk: null,
+        ll: null,
     },
     {
         id: 3,
@@ -49,10 +52,9 @@ const resData = [
         gg: '内容比较长的备注',
         hh: 'HZabc123456',
         ii: 3,
-        jj: [
-            { tagName: '标签1', id: 1 },
-            { tagName: '标签2', id: 2 },
-        ],
+        jj: [],
+        kk: null,
+        ll: null,
     },
     {
         id: 4,
@@ -66,10 +68,9 @@ const resData = [
         gg: '内容比较长的备注',
         hh: 'HZabc123456',
         ii: 1,
-        jj: [
-            { tagName: '标签1', id: 1 },
-            { tagName: '标签2', id: 2 },
-        ],
+        jj: [],
+        kk: null,
+        ll: null,
     },
 ];
 

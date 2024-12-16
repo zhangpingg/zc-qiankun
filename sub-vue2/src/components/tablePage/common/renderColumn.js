@@ -35,7 +35,7 @@ const tagsRenderColumn = (options, onClose) => {
             const value = p.row[options?.key || 'tagList'];
             if (value?.length > 0) {
                 return h('div', [
-                    value.map((tagItem) => {
+                    value.map((item) => {
                         return h(
                             'Tag',
                             {
@@ -45,10 +45,10 @@ const tagsRenderColumn = (options, onClose) => {
                                     closable: true,
                                 },
                                 on: {
-                                    'on-close': () => onClose?.(p.row, tagItem),
+                                    'on-close': () => onClose?.(p.row, item),
                                 },
                             },
-                            tagItem.tagName,
+                            item.label,
                         );
                     }),
                 ]);

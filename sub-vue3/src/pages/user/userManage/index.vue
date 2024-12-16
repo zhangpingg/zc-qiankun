@@ -68,7 +68,11 @@ import {
     remarkNormalColumn,
     orderNoNormalColumn,
 } from '@/components/tablePage/common/normalColumn';
-import { badgeRenderColumn, tagsRenderColumn } from '@/components/tablePage/common/renderColumn';
+import {
+    badgeRenderColumn,
+    tagsRenderColumn,
+    previewImgRenderColumn,
+} from '@/components/tablePage/common/renderColumn';
 import { getLabelByValue, aduitStatusDict } from '@/dicts.js';
 // 其他
 import { resData } from './const';
