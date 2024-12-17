@@ -1,15 +1,12 @@
 <template>
     <div>
         <Table ref="tableRef" v-bind="{ rowKey: 'id', noDataText: '亲，没有找到相关记录哦！~', ...tableConfig }">
-            <!-- <template v-for="(item, index) in tableConfig.columns.map((item) => !!item.slot)" #[item.slot] :key="index">
-                <slot :name="item.slot">
-                    <div>22</div>
-                </slot>
-            </template> -->
-            <template #bb>
-                <slot name="bb">
-                    <div>单击文件名可下载文件</div>
-                </slot>
+            <template
+                v-slot:[item.slot]
+                v-for="(item, index) in tableConfig.columns.filter((item) => !!item.slot)"
+                :key="index"
+            >
+                <slot :name="item.slot"></slot>
             </template>
         </Table>
     </div>

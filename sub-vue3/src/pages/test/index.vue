@@ -1,13 +1,21 @@
 <template>
     <div>
-        <TablePageNew :tableConfig="tablePageData.tableConfig">
-            <template #bb="p"> {{ p }}</template>
-        </TablePageNew>
+        <Table :columns="tablePageData.tableConfig.columns" :data="tablePageData.tableConfig.data">
+            <template #bb="{ row }">
+                <strong>{{ row.bb }}</strong>
+            </template>
+        </Table>
+        <!-- <TablePageNew :tableConfig="tablePageData.tableConfig">
+            <template #bb="p">
+                <div>{{ p }}11</div>
+            </template>
+        </TablePageNew> -->
     </div>
 </template>
 
 <script setup>
 import { reactive, getCurrentInstance } from 'vue';
+import { Table, Page } from 'view-ui-plus';
 import TablePageNew from '@/components/tablePageNew';
 
 const {
