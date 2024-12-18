@@ -32,42 +32,16 @@
                 @onChangePageSize="changePageSize"
             >
                 <template #ii1="{ row }">
-                    <span :style="{ color: getLabelByValue(aduitStatusDict, row.ii, 'color') }">
-                        {{ getLabelByValue(aduitStatusDict, row.ii) }}
-                    </span>
+                    <SlotColumns slotType="colorText" :dict="aduitStatusDict" :value="row.ii" />
                 </template>
                 <template #ii2="{ row }">
-                    <Badge
-                        :color="getLabelByValue(aduitStatusDict, row.ii, 'color')"
-                        :text="getLabelByValue(aduitStatusDict, row.ii)"
-                        v-if="isValidVal(row.ii)"
-                    />
-                    <span v-else>-</span>
+                    <SlotColumns slotType="badge" :dict="aduitStatusDict" :value="row.ii" />
                 </template>
                 <template #jj="{ row }">
-                    <div v-if="isValidArr(row.jj)">
-                        <Tag v-for="item in row.jj" :key="item.value" closable @on-close="deleteTag(row, item)">
-                            {{ item.label }}
-                        </Tag>
-                    </div>
-                    <span v-else>-</span>
+                    <SlotColumns slotType="tag" :dict="aduitStatusDict" :value="row.jj" />
                 </template>
                 <template #kk="{ row }">
-                    <div v-viewer="{ movable: true }" class="pt-2" v-if="isValidArr(row.kk)">
-                        <div
-                            class="mr-5 mt-2 mb-2"
-                            v-for="item in row.kk"
-                            :key="item"
-                            style="position: relative; width: 60px; height: 40px; display: inline-block"
-                        >
-                            <img :src="item" style="width: 60px; height: 40px" />
-                            <Icon
-                                type="ios-add-circle-outline"
-                                style="z-index: 1; position: absolute; bottom: 2px; right: 2px; color: #fff"
-                            />
-                        </div>
-                    </div>
-                    <span v-else>-</span>
+                    <SlotColumns slotType="imgPreview" :value="row.kk" />
                 </template>
                 <template #ll="{ row }">
                     <Input
@@ -119,8 +93,8 @@ import {
     remarkNormalColumn,
     orderNoNormalColumn,
 } from '@/components/tablePage/common/normalColumn';
+import SlotColumns from '@/components/tablePageNew/common/SlotColumns';
 import { getLabelByValue, aduitStatusDict } from '@/dicts.js';
-import { isValidVal, isValidArr } from '@/libs/util.tool';
 // 其他
 import { jumpPage } from '@/libs/util.menu';
 import { resMock } from './const';
