@@ -1,6 +1,6 @@
 <template>
     <div>
-        <PageHeader title="用户管理(vue3)" hidden-breadcrumb>
+        <PageHeader title="用户管理(vue3)【表格：1.0】" hidden-breadcrumb>
             <template #action>
                 <Button type="primary" :loading="loadings.export">导出</Button>
             </template>
