@@ -1,11 +1,11 @@
 <template>
-    <div class="t">
-        <PageHeader title="test(vue3)【表格：2.0】" hidden-breadcrumb>
+    <div class="ua">
+        <PageHeader title="用户申请(vue3)【表格：2.0】" hidden-breadcrumb>
             <template #action>
                 <Button type="primary" :loading="loadings.export">导出</Button>
             </template>
         </PageHeader>
-        <div class="main-card t-main">
+        <div class="main-card ua-main">
             <TableForm
                 ref="tableFormRef"
                 :formConfig="{ labelWidth: 140 }"
@@ -17,7 +17,7 @@
                     <Button type="error" class="ml-8">导出</Button>
                 </template>
             </TableForm>
-            <Alert show-icon class="ivu-mt cm-alert">
+            <Alert show-icon class="ivu-mt">
                 <div>
                     已选择 <strong :style="{ color: ' #2d8cf0' }">{{ selectList.length }}</strong> 项
                     <a class="ivu-ml" @click="clearSelected">清空</a>
@@ -313,8 +313,8 @@ watch(
 </script>
 
 <style lang="less" scoped>
-.t {
-    .t-main {
+.ua {
+    .ua-main {
         :deep(.ivu-table-cell-with-expand) {
             position: relative;
             left: -25px;
