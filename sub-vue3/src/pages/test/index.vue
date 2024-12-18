@@ -332,11 +332,11 @@ watch(
 <style lang="less" scoped>
 .t {
     .t-main {
-        /deep/ .ivu-table-cell-with-expand {
+        :deep(.ivu-table-cell-with-expand) {
             position: relative;
             left: -25px;
         }
-        /deep/ .ivu-table-expanded-cell {
+        :deep(.ivu-table-expanded-cell) {
             padding-left: 80px;
         }
     }
