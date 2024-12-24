@@ -285,6 +285,15 @@ const getFormData = () => {
 };
 
 defineExpose({ getFormData });
+watch(
+    () => props.formList,
+    (newValue, oldValue) => {
+        initSearchParams();
+    },
+    {
+        deep: true,
+    }
+);
 onMounted(() => {
     initSearchParams();
 });

@@ -1,10 +1,11 @@
 <template>
     <div>
-        <PageHeader title="用户管理(vue3)" hidden-breadcrumb>
+        <PageHeader title="用户管理(vue3)【表格：1.0】" hidden-breadcrumb>
             <template #action>
                 <Button type="primary" :loading="loadings.export">导出</Button>
             </template>
         </PageHeader>
+        <Button type="primary" @click="jumpDetails">查看详情</Button>
         <div class="main-card">
             <TableForm
                 ref="tableFormRef"
@@ -68,18 +69,11 @@ import {
     remarkNormalColumn,
     orderNoNormalColumn,
 } from '@/components/tablePage/common/normalColumn';
-import {
-    badgeRenderColumn,
-    tagsRenderColumn,
-    previewImgRenderColumn,
-} from '@/components/tablePage/common/renderColumn';
+import { badgeRenderColumn, tagsRenderColumn } from '@/components/tablePage/common/renderColumn';
 import { getLabelByValue, aduitStatusDict } from '@/dicts.js';
 // 其他
+import { jumpPage } from '@/libs/util.menu.js';
 import { resData } from './const';
-
-const jumpDetails1 = () => {
-    jumpPage({ path: '/sub-vue3/user/userManage/detail' });
-};
 
 const {
     proxy: { globalConst },
@@ -232,6 +226,9 @@ const onReset = () => {
 // 删除标签
 const deleteTag = (row, item) => {
     console.log('删除标签', row, item);
+};
+const jumpDetails = () => {
+    jumpPage({ path: '/sub-vue3/user/userManage/detail' });
 };
 
 onMounted(() => {

@@ -183,6 +183,14 @@ export default {
             return _layoutSpanMap[this.formList.length % 3];
         },
     },
+    watch: {
+        formList: {
+            handler(newVal, oldVal) {
+                this.initSearchParams();
+            },
+            deep: true,
+        },
+    },
     mounted() {
         this.initSearchParams();
     },
