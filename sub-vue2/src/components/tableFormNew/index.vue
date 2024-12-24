@@ -35,7 +35,7 @@
                     <Select
                         v-model="formData[prop]"
                         v-bind="{ placeholder: '请选择', clearable: true, ...restItem }"
-                        @on-change="restItem.onChange || null"
+                        @on-change="(val) => restItem?.onChange?.(val)"
                     >
                         <Option v-for="item in options" :value="item.value" :key="item.value">{{ item.label }}</Option>
                     </Select>
@@ -47,7 +47,7 @@
                         v-model="formData[prop]"
                         :change-on-select="true"
                         v-bind="{ placeholder: '请选择', ...restItem }"
-                        @on-change="restItem.onChange || null"
+                        @on-change="(val) => restItem?.onChange?.(val)"
                     />
                 </FormItem>
                 <!--级联+异步加载-->
@@ -57,7 +57,7 @@
                         v-model="formData[prop]"
                         :change-on-select="true"
                         v-bind="{ placeholder: '请选择', ...restItem }"
-                        @on-change="restItem.onChange || null"
+                        @on-change="(val) => restItem?.onChange?.(val)"
                     />
                 </FormItem>
                 <!--年份-->

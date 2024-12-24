@@ -224,7 +224,7 @@ export default {
                             title: '编辑输入框',
                             minWidth: 140,
                             key: 'll',
-                            renderHeader: (h, p) => {
+                            renderHeader: (h) => {
                                 const btn = h(
                                     'span',
                                     {
