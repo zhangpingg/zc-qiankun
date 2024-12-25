@@ -35,6 +35,7 @@
                     <Select
                         v-model="formData[prop]"
                         v-bind="{ placeholder: '请选择', clearable: true, ...restItem }"
+                        @on-query-change="(val) => restItem?.onQueryChange?.(val)"
                         @on-change="(val) => restItem?.onChange?.(val)"
                     >
                         <Option v-for="item in options" :value="item.value" :key="item.value">{{ item.label }}</Option>
@@ -185,7 +186,7 @@ export default {
     },
     watch: {
         formList: {
-            handler(newVal, oldVal) {
+            handler() {
                 this.initSearchParams();
             },
             deep: true,
