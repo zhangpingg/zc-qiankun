@@ -292,6 +292,7 @@ export default {
             this.$refs['formRef'].resetFields();
             this.formList.forEach((item) => {
                 switch (item.type) {
+                    case 'select':
                     case 'cascader':
                     case 'cascaderLoadData':
                         Vue.set(this.formData, item.prop, []);
