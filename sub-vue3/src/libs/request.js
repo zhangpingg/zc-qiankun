@@ -51,7 +51,7 @@ service.interceptors.response.use(
                 case 520009:
                 case 100006:
                     Cookies.remove(`Base-token`);
-                    jumpPage({ path: '/login' });
+                    jumpPage({ path: '/login', applyName: 'base' });
                     throwLogError('身份认证失败');
                     break;
                 case 520000:

@@ -1,18 +1,18 @@
 // @ts-nocheck
-import axios from "axios";
-import Cookies from "js-cookie";
-import router from "@/router";
+import axios from 'axios';
+import Cookies from 'js-cookie';
+import router from '@/router';
 
 // 创建一个 axios 实例
 const service = axios.create({
-    baseURL: "/api",
+    baseURL: '/api',
     timeout: 60000, // 请求超时时间
 });
 
 // 请求拦截器
 service.interceptors.request.use(
     (config) => {
-        config.headers["Authorization"] = Cookies.get("Base-token");
+        config.headers['Authorization'] = Cookies.get('Base-token');
         //config.headers["supplier-domain"] = "dt";
         return config;
     },
@@ -52,17 +52,14 @@ service.interceptors.response.use(
                 case 520009:
                 case 100006:
                     //cookies.set("token", "");
-                    router.push({ path: "/login" });
+                    router.push({ path: '/login', applyName: 'base' });
                     //errorCreate(`身份认证失败`);
                     break;
                 case 520000:
                     //errorCreate(`无访问权限`);
                     break;
                 case 100003:
-                    if (
-                        window.location.pathname &&
-                        window.location.pathname.indexOf("/login") === -1
-                    ) {
+                    if (window.location.pathname && window.location.pathname.indexOf('/login') === -1) {
                         //router.push({ name: "login" });
                     }
                     //errorCreate(`${dataAxios.message || "账号被禁用"}`);
@@ -86,37 +83,37 @@ service.interceptors.response.use(
         if (error && error.response) {
             switch (error.response.status) {
                 case 400:
-                    error.message = "请求错误";
+                    error.message = '请求错误';
                     break;
                 case 401:
-                    error.message = "未授权，请登录";
+                    error.message = '未授权，请登录';
                     break;
                 case 403:
-                    error.message = "拒绝访问";
+                    error.message = '拒绝访问';
                     break;
                 case 404:
                     error.message = `请求地址出错: ${error.response.config.url}`;
                     break;
                 case 408:
-                    error.message = "请求超时";
+                    error.message = '请求超时';
                     break;
                 case 500:
                     error.message = error.response.data.message;
                     break; // '服务器内部错误'; break;
                 case 501:
-                    error.message = "服务未实现";
+                    error.message = '服务未实现';
                     break;
                 case 502:
-                    error.message = "网关错误";
+                    error.message = '网关错误';
                     break;
                 case 503:
-                    error.message = "服务不可用";
+                    error.message = '服务不可用';
                     break;
                 case 504:
-                    error.message = "网关超时";
+                    error.message = '网关超时';
                     break;
                 case 505:
-                    error.message = "HTTP版本不受支持";
+                    error.message = 'HTTP版本不受支持';
                     break;
                 default:
                     break;
