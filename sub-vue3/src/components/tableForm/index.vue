@@ -189,7 +189,7 @@ const getStrProp = (prop) => {
 // 初始化查询的参数，赋默认值
 const initSearchParams = () => {
     props.formList.forEach((item) => {
-        if (item.value) {
+        if (Object.prototype.hasOwnProperty.call(item, 'value')) {
             formData[item.prop] = item.value;
         }
     });
@@ -304,4 +304,3 @@ onMounted(() => {
     width: 100%;
 }
 </style>
-

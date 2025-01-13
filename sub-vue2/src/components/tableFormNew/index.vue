@@ -208,7 +208,7 @@ export default {
         // 初始化查询的参数，赋默认值
         initSearchParams() {
             this.formList.forEach((item) => {
-                if (item.value) {
+                if (Object.prototype.hasOwnProperty.call(item, 'value')) {
                     Vue.set(this.formData, item.prop, item.value);
                 }
             });
