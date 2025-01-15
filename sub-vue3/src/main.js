@@ -19,26 +19,33 @@ import globalConst from './globalConst';
 import VueViewer from 'v-viewer';
 import 'viewerjs/dist/viewer.css';
 
-let app = createApp(App);
-
-app.component('PageHeader', PageHeader)
-    .component('FooterToolbar', FooterToolbar)
-    .component('Badge', Badge)
-    .component('Tag', Tag)
-    .component('Icon', Icon);
-
-for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
-    app.component(key, component);
-}
-
-app.config.globalProperties.globalConst = globalConst;
-
 if (!qiankunWindow.__POWERED_BY_QIANKUN__) {
+    let app = createApp(App);
+    app.component('PageHeader', PageHeader)
+        .component('FooterToolbar', FooterToolbar)
+        .component('Badge', Badge)
+        .component('Tag', Tag)
+        .component('Icon', Icon);
+    for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+        app.component(key, component);
+    }
+    app.config.globalProperties.globalConst = globalConst;
     app.use(router).use(ElementPlus, { locale: zhCn }).use(VueViewer).mount('#app');
 } else {
+    let app;
     renderWithQiankun({
         bootstrap() {},
         mount(props) {
+            app = createApp(App);
+            app.component('PageHeader', PageHeader)
+                .component('FooterToolbar', FooterToolbar)
+                .component('Badge', Badge)
+                .component('Tag', Tag)
+                .component('Icon', Icon);
+            for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+                app.component(key, component);
+            }
+            app.config.globalProperties.globalConst = globalConst;
             app.use(router)
                 .use(ElementPlus, { locale: zhCn })
                 .use(VueViewer)
