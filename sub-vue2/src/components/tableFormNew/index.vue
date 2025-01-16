@@ -106,6 +106,7 @@
                             placeholder: '请选择',
                             ...restItem,
                         }"
+                        @on-change="(val) => restItem?.onChange?.(val)"
                     />
                 </FormItem>
                 <!--日期时间选择区间-->
