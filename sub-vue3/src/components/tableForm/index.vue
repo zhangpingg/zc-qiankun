@@ -275,6 +275,15 @@ const searchForm = () => {
 // 重置-表单
 const resetForm = () => {
     formRef.value.resetFields();
+    props.formList.forEach((item) => {
+        switch (item.type) {
+            case 'select':
+            case 'cascader':
+            case 'cascaderLoadData':
+                formData[item.prop] = [];
+                break;
+        }
+    });
     initSearchParams();
     const _formData = formatFormData(formData);
     emit('onReset', _formData);
