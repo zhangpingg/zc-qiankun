@@ -73,4 +73,13 @@ const transPathToName = (path) => {
     return path.substring(1).replace(new RegExp('/', 'g'), '-');
 };
 
-export { jumpPage, getUrlParams, transPathToName };
+/**
+ * 返回上一页
+ * @param applyName 上一页的应用名称
+ */
+const goBack = (applyName = 'sub-vue2') => {
+    Cookies.set('Base-apply-name', applyName);
+    window.history.back();
+};
+
+export { jumpPage, getUrlParams, transPathToName, goBack };

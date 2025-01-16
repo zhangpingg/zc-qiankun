@@ -61,7 +61,7 @@ const changeTab = (tabName) => {
 };
 // 关闭-标签（单个）
 const closeSingleTab = (tagName) => {
-    pageStore.closeTab(tagName);
+    pageStore.closeTab(tagName, 'tag');
 };
 // 关闭-标签（多个）
 const closeMultipleTab = (closeType) => {

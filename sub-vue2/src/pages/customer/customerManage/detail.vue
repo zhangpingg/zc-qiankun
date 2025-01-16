@@ -6,14 +6,15 @@
 </template>
 
 <script setup>
-import util from "@/libs/util";
+import util from '@/libs/util';
 
-const { jumpPage, transPathToName } = util.menu;
+const { goBack, transPathToName } = util.menu;
 
 // 返回的时候，关闭顶部的tab，并返回到列表页
 const jumpPrevPage = () => {
     window.$basePageStore.closeTab(transPathToName(location.pathname));
-    jumpPage({ path: "/sub-vue2/customer/customerManage/index" });
+    //jumpPage({ path: '/sub-vue2/customer/customerManage/index' });
+    goBack();
 };
 </script>
 

@@ -77,9 +77,10 @@ const usePage = defineStore(
         };
         /**
          * @description 关闭一个 tag (关闭一个页面)
-         * @param {Object} param  tagName: 要关闭的标签名字
+         * @param {Object} tagName: 要关闭的标签名字
+         * @param {String} closeType 关闭的来源类型
          */
-        const closeTab = async (tagName) => {
+        const closeTab = async (tagName, closeType) => {
             // 下个新的页面
             let newPage = pageInfo.openedTabList[0];
             const isCurrent = pageInfo.currentRouteName === tagName;
@@ -110,7 +111,7 @@ const usePage = defineStore(
                 // 更新数据 删除关闭的页面
                 pageInfo.openedTabList.splice(index, 1);
             }
-            if (isCurrent) {
+            if (isCurrent && closeType === 'tag') {
                 const { fullPath = '/home', applyName = 'base' } = newPage;
                 jumpPage({ path: fullPath, applyName });
             }
