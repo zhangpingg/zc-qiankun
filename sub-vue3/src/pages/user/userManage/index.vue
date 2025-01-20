@@ -32,6 +32,9 @@
                 @onChangePageCurrent="changePageCurrent"
                 @onChangePageSize="changePageSize"
             >
+                <template #kk="{ row }">
+                    <SlotColumns slotType="imgPreview" :value="row.kk" />
+                </template>
                 <template #extra>这是底部插槽</template>
             </TablePage>
         </div>
@@ -70,6 +73,7 @@ import {
     orderNoNormalColumn,
 } from '@/components/tablePage/common/normalColumn';
 import { badgeRenderColumn, tagsRenderColumn } from '@/components/tablePage/common/renderColumn';
+import SlotColumns from '@/components/tablePageNew/common/SlotColumns';
 import { getLabelByValue, aduitStatusDict } from '@/dicts.js';
 // 其他
 import { jumpPage } from '@/libs/util.menu.js';
@@ -160,6 +164,7 @@ const tablePageData = reactive({
             badgeRenderColumn({ title: '审核状态', key: 'ii' }, aduitStatusDict), // Badge 徽章
             tagsRenderColumn({ title: '某种标签', key: 'jj' }, (row, item) => deleteTag(row, item)), // Tag标签列表（带删除功能）
             { title: '字典', key: '_ii', minWidth: 100 }, // 字典
+            { title: '预览图片', key: 'kk', slot: 'kk', minWidth: 200 }, // 预览图片
         ],
         data: [],
     },

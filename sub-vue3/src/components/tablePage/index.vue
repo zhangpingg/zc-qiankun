@@ -5,7 +5,15 @@
             v-bind="{ rowKey: 'id', noDataText: '亲，没有找到相关记录哦！~', ...tableConfig }"
             @on-selection-change="onSelectionChange"
             @on-current-change="onRowClick"
-        ></Table>
+        >
+            <template
+                v-for="item in tableConfig.columns.filter((item) => !!item.slot)"
+                :key="index.slot"
+                v-slot:[item.slot]="{ row }"
+            >
+                <slot :name="item.slot" :row="row"></slot>
+            </template>
+        </Table>
         <slot name="extra"></slot>
         <div class="ivu-mt ivu-text-right" v-if="isHasPage">
             <Page
