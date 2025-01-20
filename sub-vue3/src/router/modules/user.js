@@ -12,6 +12,7 @@ const userRoutes = [
     },
     {
         path: `${applyRoute}/user/userManage/detail`,
+        name: `${applyRoute.substring(1)}-user-userManage-detail`,
         meta: {
             title: '用户详情',
             auth: true,

@@ -248,7 +248,7 @@ const goDetails = (type, row) => {
 onMounted(() => {
     getData();
 });
-// 需要赋值，页面才会重新渲染；直接修改内部值是，页面是不好重新渲染的
+// 需要赋值，页面才会重新渲染；直接修改内部值是，页面是不会重新渲染的
 watch(
     [dynamicSelectItemOptions, dynamicCascaderItemOptions],
     ([newVal1, newVal2]) => {

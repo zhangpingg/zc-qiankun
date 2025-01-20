@@ -114,7 +114,7 @@ const updateFullPathParams = () => {
     const route = useRoute();
     const _openedTabList = JSON.parse(localStorage.getItem('Base-page')).pageInfo.openedTabList;
     _openedTabList.forEach((item) => {
-        if (item.name === transPathToName(route.path)) {
+        if (item.name === route.name) {
             item.fullPath = joinUrlQuery(item.path, route.query);
         }
     });

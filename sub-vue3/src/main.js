@@ -32,6 +32,8 @@ if (!qiankunWindow.__POWERED_BY_QIANKUN__) {
     }
     app.config.globalProperties.globalConst = globalConst;
     app.use(router).use(ElementPlus, { locale: zhCn }).use(VueViewer).mount('#app');
+    window.$basePageStore = props.pageStore;
+    window.$setting = props.setting;
 } else {
     let app;
     renderWithQiankun({
@@ -53,6 +55,7 @@ if (!qiankunWindow.__POWERED_BY_QIANKUN__) {
                 .use(VueViewer)
                 .mount(props?.container?.querySelector('#app') || '#app');
             window.$basePageStore = props.pageStore;
+            window.$setting = props.setting;
         },
         update() {},
         unmount() {

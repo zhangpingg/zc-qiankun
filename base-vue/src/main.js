@@ -8,6 +8,7 @@ import { usePageStore, useAccountStore } from '@/store';
 import 'view-ui-plus/dist/styles/viewuiplus.css';
 import './styles/index.less';
 import { getSubApplyUrl } from '../config/subEnv';
+import setting from '@/setting';
 
 const pinia = createPinia();
 pinia.use(piniaPersist);
@@ -27,6 +28,7 @@ const apps = [
         props: {
             pageStore,
             accountStore,
+            setting,
         },
     },
     {
@@ -37,6 +39,7 @@ const apps = [
         props: {
             pageStore,
             accountStore,
+            setting,
         },
     },
 ];
