@@ -163,6 +163,10 @@ const usePage = defineStore(
                 jumpPage({ path: '/home', applyName: 'base' });
             }
         };
+        // 更新 openedTabList
+        const updateOpenedTabList = (list) => {
+            pageInfo.openedTabList = list;
+        };
 
         return {
             pageInfo,
@@ -175,6 +179,7 @@ const usePage = defineStore(
             closeRightTab,
             closeOtherTab,
             closeAllTab,
+            updateOpenedTabList,
         };
     },
     {

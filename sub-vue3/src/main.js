@@ -5,7 +5,7 @@ import { renderWithQiankun, qiankunWindow } from 'vite-plugin-qiankun/dist/helpe
 import router from './router';
 // view-ui-plus：因为组件名和自己封装的组件名很类似，所以尽量避免全局引入，按需引入比较好
 //import ViewUIPlus from 'view-ui-plus'; // 全局引用时，会与element-plus有命名冲突
-import { PageHeader, FooterToolbar, Badge, Tag, Icon } from 'view-ui-plus';
+import { PageHeader, FooterToolbar, Card, Badge, Tag, Icon } from 'view-ui-plus';
 import 'view-ui-plus/dist/styles/viewuiplus.css';
 // element-plus
 import ElementPlus from 'element-plus';
@@ -23,6 +23,7 @@ if (!qiankunWindow.__POWERED_BY_QIANKUN__) {
     let app = createApp(App);
     app.component('PageHeader', PageHeader)
         .component('FooterToolbar', FooterToolbar)
+        .component('Card', Card)
         .component('Badge', Badge)
         .component('Tag', Tag)
         .component('Icon', Icon);
@@ -39,6 +40,7 @@ if (!qiankunWindow.__POWERED_BY_QIANKUN__) {
             app = createApp(App);
             app.component('PageHeader', PageHeader)
                 .component('FooterToolbar', FooterToolbar)
+                .component('Card', Card)
                 .component('Badge', Badge)
                 .component('Tag', Tag)
                 .component('Icon', Icon);

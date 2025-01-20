@@ -7,6 +7,7 @@ import { onMounted, onUnmounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { useUserStore, useMenuStore, usePageStore, useLayoutStore } from '@/store';
 import util from '@/libs/util';
+import Setting from '@/setting';
 
 const route = useRoute();
 const menuStore = useMenuStore();
@@ -26,10 +27,17 @@ const getWindowMedia = () => {
         layoutStore.setDeviceIsPC(true);
     }
 };
+// 刷新页面
+const refreshPage = () => {
+    Setting.detailCacheNameList.forEach((name) => {
+        localStorage.removeItem(name);
+    });
+};
 
 onMounted(() => {
     getWindowMedia();
     window.addEventListener('resize', getWindowMedia);
+    window.addEventListener('beforeunload', refreshPage);
 });
 watch(route, (newRoute) => {
     menuStore.setSiderMenuTree(userStore.userInfo.menu); // 侧边栏菜单tree
@@ -41,6 +49,7 @@ watch(route, (newRoute) => {
 });
 onUnmounted(() => {
     window.removeEventListener('resize', getWindowMedia);
+    window.removeEventListener('beforeunload', refreshPage);
 });
 </script>
 

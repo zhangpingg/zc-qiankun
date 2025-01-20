@@ -15,7 +15,7 @@ const userRoutes = [
         meta: {
             title: '用户详情',
             auth: true,
-            cache: true,
+            cache: false,
         },
         component: () => import('@/pages/user/userManage/detail.vue'),
     },
@@ -33,7 +33,7 @@ const userRoutes = [
         meta: {
             title: '申请详情',
             auth: true,
-            cache: true,
+            cache: false,
         },
         component: () => import('@/pages/user/userApply/detail.vue'),
     },

@@ -2,10 +2,10 @@
     <div>
         <PageHeader title="用户管理(vue3)【表格：1.0】" hidden-breadcrumb>
             <template #action>
+                <Button type="primary" @click="goDetails('ADD')">新增</Button>
                 <Button type="primary" :loading="loadings.export">导出</Button>
             </template>
         </PageHeader>
-        <Button type="primary" @click="jumpDetails">查看详情</Button>
         <div class="main-card">
             <TableForm
                 ref="tableFormRef"
@@ -36,6 +36,9 @@
                     <SlotColumns slotType="imgPreview" :value="row.kk" />
                 </template>
                 <template #extra>这是底部插槽</template>
+                <template #action="{ row }">
+                    <Button type="primary" size="small" @click="goDetails('EDIT', row)">编辑</Button>
+                </template>
             </TablePage>
         </div>
     </div>
@@ -165,6 +168,7 @@ const tablePageData = reactive({
             tagsRenderColumn({ title: '某种标签', key: 'jj' }, (row, item) => deleteTag(row, item)), // Tag标签列表（带删除功能）
             { title: '字典', key: '_ii', minWidth: 100 }, // 字典
             { title: '预览图片', key: 'kk', slot: 'kk', minWidth: 200 }, // 预览图片
+            { title: '操作', slot: 'action', fixed: 'right', minWidth: 100 }, // 操作列
         ],
         data: [],
     },
@@ -232,8 +236,13 @@ const onReset = () => {
 const deleteTag = (row, item) => {
     console.log('删除标签', row, item);
 };
-const jumpDetails = () => {
-    jumpPage({ path: '/sub-vue3/user/userManage/detail' });
+// 去详情
+const goDetails = (type, row) => {
+    if (type === 'ADD') {
+        jumpPage({ path: '/sub-vue3/user/userManage/detail', params: { mode: type } });
+    } else {
+        jumpPage({ path: '/sub-vue3/user/userManage/detail', params: { mode: type, id: row.id } });
+    }
 };
 
 onMounted(() => {

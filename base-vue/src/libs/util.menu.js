@@ -55,7 +55,7 @@ const jumpPage = (route) => {
  * 获取url参数
  * @param url-页面地址
  */
-const getUrlParams = (url = '') => {
+const getUrlParams = (url = window.location.href) => {
     if (url?.indexOf('?') < 0) {
         return {};
     }

@@ -1,3 +1,4 @@
+import { useRoute } from 'vue-router';
 import Cookies from 'js-cookie';
 
 /**
@@ -35,7 +36,7 @@ const jumpPage = (route) => {
  * 获取url参数
  * @param url-页面地址
  */
-const getUrlParams = (url = '') => {
+const getUrlParams = (url = window.location.href) => {
     if (url?.indexOf('?') < 0) {
         return {};
     }
@@ -66,6 +67,32 @@ const getUrlParams = (url = '') => {
 };
 
 /**
+ * 拼接url的query参数
+ */
+const joinUrlQuery = (url, params) => {
+    let _path = url;
+    if (!params) {
+        return _path;
+    }
+    const _paramsStr = Object.keys(params)
+        .map((key) => {
+            if (Array.isArray(params[key])) {
+                let list = params[key].map((item) => {
+                    return `${key}=${encodeURI(item)}`;
+                });
+                return list.join('&');
+            } else {
+                return `${key}=${encodeURI(params[key])}`;
+            }
+        })
+        .join('&');
+    if (_paramsStr) {
+        _path = `${_path}?${_paramsStr}`;
+    }
+    return _path;
+};
+
+/**
  * 转换路由的path为name
  * @param url的path
  */
@@ -82,4 +109,16 @@ const goBack = (applyName = 'sub-vue3') => {
     window.history.back();
 };
 
-export { jumpPage, getUrlParams, transPathToName, goBack };
+// 更新路由的 fullPath, 解决当tag切换的时候，还是返回的当前详情页的上一次的页面
+const updateFullPathParams = () => {
+    const route = useRoute();
+    const _openedTabList = JSON.parse(localStorage.getItem('Base-page')).pageInfo.openedTabList;
+    _openedTabList.forEach((item) => {
+        if (item.name === transPathToName(route.path)) {
+            item.fullPath = joinUrlQuery(item.path, route.query);
+        }
+    });
+    window.$basePageStore.updateOpenedTabList(_openedTabList);
+};
+
+export { jumpPage, getUrlParams, transPathToName, goBack, updateFullPathParams };

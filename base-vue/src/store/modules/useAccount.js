@@ -9,6 +9,7 @@ import useUserStore from './useUser';
 import useLayoutStore from './useLayout';
 import { siderTreeList, resData } from './const';
 import util from '@/libs/util';
+import Setting from '@/setting';
 
 const { jumpPage, getMenuPathList, getHasAuthSiderTreeList } = util.menu;
 const { setCookie } = util.cookies;
@@ -76,6 +77,11 @@ const useAccount = defineStore('Base-account', () => {
                     document.cookie = c.trim().split('=')[0] + '=;expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
                 });
             });
+            setTimeout(() => {
+                Setting.detailCacheNameList.forEach((name) => {
+                    localStorage.removeItem(name);
+                });
+            }, 0);
         }
     };
 

@@ -13,6 +13,8 @@ const Setting = {
         isShowFullscreenBtn: true, // 是否显示全屏按钮
         isLogoutConfirm: true, // 退出登录时，是否二次确认
     },
+    // 详情页缓存-name列表
+    detailCacheNameList: ['sub-vue3-user-userManage-detail'],
 };
 
 export default Setting;

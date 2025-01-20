@@ -37,9 +37,10 @@
 import { Tabs, TabPane, Dropdown, DropdownMenu, DropdownItem, Icon } from 'view-ui-plus';
 import { usePageStore } from '@/store';
 import util from '@/libs/util';
+import Setting from '@/setting';
 
 const pageStore = usePageStore();
-const { jumpPage } = util.menu;
+const { jumpPage, getUrlParams } = util.menu;
 
 const tabLabel = (h, page) => {
     const title = h('span', page?.title || '未命名');
@@ -55,11 +56,15 @@ const tabLabel = (h, page) => {
 const changeTab = (tabName) => {
     const page = pageStore.pageInfo.openedTabList.find((page) => page.name === tabName);
     if (page) {
-        const { fullPath, applyName } = page;
+        const { fullPath, path, applyName } = page;
+        let _query = getUrlParams(fullPath);
+        if (Setting.detailCacheNameList.includes(tabName)) {
+            _query = { ..._query, openType: 'TAG' };
+        }
         if (tabName === pageStore.pageInfo.currentRouteName) {
             return;
         }
-        jumpPage({ path: fullPath, applyName });
+        jumpPage({ path, params: _query, applyName });
     }
 };
 // 关闭-标签（单个）
