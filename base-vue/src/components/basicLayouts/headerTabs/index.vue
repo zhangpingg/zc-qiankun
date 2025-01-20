@@ -56,6 +56,9 @@ const changeTab = (tabName) => {
     const page = pageStore.pageInfo.openedTabList.find((page) => page.name === tabName);
     if (page) {
         const { fullPath, applyName } = page;
+        if (tabName === pageStore.pageInfo.currentRouteName) {
+            return;
+        }
         jumpPage({ path: fullPath, applyName });
     }
 };
