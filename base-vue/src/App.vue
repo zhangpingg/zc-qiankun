@@ -27,8 +27,8 @@ const getWindowMedia = () => {
         layoutStore.setDeviceIsPC(true);
     }
 };
-// 刷新页面
-const refreshPage = () => {
+// 监听页面卸载前-执行
+const unloadPage = () => {
     Setting.detailCacheNameList.forEach((name) => {
         localStorage.removeItem(name);
     });
@@ -37,7 +37,7 @@ const refreshPage = () => {
 onMounted(() => {
     getWindowMedia();
     window.addEventListener('resize', getWindowMedia);
-    window.addEventListener('beforeunload', refreshPage);
+    window.addEventListener('beforeunload', unloadPage);
 });
 watch(route, (newRoute) => {
     menuStore.setSiderMenuTree(userStore.userInfo.menu); // 侧边栏菜单tree
@@ -49,7 +49,7 @@ watch(route, (newRoute) => {
 });
 onUnmounted(() => {
     window.removeEventListener('resize', getWindowMedia);
-    window.removeEventListener('beforeunload', refreshPage);
+    window.removeEventListener('beforeunload', unloadPage);
 });
 </script>
 
